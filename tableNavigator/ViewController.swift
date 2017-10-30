@@ -9,18 +9,10 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FillTheTable {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var manager = CardsManager()
     
-    func refreshTable() {
-        //cardsNS = manager.getCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
-        
-        //tableOfCards.reloadData()
-        //print("here is what we had stored")
-        //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
-        print("done")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         //if cardsNS.isEmpty {            print("halepa...")        }
@@ -34,13 +26,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ToEdit"){
             let editViewController = segue.destination as? EditViewController
             editViewController?.delegate = self
         }
-    }
+    }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("begin")

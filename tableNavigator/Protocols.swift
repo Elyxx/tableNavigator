@@ -12,5 +12,5 @@ import CoreData
 protocol FillTheTable:class {
     var cardsNS: [NSManagedObject] {get set}
     var names: [String] {get set}
-    func refreshTable()    
+  
 }

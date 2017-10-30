@@ -67,7 +67,8 @@ class CardsManager{
             print("Could not fetch")
         }
         //print("here is what we had stored")
-        for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
+        //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
+    
         return fetchedResults
     }
     func deleteCard(){

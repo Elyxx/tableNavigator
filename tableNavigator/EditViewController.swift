@@ -18,7 +18,7 @@ class EditViewController: UIViewController {
     static var viewContext: NSManagedObjectContext{
         return persistentContainer.viewContext
     }
-    weak var delegate: FillTheTable?
+   // weak var delegate: FillTheTable?
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultFrontImage.image = UIImage(named: "britt.jpeg")
@@ -35,10 +35,7 @@ class EditViewController: UIViewController {
     
     @IBAction func saveNewData(_ sender: Any) {
         let tmpName: String! = newCardName.text!//unwrap
-      
         manager.addNewCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, name: tmpName)
-        //delegate?.refreshTable()
-        //manager.getCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
     }
     
     
