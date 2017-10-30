@@ -19,6 +19,7 @@
 		255BA7C91FA4A6AE00FB051B /* britt.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7C81FA4A6AD00FB051B /* britt.jpeg */; };
 		255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7CA1FA4A9F100FB051B /* kitty.jpeg */; };
 		255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7CC1FA4B87F00FB051B /* Protocols.swift */; };
+		257218D81FA7395F0051699F /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257218D71FA7395F0051699F /* CardsManager.swift */; };
 		2574E7481FA62D1D005EB3A7 /* CardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */; };
 		2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2574E7491FA62D78005EB3A7 /* funny.jpeg */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		255BA7C81FA4A6AD00FB051B /* britt.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = britt.jpeg; sourceTree = "<group>"; };
 		255BA7CA1FA4A9F100FB051B /* kitty.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitty.jpeg; sourceTree = "<group>"; };
 		255BA7CC1FA4B87F00FB051B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		257218D71FA7395F0051699F /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
 		2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoViewController.swift; sourceTree = "<group>"; };
 		2574E7491FA62D78005EB3A7 /* funny.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funny.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				255BA7AD1FA4854100FB051B /* AppDelegate.swift */,
+				257218D71FA7395F0051699F /* CardsManager.swift */,
 				255BA7CC1FA4B87F00FB051B /* Protocols.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
 				2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */,
@@ -172,6 +175,7 @@
 				255BA7B01FA4854100FB051B /* ViewController.swift in Sources */,
 				255BA7B61FA4854100FB051B /* tableNavigator.xcdatamodeld in Sources */,
 				255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */,
+				257218D81FA7395F0051699F /* CardsManager.swift in Sources */,
 				255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */,
 				255BA7C31FA4880400FB051B /* CardTableViewCell.swift in Sources */,
 			);

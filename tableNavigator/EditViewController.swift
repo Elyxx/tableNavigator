@@ -11,6 +11,13 @@ import CoreData
 
 class EditViewController: UIViewController {
 
+    var manager = CardsManager()
+    static var persistentContainer: NSPersistentContainer{
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    }
+    static var viewContext: NSManagedObjectContext{
+        return persistentContainer.viewContext
+    }
     weak var delegate: FillTheTable?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,21 +34,11 @@ class EditViewController: UIViewController {
     @IBOutlet weak var newCardName: UITextField!
     
     @IBAction func saveNewData(_ sender: Any) {
-        let tmpName: String? = newCardName.text
-        /////
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: managedContext)
-        let newCard = NSManagedObject(entity: entity!, insertInto:managedContext)
-        newCard.setValue(tmpName, forKey: "nameOfCard")
-   
-        
-        //var error: NSError?
-       // if let data = try? fetchDataFromDisk() { return data }
-        try! managedContext.save()
-        //delegate?.names.append(tmpName!)
-        delegate?.cardsNS.append(newCard)
-        delegate?.refreshTable()
+        let tmpName: String! = newCardName.text!//unwrap
+      
+        manager.addNewCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, name: tmpName)
+        //delegate?.refreshTable()
+        //manager.getCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
     }
     
     

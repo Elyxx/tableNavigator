@@ -8,32 +8,26 @@
 
 import UIKit
 import CoreData
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FillTheTable {
     
+    var manager = CardsManager()
+    
     func refreshTable() {
-        tableOfCards.reloadData()
-        for item in names{
-            print(item)
-        }
+        //cardsNS = manager.getCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        
+        //tableOfCards.reloadData()
+        //print("here is what we had stored")
+        //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
         print("done")
     }
-     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //title = "\"The List\""
-        if cardsNS.isEmpty {
-            print("halepa...")
-        }
+        //if cardsNS.isEmpty {            print("halepa...")        }
         
-        //tableOfCards.register(UITableViewCell.self, forCellReuseIdentifier: "cellReuseId")
-   
         tableOfCards.dataSource = self //???
         tableOfCards.delegate = self
-        //tableOfCards.contentSize.width = 800
         
-        //tableOfCards.contentSize = CGSize(width: 1000, height: 30)
-        //nea
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,18 +44,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("begin")
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        cardsNS = manager.getCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
+        tableOfCards.reloadData()
+       /* let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
         //var error: NSError?
         do {
             let fetchedResults = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-            cardsNS = fetchedResults!////
+            //cardsNS = fetchedResults!////
         }
         catch{
             print("Could not fetch")
         }
-        print(cardsNS.count)
+        //var nmv = DiscountCard()
+        
+        print(cardsNS.count)*/
         print("end")
     }
     
@@ -87,7 +85,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
      
         let cardName = cardsNS[indexPath.row]
-        cell.name.text = cardName.value(forKey: "nameOfCards") as? String
+        cell.name.text = cardName.value(forKey: "nameOfCard") as? String
+        print("cell text \(String(describing: cell.name.text))")
         cell.cardImage.image = UIImage(named:"britt.jpeg")
      /*
         let cardName = names[indexPath.row]
@@ -100,8 +99,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func numberOfSections(in tableOfCards: UITableView) -> Int {      return 1   }
   
 
-    @IBAction func newCard(_ sender: Any) {
-    }
+    
     
     @IBOutlet weak var tableOfCards: UITableView!
     
