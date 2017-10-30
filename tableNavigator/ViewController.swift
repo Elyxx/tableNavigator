@@ -56,7 +56,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //var error: NSError?
         do {
             let fetchedResults = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-            //cardsNS = fetchedResults!////
+            cardsNS = fetchedResults!////
         }
         catch{
             print("Could not fetch")
