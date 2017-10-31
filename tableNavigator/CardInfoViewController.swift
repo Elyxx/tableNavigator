@@ -30,6 +30,7 @@ class CardInfoViewController: UIViewController {
 
     @IBOutlet weak var frontDefaultImage: UIImageView!
     
+    
     /*
     // MARK: - Navigation
 

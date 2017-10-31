@@ -256,24 +256,29 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C2w-62-UrR">
-                                <rect key="frame" x="70" y="88" width="225" height="367"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wlm-P1-379">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                            </pageControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-g3-o1h">
+                                <rect key="frame" x="85" y="88" width="204" height="280"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.95778123327426146" blue="0.97038284040710243" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.82386634096532696" blue="0.87176007385049603" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Q85-ae-c3F" firstAttribute="bottom" secondItem="C2w-62-UrR" secondAttribute="top" id="1z0-N3-R75"/>
+                            <constraint firstItem="tff-se-MhQ" firstAttribute="trailing" secondItem="wlm-P1-379" secondAttribute="trailing" id="299-77-1bh"/>
                             <constraint firstItem="Q85-ae-c3F" firstAttribute="leading" secondItem="tff-se-MhQ" secondAttribute="leading" id="6rW-qx-0Jy"/>
-                            <constraint firstItem="C2w-62-UrR" firstAttribute="height" secondItem="tff-se-MhQ" secondAttribute="height" multiplier="1:2" id="FaY-8k-zkx"/>
-                            <constraint firstItem="C2w-62-UrR" firstAttribute="leading" secondItem="tff-se-MhQ" secondAttribute="leading" constant="70" id="IF2-mh-K4h"/>
+                            <constraint firstItem="tff-se-MhQ" firstAttribute="bottom" secondItem="wlm-P1-379" secondAttribute="bottom" id="EZp-5n-6eX"/>
+                            <constraint firstItem="wlm-P1-379" firstAttribute="top" secondItem="Q85-ae-c3F" secondAttribute="bottom" id="PhY-pq-Obs"/>
                             <constraint firstItem="tff-se-MhQ" firstAttribute="trailing" secondItem="Q85-ae-c3F" secondAttribute="trailing" id="ZTO-8c-1Mx"/>
-                            <constraint firstItem="C2w-62-UrR" firstAttribute="width" secondItem="tff-se-MhQ" secondAttribute="width" multiplier="3:5" id="pcR-tq-5kl"/>
+                            <constraint firstItem="wlm-P1-379" firstAttribute="leading" secondItem="tff-se-MhQ" secondAttribute="leading" id="xL4-il-QsO"/>
                             <constraint firstItem="Q85-ae-c3F" firstAttribute="top" secondItem="tff-se-MhQ" secondAttribute="top" id="ykI-2z-dZS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tff-se-MhQ"/>
                     </view>
                     <connections>
-                        <outlet property="frontDefaultImage" destination="C2w-62-UrR" id="Yf0-Qh-quF"/>
+                        <outlet property="frontDefaultImage" destination="8kv-g3-o1h" id="swl-Vj-W7V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHF-nN-n4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
