@@ -36,8 +36,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("begin")
-        cardsNS = manager.getCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
+        cardsNS = manager.getCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
         tableOfCards.reloadData()
+        
        /* let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
@@ -59,33 +60,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //return names.count
         return cardsNS.count
     }
-    /*
-    func tableView(_ tableOfCards: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        let alertController = UIAlertController(title: "Hint", message: "You have selected row \(indexPath.row).", preferredStyle: .alert)
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
+            print("edit")
+            self.performSegue(withIdentifier: "ToEdit", sender: self)
+        }
+        let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        editAction.backgroundColor = lightViolet
         
-        alertController.addAction(alertAction)
+        let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (rowAction, indexPath) in
+            //TODO: Delete the row at indexPath here
+        }
+        shareAction.backgroundColor = .green
         
-        present(alertController, animated: true, completion: nil)*/
+        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
+            let predicat = self.cardsNS[indexPath.row].value(forKey: "nameOfCard") as? String
+            //unwrap
+            self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
+        }
+        deleteAction.backgroundColor = .red
         
+        return [editAction, shareAction, deleteAction]
     }
-    */
+    
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
      
         let cardName = cardsNS[indexPath.row]
         cell.name.text = cardName.value(forKey: "nameOfCard") as? String
-        print("cell text \(String(describing: cell.name.text))")
+        //print("cell text \(String(describing: cell.name.text))")
+        
         cell.cardImage.image = UIImage(named:"britt.jpeg")
-     /*
-        let cardName = names[indexPath.row]
-        cell.name.text = cardName
-        cell.cardImage.image = UIImage(named:"kitten.jpeg")
- */
-         return cell
+        
+        return cell
     }
     
     func numberOfSections(in tableOfCards: UITableView) -> Int {      return 1   }

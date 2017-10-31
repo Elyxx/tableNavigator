@@ -224,21 +224,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPe-FP-WCI">
-                                <rect key="frame" x="16" y="214" width="343" height="369"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C2w-62-UrR">
+                                <rect key="frame" x="0.0" y="88" width="375" height="367"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.82386634096532696" blue="0.87176007385049603" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Q85-ae-c3F" firstAttribute="bottom" secondItem="C2w-62-UrR" secondAttribute="top" id="1z0-N3-R75"/>
                             <constraint firstItem="Q85-ae-c3F" firstAttribute="leading" secondItem="tff-se-MhQ" secondAttribute="leading" id="6rW-qx-0Jy"/>
-                            <constraint firstAttribute="trailing" secondItem="Q85-ae-c3F" secondAttribute="trailing" id="ZTO-8c-1Mx"/>
+                            <constraint firstItem="C2w-62-UrR" firstAttribute="height" secondItem="tff-se-MhQ" secondAttribute="height" multiplier="1:2" id="CxW-oW-ML0"/>
+                            <constraint firstItem="C2w-62-UrR" firstAttribute="leading" secondItem="tff-se-MhQ" secondAttribute="leading" id="Teo-q5-HKd"/>
+                            <constraint firstItem="tff-se-MhQ" firstAttribute="trailing" secondItem="Q85-ae-c3F" secondAttribute="trailing" id="ZTO-8c-1Mx"/>
+                            <constraint firstItem="C2w-62-UrR" firstAttribute="trailing" secondItem="tff-se-MhQ" secondAttribute="trailing" id="lZO-yH-PdL"/>
                             <constraint firstItem="Q85-ae-c3F" firstAttribute="top" secondItem="tff-se-MhQ" secondAttribute="top" id="ykI-2z-dZS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tff-se-MhQ"/>
                     </view>
                     <connections>
-                        <outlet property="frontDefaultImage" destination="jPe-FP-WCI" id="5Mw-Kt-maY"/>
+                        <outlet property="frontDefaultImage" destination="C2w-62-UrR" id="Yf0-Qh-quF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHF-nN-n4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -247,6 +250,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BYB-AX-PU2"/>
+        <segue reference="YkF-Hc-dTR"/>
     </inferredMetricsTieBreakers>
 </document>

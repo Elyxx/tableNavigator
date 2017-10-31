@@ -19,11 +19,7 @@ class CardsManager{
         
         //var error: NSError?
         //if let data = try? fetchDataFromDisk() { return data }
-        //try! context.save()
-        
-        //delegate?.names.append(tmpName!)
-        //delegate?.cardsNS.append(newCard)
-        //delegate?.refreshTable()
+        try! context.save()
     }
     func editExistingCard(){
         /*
@@ -54,7 +50,7 @@ class CardsManager{
  }*/
         //entity.FirstPropertyToUpdate = NewValue
     }
-    func getCard(context: NSManagedObjectContext)->[NSManagedObject]?{
+    func getCards(context: NSManagedObjectContext)->[NSManagedObject]?{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
         //var error: NSError?
         var fetchedResults: [NSManagedObject]? = nil
@@ -68,35 +64,23 @@ class CardsManager{
         }
         //print("here is what we had stored")
         //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
-    
-        return fetchedResults
+         return fetchedResults
     }
-    func deleteCard(){
-        /*
- let predicate = NSPredicate(format: "objectID == %@", objectIDFromNSManagedObject)
- 
- let fetchRequest = NSFetchRequest(entityName: "MyEntity")
- fetchRequest.predicate = predicate
- 
- do {
- let fetchedEntities = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [MyEntity]
- if let entityToDelete = fetchedEntities.first {
- self.managedObjectContext.deleteObject(entityToDelete)
- }
- } catch {
- // что-то делаем в зависимости от ошибки
- }
- 
- do {
- try self.managedObjectContext.save()
- } catch {
- // что-то делаем в зависимости от ошибки
- }
-
- */
+    func deleteCard(context: NSManagedObjectContext, stringPredicat: String){
+         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
+         fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
+         do {
+            let fetchedEntities = try context.fetch(fetchRequest) as? [NSManagedObject]
+            for fetchedCard in fetchedEntities! {
+                  context.delete(fetchedCard)
+                }
+             /*if let entityToDelete = fetchedEntities?.first {      print("inside")
+                context.delete(entityToDelete)         }*/
+         } catch {    // что-то делаем в зависимости от ошибки
+         }
+         do {         try context.save()         } catch {            print("wrong deleting")         }
     }
     var cardsNS: [NSManagedObject] = []
-    
 }
 
 extension DiscountCard {

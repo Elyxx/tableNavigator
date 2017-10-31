@@ -22,7 +22,12 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultFrontImage.image = UIImage(named: "britt.jpeg")
-        backImage.image = UIImage(named: "kitty.jpeg")
+        if let url = NSURL(string: "http://www.petsfriend.ca/media/k2/items/cache/95afb94bcb9e5971a68576edb0850e71_S.jpg") {
+            if let myData = NSData(contentsOf: url as URL) {
+                backImage.image = UIImage(data: myData as Data)
+            }
+        }
+        //backImage.image = UIImage(named: "kitty.jpeg")
         // Do any additional setup after loading the view.
     }
 
