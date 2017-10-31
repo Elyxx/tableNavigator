@@ -198,6 +198,23 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="BYB-AX-PU2"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aok-N4-qhh" userLabel="filter">
+                                <rect key="frame" x="0.0" y="700" width="375" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.67536856919999999" green="0.98672083720000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <segments>
+                                    <segment title="beauty"/>
+                                    <segment title="food"/>
+                                    <segment title="market"/>
+                                    <segment title="cinema"/>
+                                    <segment title="other"/>
+                                </segments>
+                                <color key="tintColor" red="0.064788886779999999" green="0.094657269399999994" blue="0.095931154820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="chooseFilter:" destination="cGr-zl-uCv" eventType="valueChanged" id="Eha-st-zTt"/>
+                                    <action selector="filterCards:" destination="BYZ-38-t0r" eventType="valueChanged" id="kGV-8q-FKc"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.15333921047431964" green="1" blue="0.99937830094227986" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -228,6 +245,7 @@
                     <connections>
                         <outlet property="DefaultFrontImage" destination="XWl-b7-ymu" id="KR5-iM-CLt"/>
                         <outlet property="backImage" destination="Fee-R8-qGF" id="sJ8-Z7-95U"/>
+                        <outlet property="filterOfColors" destination="aok-N4-qhh" id="LEW-is-U7U"/>
                         <outlet property="newCardName" destination="Wts-kw-tGF" id="W42-gP-fW0"/>
                     </connections>
                 </viewController>
@@ -287,6 +305,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YkF-Hc-dTR"/>
+        <segue reference="BYB-AX-PU2"/>
     </inferredMetricsTieBreakers>
 </document>

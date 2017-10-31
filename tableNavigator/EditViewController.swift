@@ -63,6 +63,11 @@ class EditViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var filterOfColors: UISegmentedControl!
+    
+    
+    @IBAction func chooseFilter(_ sender: UISegmentedControl) {
+    }
     @IBOutlet weak var backImage: UIImageView!
     
     @IBOutlet weak var defaultFrontImage: UIImageView!

@@ -68,6 +68,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let predicat = self.cardsNS[indexPath.row].value(forKey: "nameOfCard") as? String
             //unwrap
             self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
+            //if more then one crash accured
+            self.tableOfCards.reloadData()
         }
         deleteAction.backgroundColor = .red
         
