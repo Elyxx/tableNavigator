@@ -20,6 +20,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableOfCards.dataSource = self //???
         tableOfCards.delegate = self
         
+        let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        var subViewOfSegment: UIView = coloredFilter.subviews[1] as UIView
+        subViewOfSegment.backgroundColor = lightGreen
+        subViewOfSegment = coloredFilter.subviews[3] as UIView
+        subViewOfSegment.backgroundColor = lightRed
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,47 +41,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print("begin")
         cardsNS = manager.getCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
         tableOfCards.reloadData()
-        
-       /* let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-        //var error: NSError?
-        do {
-            let fetchedResults = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-            //cardsNS = fetchedResults!////
-        }
-        catch{
-            print("Could not fetch")
-        }
-        //var nmv = DiscountCard()
-        
-        print(cardsNS.count)*/
-        print("end")
     }
     
     func tableView(_ tableOfCards: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return names.count
         return cardsNS.count
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
-            print("edit")
+        let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
+            let predicat = self.cardsNS[indexPath.row].value(forKey: "nameOfCard") as? String
+            self.manager.setActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
             self.performSegue(withIdentifier: "ToEdit", sender: self)
         }
         let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         editAction.backgroundColor = lightViolet
         
-        let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (rowAction, indexPath) in
+        let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
             //TODO: Delete the row at indexPath here
         }
         shareAction.backgroundColor = .green
         
-        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .normal, title: "delete") { (rowAction, indexPath) in
             let predicat = self.cardsNS[indexPath.row].value(forKey: "nameOfCard") as? String
             //unwrap
             self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
@@ -107,6 +96,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var cardsNS: [NSManagedObject] = []
     
-    internal var names: [String] =  ["Chocolate", "IceCream", "Donote"]
+    @IBAction func filterCards(_ sender: UISegmentedControl) {
+    
+        switch  sender.selectedSegmentIndex
+        {
+        case 0:
+            print("zero")
+        case 1:
+            print("one")
+        default:
+            break;
+        }
+    }
+    @IBOutlet weak var coloredFilter: UISegmentedControl!
 }
 

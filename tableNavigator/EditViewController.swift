@@ -12,22 +12,41 @@ import CoreData
 class EditViewController: UIViewController {
 
     var manager = CardsManager()
-    static var persistentContainer: NSPersistentContainer{
+    
+    
+    /*static var persistentContainer: NSPersistentContainer{
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
     static var viewContext: NSManagedObjectContext{
         return persistentContainer.viewContext
-    }
+    }*/
    // weak var delegate: FillTheTable?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        defaultFrontImage.image = UIImage(named: "britt.jpeg")
-        if let url = NSURL(string: "http://www.petsfriend.ca/media/k2/items/cache/95afb94bcb9e5971a68576edb0850e71_S.jpg") {
-            if let myData = NSData(contentsOf: url as URL) {
-                backImage.image = UIImage(data: myData as Data)
-            }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+       
+        defaultFrontImage.image = UIImage(named: "red.jpeg")
+        backImage.image = UIImage(named: "kitty.jpeg")
+        
+        let cardName = manager.getActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        if let newTitle = cardName?.value(forKey: "nameOfCard") as? String {
+            print(newTitle)
+            newCardName.text = newTitle
         }
-        //backImage.image = UIImage(named: "kitty.jpeg")
+        else {
+            newCardName.text = "WORK HARDER!"
+        }
+        
+        
+        
+        /*if let url = NSURL(string: "http://www.petsfriend.ca/media/k2/items/cache/95afb94bcb9e5971a68576edb0850e71_S.jpg") {
+         if let myData = NSData(contentsOf: url as URL) {
+         backImage.image = UIImage(data: myData as Data)
+         }
+         }*/
+        
+    }
+    override func viewDidLoad() {
+         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 

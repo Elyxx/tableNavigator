@@ -11,6 +11,9 @@ import CoreData
 
 class CardsManager{
     
+    func getActiveCard(context: NSManagedObjectContext)->NSManagedObject?{
+        return activeCard
+    }
     
     func addNewCard(context: NSManagedObjectContext, name: String){
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
@@ -18,8 +21,22 @@ class CardsManager{
         newCard.setValue(name, forKey: "nameOfCard")
         
         //var error: NSError?
-        //if let data = try? fetchDataFromDisk() { return data }
+      
         try! context.save()
+    }
+    func setActiveCard(context: NSManagedObjectContext, stringPredicat: String){
+     
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
+        fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
+      
+        do {
+            let fetchedResults = try context.fetch(fetchRequest) as? [NSManagedObject]
+            activeCard = (fetchedResults?.first)!
+            print("we have a card")
+        } catch {
+            activeCard = nil
+            print("there was no card")
+        }
     }
     func editExistingCard(){
         /*
@@ -66,6 +83,18 @@ class CardsManager{
         //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
          return fetchedResults
     }
+    func getOneCard(context: NSManagedObjectContext, stringPredicat: String)->NSManagedObject?{
+        var card: NSManagedObject? = nil
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
+        fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
+        do {
+            let fetchedResults = try context.fetch(fetchRequest) as? [NSManagedObject]
+            card = (fetchedResults?.first)!
+        } catch {card = nil}
+        do {         try context.save()         } catch {            print("wrong deleting")         }
+        return card
+    }
+    
     func deleteCard(context: NSManagedObjectContext, stringPredicat: String){
          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
          fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
@@ -81,6 +110,8 @@ class CardsManager{
          do {         try context.save()         } catch {            print("wrong deleting")         }
     }
     var cardsNS: [NSManagedObject] = []
+    
+    var activeCard: NSManagedObject? = nil
 }
 
 extension DiscountCard {

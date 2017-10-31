@@ -17,6 +17,7 @@ class CardInfoViewController: UIViewController {
                 frontDefaultImage.image = UIImage(data: myData as Data)
             }
         }*/
+        
         frontDefaultImage.image = UIImage(named: "funny.jpeg")
         // Do any additional setup after loading the view.
     }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="DiscountCard">
     <entity name="DiscountCard" representedClassName="DiscountCard" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionOfCard" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filterByColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameOfCard" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DiscountCard" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="DiscountCard" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

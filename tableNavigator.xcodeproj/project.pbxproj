@@ -22,6 +22,7 @@
 		257218D81FA7395F0051699F /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257218D71FA7395F0051699F /* CardsManager.swift */; };
 		2574E7481FA62D1D005EB3A7 /* CardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */; };
 		2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2574E7491FA62D78005EB3A7 /* funny.jpeg */; };
+		259341811FA8C8110093D751 /* red.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 259341801FA8C8110093D751 /* red.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		257218D71FA7395F0051699F /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
 		2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoViewController.swift; sourceTree = "<group>"; };
 		2574E7491FA62D78005EB3A7 /* funny.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funny.jpeg; sourceTree = "<group>"; };
+		259341801FA8C8110093D751 /* red.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = red.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				255BA7C21FA4880400FB051B /* CardTableViewCell.swift */,
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
 				255BA7CA1FA4A9F100FB051B /* kitty.jpeg */,
+				259341801FA8C8110093D751 /* red.jpeg */,
 				255BA7C41FA4A0CE00FB051B /* kitten.jpeg */,
 				2574E7491FA62D78005EB3A7 /* funny.jpeg */,
 				255BA7C81FA4A6AD00FB051B /* britt.jpeg */,
@@ -160,6 +163,7 @@
 				255BA7C51FA4A0CE00FB051B /* kitten.jpeg in Resources */,
 				255BA7B31FA4854100FB051B /* Main.storyboard in Resources */,
 				255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */,
+				259341811FA8C8110093D751 /* red.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
