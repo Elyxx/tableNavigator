@@ -12,6 +12,7 @@ import CoreData
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var manager = CardsManager()
+    var myCards = [DiscountCard]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +42,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        cardsNS = manager.getCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
+        myCards = manager.getCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
+        //unwrap
         tableOfCards.reloadData()
     }
     
     func tableView(_ tableOfCards: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cardsNS.count
+        
+        return myCards.count
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            let predicat = self.cardsNS[indexPath.row].value(forKey: "nameOfCard") as? String
+            let predicat = self.myCards[indexPath.row].nameOfCard
             self.manager.setActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
             self.performSegue(withIdentifier: "ToEdit", sender: self)
         }
@@ -60,18 +63,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         editAction.backgroundColor = lightViolet
         
         let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
-            //TODO: Delete the row at indexPath here
+            //print(myCards.nameOfCard)
         }
-        shareAction.backgroundColor = .green
+        let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        shareAction.backgroundColor = lightGreen
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "delete") { (rowAction, indexPath) in
-            let predicat = self.cardsNS[indexPath.row].value(forKey: "nameOfCard") as? String
+            let predicat = self.myCards[indexPath.row].nameOfCard
             //unwrap
             self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
             //if more then one crash accured
             self.tableOfCards.reloadData()
         }
-        deleteAction.backgroundColor = .red
+        let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        deleteAction.backgroundColor = lightRed
         
         return [editAction, shareAction, deleteAction]
     }
@@ -80,8 +85,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
      
-        let cardName = cardsNS[indexPath.row]
-        cell.name.text = cardName.value(forKey: "nameOfCard") as? String
+        //let cardName = cardsNS[indexPath.row]
+        //cell.name.text = cardName.value(forKey: "nameOfCard") as? String
+        
+        cell.name.text = myCards[indexPath.row].nameOfCard
         //print("cell text \(String(describing: cell.name.text))")
         
         cell.cardImage.image = UIImage(named:"britt.jpeg")
@@ -96,13 +103,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableOfCards: UITableView!
     
-    var cardsNS: [NSManagedObject] = []
+    //var cardsNS: [NSManagedObject] = []
+    
+    
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
     
         switch  sender.selectedSegmentIndex
         {
         case 0:
+            //manager.getFilteredCards(context: <#T##NSManagedObjectContext#>, filter: <#T##Int16#>)
             print("zero")
         case 1:
             print("one")

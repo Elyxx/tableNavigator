@@ -11,8 +11,10 @@ import CoreData
 
 class EditViewController: UIViewController {
 
-    var manager = CardsManager()
+    @IBOutlet var child: Child!
     
+    var manager = CardsManager()
+    var newCard: DiscountCard? = nil
     
     /*static var persistentContainer: NSPersistentContainer{
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
@@ -23,17 +25,17 @@ class EditViewController: UIViewController {
    // weak var delegate: FillTheTable?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-       
-        defaultFrontImage.image = UIImage(named: "red.jpeg")
-        backImage.image = UIImage(named: "kitty.jpeg")
+        child.defaultFrontImage.image = UIImage(named: "red.jpeg")
+        child.backImage.image = UIImage(named: "kitty.jpeg")
         
         let cardName = manager.getActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        
         if let newTitle = cardName?.value(forKey: "nameOfCard") as? String {
             print(newTitle)
-            newCardName.text = newTitle
+            child.newCardName.text = newTitle
         }
         else {
-            newCardName.text = "WORK HARDER!"
+            child.newCardName.text = "WORK HARDER!"
         }
         
         
@@ -43,6 +45,7 @@ class EditViewController: UIViewController {
          backImage.image = UIImage(data: myData as Data)
          }
          }*/
+        
         
     }
     override func viewDidLoad() {
@@ -55,22 +58,17 @@ class EditViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var newCardName: UITextField!
-    
-    @IBAction func saveNewData(_ sender: Any) {
-        let tmpName: String! = newCardName.text!//unwrap
-        manager.addNewCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, name: tmpName)
-    }
     
     
-    @IBOutlet weak var filterOfColors: UISegmentedControl!
     
     
+   
     @IBAction func chooseFilter(_ sender: UISegmentedControl) {
+        
     }
-    @IBOutlet weak var backImage: UIImageView!
     
-    @IBOutlet weak var defaultFrontImage: UIImageView!
+    
+    
     /*
     // MARK: - Navigation
 

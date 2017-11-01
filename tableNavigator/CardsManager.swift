@@ -19,9 +19,7 @@ class CardsManager{
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
         let newCard = NSManagedObject(entity: entity!, insertInto:context)
         newCard.setValue(name, forKey: "nameOfCard")
-        
         //var error: NSError?
-      
         try! context.save()
     }
     func setActiveCard(context: NSManagedObjectContext, stringPredicat: String){
@@ -67,13 +65,31 @@ class CardsManager{
  }*/
         //entity.FirstPropertyToUpdate = NewValue
     }
-    func getCards(context: NSManagedObjectContext)->[NSManagedObject]?{
+    func getFilteredCards(context: NSManagedObjectContext, filter: Int16)->[DiscountCard]?{
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
+        fetchRequest.predicate = NSPredicate(format: "filterByColor == %@", filter)
+        //var error: NSError?
+        var fetchedResults: [DiscountCard]? = nil
+        do {
+            fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] //[NSManagedObject]
+        }
+        catch{
+            fetchedResults = nil
+            print("Could not fetch")
+        }
+        //print("here is what we had stored")
+        //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
+        return fetchedResults
+    }
+    
+    func getCards(context: NSManagedObjectContext)->[DiscountCard]?{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
         //var error: NSError?
-        var fetchedResults: [NSManagedObject]? = nil
+        var fetchedResults: [DiscountCard]? = nil
         do {
-            fetchedResults = try context.fetch(fetchRequest) as? [NSManagedObject]
-            cardsNS = fetchedResults!////
+            fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] //[NSManagedObject]
+            //cardsNS = fetchedResults as! [DiscountCard]////
         }
         catch{
             fetchedResults = nil
@@ -83,6 +99,7 @@ class CardsManager{
         //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
          return fetchedResults
     }
+    
     func getOneCard(context: NSManagedObjectContext, stringPredicat: String)->NSManagedObject?{
         var card: NSManagedObject? = nil
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
@@ -96,6 +113,7 @@ class CardsManager{
     }
     
     func deleteCard(context: NSManagedObjectContext, stringPredicat: String){
+        
          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
          fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
          do {
@@ -109,7 +127,7 @@ class CardsManager{
          }
          do {         try context.save()         } catch {            print("wrong deleting")         }
     }
-    var cardsNS: [NSManagedObject] = []
+   // var cardsNS: [DiscountCard] = []
     
     var activeCard: NSManagedObject? = nil
 }
