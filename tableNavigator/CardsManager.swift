@@ -11,31 +11,30 @@ import CoreData
 
 class CardsManager{
     
-    func getActiveCard(context: NSManagedObjectContext)->NSManagedObject?{
-        return activeCard
+    
+    func createNewCard(context: NSManagedObjectContext)->NSManagedObjectID{
+        let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
+        let newCard = NSManagedObject(entity: entity!, insertInto:context)
+        //var error: NSError?
+        try! context.save()
+        return newCard.objectID
     }
     
-    func addNewCard(context: NSManagedObjectContext, name: String){
+    func addNewCard(context: NSManagedObjectContext, name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
         let newCard = NSManagedObject(entity: entity!, insertInto:context)
         newCard.setValue(name, forKey: "nameOfCard")
+        //newCard.setValue(frontIMG, forKey: "frontImageOfCard")
+        //newCard.setValue(backIMG, forKey: "backImageOfCard")
+        //newCard.setValue(barcodeIMG, forKey: "barcode")
+        newCard.setValue(descrip, forKey: "descriptionOfCard")
+        newCard.setValue(filter, forKey: "filterByColor")
+        //newCard.setValue(Data(), forKey: "dateOfCreation")
+     
         //var error: NSError?
         try! context.save()
     }
-    func setActiveCard(context: NSManagedObjectContext, stringPredicat: String){
-     
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-        fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
-      
-        do {
-            let fetchedResults = try context.fetch(fetchRequest) as? [NSManagedObject]
-            activeCard = (fetchedResults?.first)!
-            print("we have a card")
-        } catch {
-            activeCard = nil
-            print("there was no card")
-        }
-    }
+    
     func editExistingCard(){
         /*
  // Предполагаем, что тип имеет ссылку на контекст
@@ -65,21 +64,19 @@ class CardsManager{
  }*/
         //entity.FirstPropertyToUpdate = NewValue
     }
-    func getFilteredCards(context: NSManagedObjectContext, filter: Int16)->[DiscountCard]?{
-        
+    func getFilteredCards(context: NSManagedObjectContext, filter: String? = nil)->[DiscountCard]?{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-        fetchRequest.predicate = NSPredicate(format: "filterByColor == %@", filter)
+        if filter != nil {
+            fetchRequest.predicate = NSPredicate(format: "filterByColor == %@", filter!)
+        }
         //var error: NSError?
         var fetchedResults: [DiscountCard]? = nil
         do {
             fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] //[NSManagedObject]
         }
         catch{
-            fetchedResults = nil
             print("Could not fetch")
         }
-        //print("here is what we had stored")
-        //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
         return fetchedResults
     }
     
@@ -89,45 +86,34 @@ class CardsManager{
         var fetchedResults: [DiscountCard]? = nil
         do {
             fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] //[NSManagedObject]
-            //cardsNS = fetchedResults as! [DiscountCard]////
         }
         catch{
             fetchedResults = nil
             print("Could not fetch")
         }
-        //print("here is what we had stored")
-        //for item in cardsNS {            print(item.value(forKey: "nameOfCard"))        }
-         return fetchedResults
+        return fetchedResults
     }
-    
+    /*
     func getOneCard(context: NSManagedObjectContext, stringPredicat: String)->NSManagedObject?{
         var card: NSManagedObject? = nil
+        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-        fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
+        fetchRequest.predicate = NSPredicate(format: "objectID == %@", stringPredicat)
         do {
-            let fetchedResults = try context.fetch(fetchRequest) as? [NSManagedObject]
+            let fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard]
             card = (fetchedResults?.first)!
-        } catch {card = nil}
+        } catch {
+            card = nil}
         do {         try context.save()         } catch {            print("wrong deleting")         }
         return card
     }
-    
-    func deleteCard(context: NSManagedObjectContext, stringPredicat: String){
-        
-         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-         fetchRequest.predicate = NSPredicate(format: "nameOfCard == %@", stringPredicat)
+    */
+    func deleteCard(context: NSManagedObjectContext, cardDeleted: DiscountCard){
+         context.delete(cardDeleted)
          do {
-            let fetchedEntities = try context.fetch(fetchRequest) as? [NSManagedObject]
-            for fetchedCard in fetchedEntities! {
-                  context.delete(fetchedCard)
-                }
-             /*if let entityToDelete = fetchedEntities?.first {      print("inside")
-                context.delete(entityToDelete)         }*/
-         } catch {    // что-то делаем в зависимости от ошибки
-         }
-         do {         try context.save()         } catch {            print("wrong deleting")         }
+            try context.save()         } catch {            print("wrong deleting")         }
     }
-   // var cardsNS: [DiscountCard] = []
+
     
     var activeCard: NSManagedObject? = nil
 }

@@ -15,9 +15,15 @@ class CardTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    @IBOutlet weak var cardImage: UIImageView!
+    @IBOutlet weak var nameCell: UILabel!
     
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var imageCell: UIImageView!
+    
+    @IBOutlet weak var filterCell: UILabel!
+    
+    @IBOutlet weak var descripCell: UITextView!
+    
+    @IBOutlet weak var dataCell: UILabel!
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

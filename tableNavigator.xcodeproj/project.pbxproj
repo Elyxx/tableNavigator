@@ -23,7 +23,8 @@
 		2574E7481FA62D1D005EB3A7 /* CardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */; };
 		2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2574E7491FA62D78005EB3A7 /* funny.jpeg */; };
 		257984A51FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */; };
-		257E19D11FAA20C100F86CE7 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257E19D01FAA20C100F86CE7 /* Child.swift */; };
+		2586F0A51FAB114A0082691D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586F0A41FAB114A0082691D /* Extensions.swift */; };
+		258B2BD11FAB521400C11748 /* ChildScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B2BD01FAB521400C11748 /* ChildScrollView.swift */; };
 		259341811FA8C8110093D751 /* red.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 259341801FA8C8110093D751 /* red.jpeg */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +47,8 @@
 		2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoViewController.swift; sourceTree = "<group>"; };
 		2574E7491FA62D78005EB3A7 /* funny.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funny.jpeg; sourceTree = "<group>"; };
 		257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscountCard+CoreDataClass.swift"; sourceTree = "<group>"; };
-		257E19D01FAA20C100F86CE7 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		2586F0A41FAB114A0082691D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		258B2BD01FAB521400C11748 /* ChildScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildScrollView.swift; sourceTree = "<group>"; };
 		259341801FA8C8110093D751 /* red.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = red.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,10 +84,11 @@
 			children = (
 				255BA7AD1FA4854100FB051B /* AppDelegate.swift */,
 				257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */,
+				2586F0A41FAB114A0082691D /* Extensions.swift */,
 				257218D71FA7395F0051699F /* CardsManager.swift */,
 				255BA7CC1FA4B87F00FB051B /* Protocols.swift */,
-				257E19D01FAA20C100F86CE7 /* Child.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
+				258B2BD01FAB521400C11748 /* ChildScrollView.swift */,
 				2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */,
 				255BA7C61FA4A4B200FB051B /* EditViewController.swift */,
 				255BA7C21FA4880400FB051B /* CardTableViewCell.swift */,
@@ -186,9 +189,10 @@
 				255BA7B01FA4854100FB051B /* ViewController.swift in Sources */,
 				255BA7B61FA4854100FB051B /* tableNavigator.xcdatamodeld in Sources */,
 				255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */,
+				258B2BD11FAB521400C11748 /* ChildScrollView.swift in Sources */,
 				257218D81FA7395F0051699F /* CardsManager.swift in Sources */,
 				255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */,
-				257E19D11FAA20C100F86CE7 /* Child.swift in Sources */,
+				2586F0A51FAB114A0082691D /* Extensions.swift in Sources */,
 				255BA7C31FA4880400FB051B /* CardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

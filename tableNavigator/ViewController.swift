@@ -13,7 +13,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var manager = CardsManager()
     var myCards = [DiscountCard]()
-    
+   
+    var filter: String? = nil
+    var delegate: sendCard?
     override func viewDidLoad() {
         super.viewDidLoad()
         //if cardsNS.isEmpty {            print("halepa...")        }
@@ -37,12 +39,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ToEdit"){
             let editViewController = segue.destination as? EditViewController
-            editViewController?.delegate = self
+            //editViewController?.delegate = self
         }
     }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        myCards = manager.getCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)!
+        myCards = manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: filter)!
         //unwrap
         tableOfCards.reloadData()
     }
@@ -55,9 +57,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            let predicat = self.myCards[indexPath.row].nameOfCard
-            self.manager.setActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
+            //let predicat = self.myCards[indexPath.row].nameOfCard
+            
+            //self.manager.setActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
+            
             self.performSegue(withIdentifier: "ToEdit", sender: self)
+            //self.editViewController?.initCard(cardID: self.myCards[indexPath.row].objectID)
         }
         let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         editAction.backgroundColor = lightViolet
@@ -69,10 +74,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         shareAction.backgroundColor = lightGreen
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "delete") { (rowAction, indexPath) in
-            let predicat = self.myCards[indexPath.row].nameOfCard
+            //let predicat = self.myCards[indexPath.row].nameOfCard
             //unwrap
-            self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
+            self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, cardDeleted: self.myCards[indexPath.row])
             //if more then one crash accured
+            self.myCards = self.manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: self.filter)!
             self.tableOfCards.reloadData()
         }
         let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
@@ -84,40 +90,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
-     
-        //let cardName = cardsNS[indexPath.row]
-        //cell.name.text = cardName.value(forKey: "nameOfCard") as? String
         
-        cell.name.text = myCards[indexPath.row].nameOfCard
-        //print("cell text \(String(describing: cell.name.text))")
+        cell.nameCell.text = myCards[indexPath.row].nameOfCard
         
-        cell.cardImage.image = UIImage(named:"britt.jpeg")
+        cell.filterCell.backgroundColor = setColor(number: myCards[indexPath.row].filterByColor)
+        
+        cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
+        cell.imageCell.image = UIImage(named:"britt.jpeg")
         
         return cell
     }
     
     func numberOfSections(in tableOfCards: UITableView) -> Int {      return 1   }
-  
-
-    
     
     @IBOutlet weak var tableOfCards: UITableView!
     
-    //var cardsNS: [NSManagedObject] = []
-    
-    
-    
     @IBAction func filterCards(_ sender: UISegmentedControl) {
-    
-        switch  sender.selectedSegmentIndex
-        {
-        case 0:
-            //manager.getFilteredCards(context: <#T##NSManagedObjectContext#>, filter: <#T##Int16#>)
-            print("zero")
-        case 1:
-            print("one")
+        filter = String(sender.selectedSegmentIndex)
+        myCards = manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: filter)!
+        tableOfCards.reloadData()
+    }
+    func setColor(number: String?) -> UIColor{
+        switch number {
+        case "0"?:
+            return UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        case "1"?:
+            return UIColor(red: 230.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+        case "2"?:
+            return UIColor(red: 235.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        case "3"?:
+            return UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+        case "4"?:
+            return UIColor(red: 255.0/255.0, green: 250.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         default:
-            break;
+            return .red
         }
     }
     @IBOutlet weak var coloredFilter: UISegmentedControl!

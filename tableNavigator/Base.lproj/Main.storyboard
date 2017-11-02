@@ -55,14 +55,13 @@
                                                     <rect key="frame" x="0.0" y="-0.33333333333333215" width="150" height="44.333333333333329"/>
                                                     <color key="backgroundColor" red="0.53727067674449658" green="0.99495315724425426" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gJq-iE-5gh" userLabel="description">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gJq-iE-5gh">
                                                     <rect key="frame" x="150" y="10.333333333333334" width="213.33333333333337" height="26.333333333333329"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.10.2017" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkF-6O-t8Z" userLabel="date">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.10.2017" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkF-6O-t8Z">
                                                     <rect key="frame" x="150" y="36.666666666666664" width="213.33333333333337" height="7.3333333333333357"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="8"/>
                                                     <nil key="textColor"/>
@@ -101,8 +100,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.82882098178086161" green="1" blue="0.69277065271339944" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="cardImage" destination="IKl-wS-l9A" id="reM-8A-6nT"/>
-                                            <outlet property="name" destination="Vsq-jv-XY0" id="5s1-1M-nUG"/>
+                                            <outlet property="dataCell" destination="nkF-6O-t8Z" id="IAS-qH-RHq"/>
+                                            <outlet property="descripCell" destination="gJq-iE-5gh" id="rPI-IA-y5W"/>
+                                            <outlet property="filterCell" destination="5B5-7L-91H" id="AP9-ev-4KE"/>
+                                            <outlet property="imageCell" destination="IKl-wS-l9A" id="QOg-1d-dIy"/>
+                                            <outlet property="nameCell" destination="Vsq-jv-XY0" id="xu2-ix-Qg9"/>
                                             <segue destination="AIs-b2-dfu" kind="show" id="cLy-Sc-uYH"/>
                                         </connections>
                                     </tableViewCell>
@@ -160,7 +162,7 @@
         <scene sceneID="XDg-qM-XMq">
             <objects>
                 <viewController id="cGr-zl-uCv" customClass="EditViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZmH-0X-Pn7" customClass="Child" customModule="tableNavigator" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="ZmH-0X-Pn7" customClass="ChildScrollView" customModule="tableNavigator" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -171,7 +173,7 @@
                                     <navigationItem title="edit" id="6C4-cP-lPJ">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="D2g-hR-LCP">
                                             <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="Mc8-BA-yr8"/>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="ToMain" id="Mc8-BA-yr8"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -189,28 +191,10 @@
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="saveCard:" destination="ZmH-0X-Pn7" eventType="touchUpInside" id="fXj-si-RW2"/>
-                                                    <segue destination="BYZ-38-t0r" kind="show" id="QM5-st-Frr"/>
+                                                    <action selector="saveCard:" destination="ZmH-0X-Pn7" eventType="touchUpInside" id="k5g-8l-IAh"/>
+                                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ToMainSave" id="QM5-st-Frr"/>
                                                 </connections>
                                             </button>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-v7-3Nu" userLabel="filter">
-                                                <rect key="frame" x="0.0" y="537" width="375" height="26"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.67536856919999999" green="0.98672083720000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <segments>
-                                                    <segment title="beauty"/>
-                                                    <segment title="food"/>
-                                                    <segment title="market"/>
-                                                    <segment title="cinema"/>
-                                                    <segment title="other"/>
-                                                </segments>
-                                                <color key="tintColor" red="0.064788886779999999" green="0.094657269399999994" blue="0.095931154820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <action selector="chooseColor:" destination="ZmH-0X-Pn7" eventType="valueChanged" id="q5m-P4-sdF"/>
-                                                    <action selector="chooseFilter:" destination="ZmH-0X-Pn7" eventType="valueChanged" id="sS5-ox-B61"/>
-                                                    <action selector="filterCards:" destination="BYZ-38-t0r" eventType="valueChanged" id="nB7-so-WuX"/>
-                                                </connections>
-                                            </segmentedControl>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-Ez-egz">
                                                 <rect key="frame" x="67" y="96" width="240" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -223,6 +207,37 @@
                                                 <rect key="frame" x="67" y="368" width="240" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-v7-3Nu" userLabel="filter">
+                                                <rect key="frame" x="0.0" y="664" width="375" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.67536856919999999" green="0.98672083720000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <segments>
+                                                    <segment title="beauty"/>
+                                                    <segment title="food"/>
+                                                    <segment title="market"/>
+                                                    <segment title="cinema"/>
+                                                    <segment title="other"/>
+                                                </segments>
+                                                <color key="tintColor" red="0.064788886779999999" green="0.094657269399999994" blue="0.095931154820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="chooseColor:" destination="ZmH-0X-Pn7" eventType="valueChanged" id="efG-YA-rIn"/>
+                                                    <action selector="filterCards:" destination="BYZ-38-t0r" eventType="valueChanged" id="nB7-so-WuX"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Lorem commodo consequat. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
+                                                <rect key="frame" x="67" y="504" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioY-iM-7d3">
+                                                <rect key="frame" x="67" y="58" width="97" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.78841646640542162" green="0.97256097908464001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -232,13 +247,6 @@
                                             <constraint firstAttribute="bottom" secondItem="DQA-qM-hkc" secondAttribute="bottom" id="ruj-bd-Kc6"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioY-iM-7d3">
-                                        <rect key="frame" x="139" y="43" width="97" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.7576853323391165" green="0.98055818227258384" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -264,13 +272,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0bQ-WB-9Kd"/>
                         <connections>
-                            <outlet property="backImage" destination="5jo-ZC-OVP" id="DgI-Y5-SCe"/>
-                            <outlet property="defaultFrontImage" destination="J7C-Ez-egz" id="l7f-1x-6nb"/>
-                            <outlet property="newCardName" destination="ioY-iM-7d3" id="ecF-eg-Ppd"/>
+                            <outlet property="backImage" destination="5jo-ZC-OVP" id="8WN-3Q-Lgv"/>
+                            <outlet property="defaultFrontImage" destination="J7C-Ez-egz" id="rFo-I7-0GW"/>
+                            <outlet property="descript" destination="gUF-Tn-cjs" id="oJx-3L-h0f"/>
+                            <outlet property="newCardName" destination="ioY-iM-7d3" id="QJ5-7V-buY"/>
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="child" destination="ZmH-0X-Pn7" id="Qyp-pp-hLi"/>
+                        <outlet property="childView" destination="ZmH-0X-Pn7" id="9ye-hc-1hz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FyR-3I-Jq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -325,10 +334,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHF-nN-n4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728.79999999999995" y="574.8768472906404"/>
+            <point key="canvasLocation" x="593" y="405"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Mc8-BA-yr8"/>
+        <segue reference="QM5-st-Frr"/>
     </inferredMetricsTieBreakers>
 </document>

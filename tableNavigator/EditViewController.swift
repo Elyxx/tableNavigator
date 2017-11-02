@@ -9,35 +9,58 @@
 import UIKit
 import CoreData
 
-class EditViewController: UIViewController {
+class EditViewController: UIViewController, sendCard {
 
-    @IBOutlet var child: Child!
+   
+    @IBOutlet var childView: ChildScrollView!
+    
     
     var manager = CardsManager()
-    var newCard: DiscountCard? = nil
+    
+    var editingCard: NSManagedObjectID? = nil
     
     /*static var persistentContainer: NSPersistentContainer{
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
     static var viewContext: NSManagedObjectContext{
         return persistentContainer.viewContext
-    }*/
+    }
    // weak var delegate: FillTheTable?
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if (segue.identifier == "ToEdit"){
+            print("edit")
+             let viewController = segue.destination as? ViewController
+             viewController?.delegate = self
+         }
+        if (segue.identifier == "ToMain"){
+            print("main")
+            let viewController = segue.destination as? ViewController
+            viewController?.delegate = self
+        }
+        if (segue.identifier == "ToMainSave"){
+            print("mainSave")
+            let viewController = segue.destination as? ViewController
+            viewController?.delegate = self
+        }
+     }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        child.defaultFrontImage.image = UIImage(named: "red.jpeg")
-        child.backImage.image = UIImage(named: "kitty.jpeg")
+     
+        childView.defaultFrontImage.image = UIImage(named: "red.jpeg")
+        childView.backImage.image = UIImage(named: "kitty.jpeg")
         
-        let cardName = manager.getActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        //let cardName = manager.getActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        /*let cardName = child.newCard?.nameOfCard
         
-        if let newTitle = cardName?.value(forKey: "nameOfCard") as? String {
+        if let newTitle = cardName {
             print(newTitle)
             child.newCardName.text = newTitle
         }
         else {
             child.newCardName.text = "WORK HARDER!"
         }
-        
+        */
         
         
         /*if let url = NSURL(string: "http://www.petsfriend.ca/media/k2/items/cache/95afb94bcb9e5971a68576edb0850e71_S.jpg") {
@@ -58,16 +81,10 @@ class EditViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
-    
-   
-    @IBAction func chooseFilter(_ sender: UISegmentedControl) {
-        
+    func initCard (cardID: NSManagedObjectID){
+        //childView.newCardName.text = "THINK!"
+        print("card has been initiated")
     }
-    
-    
     
     /*
     // MARK: - Navigation
