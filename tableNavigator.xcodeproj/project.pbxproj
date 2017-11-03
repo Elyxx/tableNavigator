@@ -19,6 +19,8 @@
 		255BA7C91FA4A6AE00FB051B /* britt.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7C81FA4A6AD00FB051B /* britt.jpeg */; };
 		255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7CA1FA4A9F100FB051B /* kitty.jpeg */; };
 		255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7CC1FA4B87F00FB051B /* Protocols.swift */; };
+		25646CAE1FAC9DC50051944E /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25646CAD1FAC9DC50051944E /* PageController.swift */; };
+		25646CB01FACA0680051944E /* chernyj_strizh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25646CAF1FACA0680051944E /* chernyj_strizh.jpg */; };
 		257218D81FA7395F0051699F /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257218D71FA7395F0051699F /* CardsManager.swift */; };
 		2574E7481FA62D1D005EB3A7 /* CardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */; };
 		2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2574E7491FA62D78005EB3A7 /* funny.jpeg */; };
@@ -43,6 +45,8 @@
 		255BA7C81FA4A6AD00FB051B /* britt.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = britt.jpeg; sourceTree = "<group>"; };
 		255BA7CA1FA4A9F100FB051B /* kitty.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitty.jpeg; sourceTree = "<group>"; };
 		255BA7CC1FA4B87F00FB051B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		25646CAD1FAC9DC50051944E /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		25646CAF1FACA0680051944E /* chernyj_strizh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chernyj_strizh.jpg; sourceTree = "<group>"; };
 		257218D71FA7395F0051699F /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
 		2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoViewController.swift; sourceTree = "<group>"; };
 		2574E7491FA62D78005EB3A7 /* funny.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funny.jpeg; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 				2586F0A41FAB114A0082691D /* Extensions.swift */,
 				257218D71FA7395F0051699F /* CardsManager.swift */,
 				255BA7CC1FA4B87F00FB051B /* Protocols.swift */,
+				25646CAD1FAC9DC50051944E /* PageController.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
 				258B2BD01FAB521400C11748 /* ChildScrollView.swift */,
 				2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */,
@@ -95,6 +100,7 @@
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
 				255BA7CA1FA4A9F100FB051B /* kitty.jpeg */,
 				259341801FA8C8110093D751 /* red.jpeg */,
+				25646CAF1FACA0680051944E /* chernyj_strizh.jpg */,
 				255BA7C41FA4A0CE00FB051B /* kitten.jpeg */,
 				2574E7491FA62D78005EB3A7 /* funny.jpeg */,
 				255BA7C81FA4A6AD00FB051B /* britt.jpeg */,
@@ -172,6 +178,7 @@
 				255BA7C51FA4A0CE00FB051B /* kitten.jpeg in Resources */,
 				255BA7B31FA4854100FB051B /* Main.storyboard in Resources */,
 				255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */,
+				25646CB01FACA0680051944E /* chernyj_strizh.jpg in Resources */,
 				259341811FA8C8110093D751 /* red.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,6 +198,7 @@
 				255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */,
 				258B2BD11FAB521400C11748 /* ChildScrollView.swift in Sources */,
 				257218D81FA7395F0051699F /* CardsManager.swift in Sources */,
+				25646CAE1FAC9DC50051944E /* PageController.swift in Sources */,
 				255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */,
 				2586F0A51FAB114A0082691D /* Extensions.swift in Sources */,
 				255BA7C31FA4880400FB051B /* CardTableViewCell.swift in Sources */,

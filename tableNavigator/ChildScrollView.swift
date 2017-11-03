@@ -13,8 +13,7 @@
         
         var filter: String? = nil
         var manager = CardsManager()
-        var editingCard: NSManagedObjectID? = nil
-        
+        var editingCard: DiscountCard? = nil
    
     @IBOutlet weak var defaultFrontImage: UIImageView!
 
@@ -28,18 +27,23 @@
          filter = String(sender.selectedSegmentIndex)
          print(descript.text)
     }
-   
-    @IBAction func saveCard(_ sender: UIButton) {
-    manager.addNewCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, name: newCardName.text, descrip: descript.text, filter: filter)
     
+    @IBAction func saveCard(_ sender: UIButton) {
+        /*if editingCard != nil { 
+            //manager.editExisting(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, card: editingCard!)
+            //print("this works too")
         }
-        /*
+        else{
+            manager.addNewCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, name: newCardName.text, descrip: descript.text, filter: filter)
+        }
+        
          // Only override draw() if you perform custom drawing.
          // An empty implementation adversely affects performance during animation.
          override func draw(_ rect: CGRect) {
          // Drawing code
          }
          */
+    }
         
 }
 

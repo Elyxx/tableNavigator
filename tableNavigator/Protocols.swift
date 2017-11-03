@@ -14,6 +14,7 @@ protocol FillTheTable:class {
     var names: [String] {get set}
   
 }
-protocol sendCard: class {
-    func initCard (cardID: NSManagedObjectID)
+protocol SendCard: class {
+    func initCard (card: DiscountCard)
+    //var card: DiscountCard 
 }

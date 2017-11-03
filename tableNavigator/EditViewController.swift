@@ -9,15 +9,13 @@
 import UIKit
 import CoreData
 
-class EditViewController: UIViewController, sendCard {
+class EditViewController: UIViewController, SendCard {
 
    
     @IBOutlet var childView: ChildScrollView!
     
-    
+    //weak var delegate: SendCard?
     var manager = CardsManager()
-    
-    var editingCard: NSManagedObjectID? = nil
     
     /*static var persistentContainer: NSPersistentContainer{
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
@@ -25,54 +23,27 @@ class EditViewController: UIViewController, sendCard {
     static var viewContext: NSManagedObjectContext{
         return persistentContainer.viewContext
     }
-   // weak var delegate: FillTheTable?
-    
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         if (segue.identifier == "ToEdit"){
-            print("edit")
-             let viewController = segue.destination as? ViewController
-             viewController?.delegate = self
-         }
-        if (segue.identifier == "ToMain"){
-            print("main")
+   //
+    */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "ToEdit")||(segue.identifier == "ToMainSave")||(segue.identifier == "ToMain"){
+            //print("mainSave")
             let viewController = segue.destination as? ViewController
             viewController?.delegate = self
+            //childView.editingCard = sender as? DiscountCard
         }
-        if (segue.identifier == "ToMainSave"){
-            print("mainSave")
-            let viewController = segue.destination as? ViewController
-            viewController?.delegate = self
-        }
-     }*/
+     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
      
         childView.defaultFrontImage.image = UIImage(named: "red.jpeg")
         childView.backImage.image = UIImage(named: "kitty.jpeg")
         
-        //let cardName = manager.getActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
-        /*let cardName = child.newCard?.nameOfCard
-        
-        if let newTitle = cardName {
-            print(newTitle)
-            child.newCardName.text = newTitle
-        }
-        else {
-            child.newCardName.text = "WORK HARDER!"
-        }
-        */
-        
-        
-        /*if let url = NSURL(string: "http://www.petsfriend.ca/media/k2/items/cache/95afb94bcb9e5971a68576edb0850e71_S.jpg") {
-         if let myData = NSData(contentsOf: url as URL) {
-         backImage.image = UIImage(data: myData as Data)
-         }
-         }*/
-        
         
     }
     override func viewDidLoad() {
          super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -81,9 +52,17 @@ class EditViewController: UIViewController, sendCard {
         // Dispose of any resources that can be recreated.
     }
     
-    func initCard (cardID: NSManagedObjectID){
-        //childView.newCardName.text = "THINK!"
+    func initCard (card: DiscountCard){
+        childView.editingCard = card
         print("card has been initiated")
+        if let newTitle = card.nameOfCard {
+            childView.newCardName.text = "where is title?"
+            print(newTitle)
+            //print("second is \()")
+        }
+        else {
+            childView.newCardName.text = "WORK HARDER!"
+        }
     }
     
     /*

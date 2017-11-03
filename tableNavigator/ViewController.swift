@@ -15,7 +15,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var myCards = [DiscountCard]()
    
     var filter: String? = nil
-    var delegate: sendCard?
+    var delegate: SendCard?
+    
+    var editViewController: EditViewController? = nil
+    
+    @IBOutlet weak var searchCard: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //if cardsNS.isEmpty {            print("halepa...")        }
@@ -45,7 +50,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         myCards = manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: filter)!
-        //unwrap
         tableOfCards.reloadData()
     }
     
@@ -57,12 +61,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            //let predicat = self.myCards[indexPath.row].nameOfCard
-            
-            //self.manager.setActiveCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, stringPredicat: predicat!)
-            
-            self.performSegue(withIdentifier: "ToEdit", sender: self)
-            //self.editViewController?.initCard(cardID: self.myCards[indexPath.row].objectID)
+            self.delegate?.initCard(card: self.myCards[indexPath.row])
+            self.performSegue(withIdentifier: "ToEdit", sender: self.myCards[indexPath.row])
         }
         let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         editAction.backgroundColor = lightViolet
@@ -74,10 +74,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         shareAction.backgroundColor = lightGreen
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "delete") { (rowAction, indexPath) in
-            //let predicat = self.myCards[indexPath.row].nameOfCard
-            //unwrap
             self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, cardDeleted: self.myCards[indexPath.row])
-            //if more then one crash accured
             self.myCards = self.manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: self.filter)!
             self.tableOfCards.reloadData()
         }
