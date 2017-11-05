@@ -22,7 +22,6 @@
 		25646CAE1FAC9DC50051944E /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25646CAD1FAC9DC50051944E /* PageController.swift */; };
 		25646CB01FACA0680051944E /* chernyj_strizh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25646CAF1FACA0680051944E /* chernyj_strizh.jpg */; };
 		257218D81FA7395F0051699F /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257218D71FA7395F0051699F /* CardsManager.swift */; };
-		2574E7481FA62D1D005EB3A7 /* CardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */; };
 		2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2574E7491FA62D78005EB3A7 /* funny.jpeg */; };
 		257984A51FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */; };
 		2586F0A51FAB114A0082691D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586F0A41FAB114A0082691D /* Extensions.swift */; };
@@ -48,7 +47,6 @@
 		25646CAD1FAC9DC50051944E /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		25646CAF1FACA0680051944E /* chernyj_strizh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chernyj_strizh.jpg; sourceTree = "<group>"; };
 		257218D71FA7395F0051699F /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
-		2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoViewController.swift; sourceTree = "<group>"; };
 		2574E7491FA62D78005EB3A7 /* funny.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funny.jpeg; sourceTree = "<group>"; };
 		257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscountCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2586F0A41FAB114A0082691D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				25646CAD1FAC9DC50051944E /* PageController.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
 				258B2BD01FAB521400C11748 /* ChildScrollView.swift */,
-				2574E7471FA62D1D005EB3A7 /* CardInfoViewController.swift */,
 				255BA7C61FA4A4B200FB051B /* EditViewController.swift */,
 				255BA7C21FA4880400FB051B /* CardTableViewCell.swift */,
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
@@ -191,7 +188,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				257984A51FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift in Sources */,
-				2574E7481FA62D1D005EB3A7 /* CardInfoViewController.swift in Sources */,
 				255BA7C71FA4A4B200FB051B /* EditViewController.swift in Sources */,
 				255BA7B01FA4854100FB051B /* ViewController.swift in Sources */,
 				255BA7B61FA4854100FB051B /* tableNavigator.xcdatamodeld in Sources */,

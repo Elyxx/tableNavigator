@@ -10,17 +10,6 @@ import Foundation
 import CoreData
 
 class CardsManager{
-    
-    //static var activeCard: NSManagedObject? = nil
-    /*
-    func createNewCard(context: NSManagedObjectContext)->NSManagedObjectID{
-        let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
-        let newCard = NSManagedObject(entity: entity!, insertInto:context)
-        //var error: NSError?
-        try! context.save()
-        return newCard.objectID
-    }
-    */
     func addNewCard(context: NSManagedObjectContext, name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
         let newCard = NSManagedObject(entity: entity!, insertInto:context)
@@ -30,16 +19,16 @@ class CardsManager{
         //newCard.setValue(barcodeIMG, forKey: "barcode")
         newCard.setValue(descrip, forKey: "descriptionOfCard")
         newCard.setValue(filter, forKey: "filterByColor")
-        //newCard.setValue(Data(), forKey: "dateOfCreation")
+        newCard.setValue(Date(), forKey: "dateOfCreation")
      
         //var error: NSError?
         try! context.save()
     }
-    
-    func editExisting(context: NSManagedObjectContext, card: DiscountCard){
-         //card.nameOfCard = ""
-         //card.descriptionOfCard = ""
-         try! context.save()
+    func editExisting(context: NSManagedObjectContext, card: DiscountCard, name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
+        card.nameOfCard = name
+        card.descriptionOfCard = descrip
+        card.filterByColor = filter
+        try! context.save()
     }
     func getFilteredCards(context: NSManagedObjectContext, filter: String? = nil)->[DiscountCard]?{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
@@ -49,56 +38,21 @@ class CardsManager{
         //var error: NSError?
         var fetchedResults: [DiscountCard]? = nil
         do {
-            fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] //[NSManagedObject]
+            fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] 
+            for item in fetchedResults!{
+                if item.dateOfCreation == nil{
+                    item.dateOfCreation = Date()
+                }
+            }
         }
         catch{
             print("Could not fetch")
         }
         return fetchedResults
-    }
-    
-    func getCards(context: NSManagedObjectContext)->[DiscountCard]?{
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-        //var error: NSError?
-        var fetchedResults: [DiscountCard]? = nil
-        do {
-            fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] //[NSManagedObject]
-        }
-        catch{
-            fetchedResults = nil
-            print("Could not fetch")
-        }
-        return fetchedResults
-    }
-    /*
-    func getOneCard(context: NSManagedObjectContext, stringPredicat: String)->NSManagedObject?{
-        var card: NSManagedObject? = nil
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DiscountCard")
-        fetchRequest.predicate = NSPredicate(format: "objectID == %@", stringPredicat)
-        do {
-            let fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard]
-            card = (fetchedResults?.first)!
-        } catch {
-            card = nil}
-        do {         try context.save()         } catch {            print("wrong deleting")         }
-        return card
-    }
-    */
+    }    
     func deleteCard(context: NSManagedObjectContext, cardDeleted: DiscountCard){
          context.delete(cardDeleted)
-         do {
-            try context.save()         } catch {            print("wrong deleting")         }
+         do {            try context.save()         } catch {            print("wrong deleting")         }
     }
-    
-    func setActiveCard(context: NSManagedObjectContext, card: DiscountCard){
-        //self.activeCard = card
-    }
-
-    
-    
 }
 
-extension DiscountCard {
-    
-}

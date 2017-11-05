@@ -45,24 +45,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsq-jv-XY0">
-                                                    <rect key="frame" x="150" y="-0.66666666666666696" width="213.33333333333337" height="11"/>
+                                                    <rect key="frame" x="225" y="-0.66666666666666696" width="138.33333333333337" height="11"/>
                                                     <color key="backgroundColor" red="0.85993726517354618" green="0.68479459083211081" blue="0.87351284898477155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IKl-wS-l9A">
-                                                    <rect key="frame" x="0.0" y="-0.33333333333333215" width="150" height="44.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="-0.33333333333333215" width="225" height="44.333333333333329"/>
                                                     <color key="backgroundColor" red="0.53727067674449658" green="0.99495315724425426" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Lorem " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gJq-iE-5gh">
-                                                    <rect key="frame" x="150" y="10.333333333333334" width="213.33333333333337" height="26.333333333333329"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gJq-iE-5gh">
+                                                    <rect key="frame" x="225" y="10.333333333333334" width="138.33333333333337" height="26.333333333333329"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.10.2017" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkF-6O-t8Z">
-                                                    <rect key="frame" x="150" y="36.666666666666664" width="213.33333333333337" height="7.3333333333333357"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkF-6O-t8Z">
+                                                    <rect key="frame" x="225" y="36.666666666666664" width="138.33333333333337" height="7.3333333333333357"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="8"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="width" secondItem="p8r-OH-bTG" secondAttribute="width" multiplier="1:32" id="Lrs-bn-yo8"/>
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="leading" secondItem="gJq-iE-5gh" secondAttribute="trailing" id="OEl-kq-RjH"/>
                                                 <constraint firstItem="IKl-wS-l9A" firstAttribute="top" secondItem="p8r-OH-bTG" secondAttribute="top" id="T2B-K7-b3t"/>
-                                                <constraint firstItem="IKl-wS-l9A" firstAttribute="width" secondItem="p8r-OH-bTG" secondAttribute="width" multiplier="2:5" id="Y95-2f-hf5"/>
+                                                <constraint firstItem="IKl-wS-l9A" firstAttribute="width" secondItem="p8r-OH-bTG" secondAttribute="width" multiplier="3:5" id="Y95-2f-hf5"/>
                                                 <constraint firstItem="nkF-6O-t8Z" firstAttribute="top" secondItem="gJq-iE-5gh" secondAttribute="bottom" id="b4w-X8-JJI"/>
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="leading" secondItem="Vsq-jv-XY0" secondAttribute="trailing" id="fQl-LL-FOI"/>
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="top" secondItem="p8r-OH-bTG" secondAttribute="top" id="feS-N0-yx7"/>
@@ -153,11 +153,12 @@
                         <outlet property="coloredFilter" destination="RDA-Sz-Gvg" id="O1Y-Ro-wOE"/>
                         <outlet property="searchCard" destination="6Xs-JX-a4r" id="ujb-Bf-muC"/>
                         <outlet property="tableOfCards" destination="Iek-ph-w9K" id="cbF-Bp-moe"/>
+                        <segue destination="cGr-zl-uCv" kind="show" identifier="ForEditting" id="SyO-Pu-ats"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-153" y="277"/>
+            <point key="canvasLocation" x="-702" y="-91"/>
         </scene>
         <!--Edit View Controller-->
         <scene sceneID="XDg-qM-XMq">
@@ -173,6 +174,7 @@
                                 <items>
                                     <navigationItem title="edit" id="6C4-cP-lPJ">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="D2g-hR-LCP">
+                                            <color key="tintColor" red="0.021474460659898442" green="0.020491141134261155" blue="0.018524223758641805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="ToMain" id="Mc8-BA-yr8"/>
                                             </connections>
@@ -225,11 +227,11 @@
                                                     <action selector="filterCards:" destination="BYZ-38-t0r" eventType="valueChanged" id="nB7-so-WuX"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Lorem commodo consequat. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="you may add here a shot ( 120 symbols ) description of your new card " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
                                                 <rect key="frame" x="67" y="504" width="240" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioY-iM-7d3">
@@ -290,10 +292,10 @@
         <!--Page Controller-->
         <scene sceneID="zsH-YZ-COB">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-Wi-HEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="703"/>
+            <point key="canvasLocation" x="1188" y="489"/>
         </scene>
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
@@ -324,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-Qg-yVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="1482"/>
+            <point key="canvasLocation" x="-47.200000000000003" y="1481.5270935960591"/>
         </scene>
         <!--back-->
         <scene sceneID="muY-bA-B1y">
@@ -341,6 +343,9 @@
                                     <navigationItem title="second" id="wEw-HH-K1A">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="mdI-Sh-mx3">
                                             <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="epE-7d-x0q"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -373,6 +378,9 @@
                                     <navigationItem title="third" id="S7a-8g-DV8">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="D8t-V8-9Yo">
                                             <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="Y1f-RG-bjR"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -384,13 +392,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XY-av-EvB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="1482"/>
+            <point key="canvasLocation" x="1292" y="1481.5270935960591"/>
         </scene>
     </scenes>
     <resources>
         <image name="chernyj_strizh.jpg" width="370" height="332"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QM5-st-Frr"/>
+        <segue reference="SyO-Pu-ats"/>
+        <segue reference="Y1f-RG-bjR"/>
     </inferredMetricsTieBreakers>
 </document>

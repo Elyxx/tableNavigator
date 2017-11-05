@@ -9,13 +9,17 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var manager = CardsManager()
     var myCards = [DiscountCard]()
    
+    var data = [String] ()
+    var searchActive : Bool = false
     var filter: String? = nil
     var delegate: SendCard?
+    
+    var filtered = [DiscountCard]()
     
     var editViewController: EditViewController? = nil
     
@@ -27,7 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableOfCards.dataSource = self //???
         tableOfCards.delegate = self
-        
+        searchCard.delegate = self
+
         let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         var subViewOfSegment: UIView = coloredFilter.subviews[1] as UIView
@@ -35,18 +40,57 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         subViewOfSegment = coloredFilter.subviews[3] as UIView
         subViewOfSegment.backgroundColor = lightRed
     }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   
+        filtered = myCards.filter({ (text) -> Bool in
+            let tmp: NSString = (text.nameOfCard as NSString?)!
+            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            return range.location != NSNotFound
+        })
+        
+        print(searchText)
+        if (filtered.count == 0) {
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        tableOfCards.reloadData()
+ 
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ToEdit"){
             let editViewController = segue.destination as? EditViewController
-            //editViewController?.delegate = self
+            editViewController?.delegate = self as? SendCard
+            //editViewController?.editingCard = sender as? DiscountCard
         }
-    }*/
+        if (segue.identifier == "ForEditting"){
+            let editViewController = segue.destination as? EditViewController
+            editViewController?.delegate = self as? SendCard
+            editViewController?.editingCard = sender as? DiscountCard
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         myCards = manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: filter)!
@@ -54,22 +98,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableOfCards: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if(searchActive) {
+            return filtered.count
+        }
         return myCards.count
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            self.delegate?.initCard(card: self.myCards[indexPath.row])
-            self.performSegue(withIdentifier: "ToEdit", sender: self.myCards[indexPath.row])
+            self.performSegue(withIdentifier: "ForEditting", sender: self.myCards[indexPath.row])
+            //self.delegate?.initCard(card: self.myCards[indexPath.row])
         }
         let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         editAction.backgroundColor = lightViolet
         
         let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
-            //print(myCards.nameOfCard)
-        }
+            }
         let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         shareAction.backgroundColor = lightGreen
         
@@ -88,13 +133,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
         
-        cell.nameCell.text = myCards[indexPath.row].nameOfCard
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_US")
         
-        cell.filterCell.backgroundColor = setColor(number: myCards[indexPath.row].filterByColor)
         
-        cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
-        cell.imageCell.image = UIImage(named:"britt.jpeg")
-        
+        if searchActive == true {
+            //filtered mas
+            cell.nameCell.text = filtered[indexPath.row].nameOfCard
+            
+            cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
+            
+            cell.descripCell.text = filtered[indexPath.row].descriptionOfCard
+            cell.imageCell.image = UIImage(named:"britt.jpeg")
+            cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
+        }
+        else{
+            cell.nameCell.text = myCards[indexPath.row].nameOfCard
+            
+            cell.filterCell.backgroundColor = setColor(number: myCards[indexPath.row].filterByColor)
+            
+            cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
+            cell.imageCell.image = UIImage(named:"britt.jpeg")
+            cell.dataCell.text = dateFormatter.string(from: myCards[indexPath.row].dateOfCreation!)
+        }
         return cell
     }
     

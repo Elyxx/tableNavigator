@@ -10,12 +10,21 @@ import UIKit
 
 class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
+    weak var myDelegate: PageController?
+    var pageControl = UIPageControl()
+    
     private (set) lazy var orderedViewControllers: [UIViewController] = {
         return [self.newColoredViewController(color: "front"),
                 self.newColoredViewController(color: "back"),
                 self.newColoredViewController(color: "barcode")]
     }()
-    
+    /*
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let pageViewController = segue.destination as? PageController {
+            pageViewController.myDelegate = self
+        }
+    }
+    */
     private func newColoredViewController(color: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewController(withIdentifier: "\(color)View")
@@ -28,8 +37,6 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         
         let previousIndex = viewControllerIndex - 1
         
-        // User is on the first view controller and swiped left to loop to
-        // the last view controller.
         guard previousIndex >= 0 else {
             return orderedViewControllers.last
         }
@@ -49,8 +56,6 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         let nextIndex = viewControllerIndex + 1
         let orderedViewControllersCount = orderedViewControllers.count
         
-        // User is on the last view controller and swiped right to loop to
-        // the first view controller.
         guard orderedViewControllersCount != nextIndex else {
             return orderedViewControllers.first
         }
@@ -62,14 +67,38 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         return orderedViewControllers[nextIndex]
     }
     
+    func pageViewController(pageViewController: UIPageViewController, didUpdatePageCount count: Int){
+        pageControl.numberOfPages = count
+    }
+    func pageViewController(pageViewController: UIPageViewController,
+                            didUpdatePageIndex index: Int){
+        pageControl.currentPage = index
+    }
+ 
+    func configurePageControl() {
+        // The total number of pages that are available is based on how many available colors we have.
+        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 70,width: UIScreen.main.bounds.width,height: 70))
+        self.pageControl.numberOfPages = orderedViewControllers.count
+        self.pageControl.currentPage = 0
+        self.pageControl.tintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
+        self.pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        self.pageControl.currentPageIndicatorTintColor = UIColor.black
+        self.view.addSubview(pageControl)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dataSource = self
+        delegate = self
         
+        configurePageControl()
+        
+   
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -81,15 +110,12 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return orderedViewControllers.count
     }
-    
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        guard let firstViewController = viewControllers?.first,
-            let firstViewControllerIndex = orderedViewControllers.index(of: firstViewController) else {
-                return 0
-        }
-        
-        return firstViewControllerIndex
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let pageContentViewController = pageViewController.viewControllers![0]
+        self.pageControl.currentPage = orderedViewControllers.index(of: pageContentViewController)!
     }
+
+    
     /*
     // MARK: - Navigation
 

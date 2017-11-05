@@ -13,8 +13,8 @@ class EditViewController: UIViewController, SendCard {
 
    
     @IBOutlet var childView: ChildScrollView!
-    
-    //weak var delegate: SendCard?
+    var editingCard: DiscountCard? = nil
+    weak var delegate: SendCard?
     var manager = CardsManager()
     
     /*static var persistentContainer: NSPersistentContainer{
@@ -24,46 +24,42 @@ class EditViewController: UIViewController, SendCard {
         return persistentContainer.viewContext
     }
    //
-    */
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ToEdit")||(segue.identifier == "ToMainSave")||(segue.identifier == "ToMain"){
-            //print("mainSave")
             let viewController = segue.destination as? ViewController
             viewController?.delegate = self
-            //childView.editingCard = sender as? DiscountCard
         }
-     }
+     }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-     
+        
         childView.defaultFrontImage.image = UIImage(named: "red.jpeg")
         childView.backImage.image = UIImage(named: "kitty.jpeg")
-        
-        
+       
+        childView.editingCard = editingCard
+        if editingCard != nil{
+            childView.newCardName.text = editingCard?.nameOfCard
+            childView.descript.text = editingCard?.descriptionOfCard
+        }
+        else {
+            childView.newCardName.text = "Type a new name"
+        }
     }
     override func viewDidLoad() {
          super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+         // Do any additional setup after loading the view.
+       
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+   
     func initCard (card: DiscountCard){
-        childView.editingCard = card
-        print("card has been initiated")
-        if let newTitle = card.nameOfCard {
-            childView.newCardName.text = "where is title?"
-            print(newTitle)
-            //print("second is \()")
-        }
-        else {
-            childView.newCardName.text = "WORK HARDER!"
-        }
-    }
+       
+   }
     
     /*
     // MARK: - Navigation
