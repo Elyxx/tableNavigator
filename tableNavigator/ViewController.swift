@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
     var manager = CardsManager()
     var myCards = [DiscountCard]()
@@ -25,21 +25,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var searchCard: UISearchBar!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //if cardsNS.isEmpty {            print("halepa...")        }
-        
+              
         tableOfCards.dataSource = self //???
         tableOfCards.delegate = self
         searchCard.delegate = self
 
         let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        
         var subViewOfSegment: UIView = coloredFilter.subviews[1] as UIView
         subViewOfSegment.backgroundColor = lightGreen
+        
         subViewOfSegment = coloredFilter.subviews[3] as UIView
         subViewOfSegment.backgroundColor = lightRed
     }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
     }
@@ -58,8 +62,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
    
-        filtered = myCards.filter({ (text) -> Bool in
-            let tmp: NSString = (text.nameOfCard as NSString?)!
+        filtered = myCards.filter({ (card) -> Bool in
+            let tmp: NSString = (card.nameOfCard as NSString?)!
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound
         })
@@ -82,18 +86,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if (segue.identifier == "ToEdit"){
             let editViewController = segue.destination as? EditViewController
             editViewController?.delegate = self as? SendCard
-            //editViewController?.editingCard = sender as? DiscountCard
         }
         if (segue.identifier == "ForEditting"){
             let editViewController = segue.destination as? EditViewController
             editViewController?.delegate = self as? SendCard
             editViewController?.editingCard = sender as? DiscountCard
         }
+        if (segue.identifier == "ToPage"){
+            let pageController = segue.destination as? PageController
+            //pageController?.delegate = self as? PageController
+            pageController?.editingCard = sender as? DiscountCard
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        myCards = manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: filter)!
+        myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
     }
     
@@ -108,7 +116,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
             self.performSegue(withIdentifier: "ForEditting", sender: self.myCards[indexPath.row])
-            //self.delegate?.initCard(card: self.myCards[indexPath.row])
         }
         let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         editAction.backgroundColor = lightViolet
@@ -119,14 +126,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         shareAction.backgroundColor = lightGreen
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "delete") { (rowAction, indexPath) in
-            self.manager.deleteCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, cardDeleted: self.myCards[indexPath.row])
-            self.myCards = self.manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: self.filter)!
+            self.manager.deleteCard(cardDeleted: self.myCards[indexPath.row])
+            self.myCards = self.manager.getFilteredCards(filter: self.filter)!
             self.tableOfCards.reloadData()
         }
         let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         deleteAction.backgroundColor = lightRed
         
         return [editAction, shareAction, deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("row's been selected")
+        performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
     }
     
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,7 +149,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "en_US")
-        
+       
         
         if searchActive == true {
             //filtered mas
@@ -146,7 +158,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
             
             cell.descripCell.text = filtered[indexPath.row].descriptionOfCard
-            cell.imageCell.image = UIImage(named:"britt.jpeg")
+            cell.imageCell.image = UIImage(named:"kitten.jpeg")
             cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
         }
         else{
@@ -167,9 +179,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
         filter = String(sender.selectedSegmentIndex)
-        myCards = manager.getFilteredCards(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, filter: filter)!
+        myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
+        
+        let fm = FileManager.default
+        let path = Bundle.main.resourcePath!
+        
+        do {
+            let items = try fm.contentsOfDirectory(atPath: path)
+            
+            for item in items {
+                print("Found \(item)")
+            }
+        } catch {    print("no such file")    }
+        UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)
+        
     }
+    
     func setColor(number: String?) -> UIColor{
         switch number {
         case "0"?:

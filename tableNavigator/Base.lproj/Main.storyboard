@@ -105,7 +105,6 @@
                                             <outlet property="filterCell" destination="5B5-7L-91H" id="AP9-ev-4KE"/>
                                             <outlet property="imageCell" destination="IKl-wS-l9A" id="QOg-1d-dIy"/>
                                             <outlet property="nameCell" destination="Vsq-jv-XY0" id="xu2-ix-Qg9"/>
-                                            <segue destination="Cub-AU-mTH" kind="show" id="4bg-K2-IXd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -124,7 +123,7 @@
                                     <segment title="cinema"/>
                                     <segment title="other"/>
                                 </segments>
-                                <color key="tintColor" red="0.06478888677746332" green="0.094657269403208691" blue="0.095931154822335052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.15388285194375165" green="0.22669574500579656" blue="0.23102395304568524" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="filterCards:" destination="BYZ-38-t0r" eventType="valueChanged" id="rEH-4T-t9N"/>
                                 </connections>
@@ -154,11 +153,12 @@
                         <outlet property="searchCard" destination="6Xs-JX-a4r" id="ujb-Bf-muC"/>
                         <outlet property="tableOfCards" destination="Iek-ph-w9K" id="cbF-Bp-moe"/>
                         <segue destination="cGr-zl-uCv" kind="show" identifier="ForEditting" id="SyO-Pu-ats"/>
+                        <segue destination="Cub-AU-mTH" kind="show" identifier="ToPage" id="gch-Df-dQe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-702" y="-91"/>
+            <point key="canvasLocation" x="-673" y="-95"/>
         </scene>
         <!--Edit View Controller-->
         <scene sceneID="XDg-qM-XMq">
@@ -194,11 +194,11 @@
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="saveCard:" destination="ZmH-0X-Pn7" eventType="touchUpInside" id="k5g-8l-IAh"/>
-                                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ToMainSave" id="QM5-st-Frr"/>
+                                                    <action selector="saveCard:" destination="cGr-zl-uCv" eventType="touchUpInside" id="ZgB-3T-Zgs"/>
+                                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ToMainSave" id="PWK-na-SxP"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-Ez-egz">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-Ez-egz">
                                                 <rect key="frame" x="67" y="96" width="240" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -223,8 +223,7 @@
                                                 </segments>
                                                 <color key="tintColor" red="0.064788886779999999" green="0.094657269399999994" blue="0.095931154820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
-                                                    <action selector="chooseColor:" destination="ZmH-0X-Pn7" eventType="valueChanged" id="efG-YA-rIn"/>
-                                                    <action selector="filterCards:" destination="BYZ-38-t0r" eventType="valueChanged" id="nB7-so-WuX"/>
+                                                    <action selector="filter:" destination="cGr-zl-uCv" eventType="valueChanged" id="84b-Jf-pmt"/>
                                                 </connections>
                                             </segmentedControl>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="you may add here a shot ( 120 symbols ) description of your new card " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
@@ -274,15 +273,13 @@
                             <constraint firstItem="0bQ-WB-9Kd" firstAttribute="trailing" secondItem="AzY-jg-jdy" secondAttribute="trailing" id="g1L-iw-XGx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0bQ-WB-9Kd"/>
-                        <connections>
-                            <outlet property="backImage" destination="5jo-ZC-OVP" id="8WN-3Q-Lgv"/>
-                            <outlet property="defaultFrontImage" destination="J7C-Ez-egz" id="rFo-I7-0GW"/>
-                            <outlet property="descript" destination="gUF-Tn-cjs" id="oJx-3L-h0f"/>
-                            <outlet property="newCardName" destination="ioY-iM-7d3" id="QJ5-7V-buY"/>
-                        </connections>
                     </view>
                     <connections>
-                        <outlet property="childView" destination="ZmH-0X-Pn7" id="9ye-hc-1hz"/>
+                        <outlet property="backImage" destination="5jo-ZC-OVP" id="Hlq-WD-k7D"/>
+                        <outlet property="barcodeImage" destination="Ydr-TT-nWQ" id="qKC-wK-6lQ"/>
+                        <outlet property="decriptionCard" destination="gUF-Tn-cjs" id="cvj-7b-8Oa"/>
+                        <outlet property="frontImage" destination="J7C-Ez-egz" id="n1B-Ig-box"/>
+                        <outlet property="name" destination="ioY-iM-7d3" id="PFK-Ad-AFn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FyR-3I-Jq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -295,7 +292,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-Wi-HEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1188" y="489"/>
+            <point key="canvasLocation" x="802" y="331"/>
         </scene>
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
@@ -305,22 +302,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z2H-xY-hyz">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2H-xY-hyz">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="first" id="zsV-ml-d3a">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="sa9-Lm-V0u">
                                             <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="BV1-3h-QNK"/>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="tjK-Dz-acH"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="tFI-Ag-Kkk">
+                                            <color key="tintColor" red="0.012888642131979711" green="0.012888642131979711" blue="0.012888642131979711" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <segue destination="cGr-zl-uCv" kind="show" id="6ep-Xt-jbd"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="frontImg" image="lili.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="vN6-uz-0ys">
+                                <rect key="frame" x="10" y="98" width="355" height="670"/>
+                                <color key="backgroundColor" red="0.94960362182053137" green="0.96720254487595347" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.91250973928164936" blue="0.99831244689481358" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="z2H-xY-hyz" firstAttribute="leading" secondItem="8ir-te-OXr" secondAttribute="leading" id="6dX-do-l8H"/>
+                            <constraint firstItem="vN6-uz-0ys" firstAttribute="top" secondItem="z2H-xY-hyz" secondAttribute="bottom" constant="10" id="H1s-wk-ycf"/>
+                            <constraint firstItem="vN6-uz-0ys" firstAttribute="leading" secondItem="8ir-te-OXr" secondAttribute="leading" constant="10" id="iRi-1e-K7g"/>
+                            <constraint firstItem="z2H-xY-hyz" firstAttribute="top" secondItem="8ir-te-OXr" secondAttribute="top" id="qmx-Zu-BRW"/>
+                            <constraint firstItem="vN6-uz-0ys" firstAttribute="bottom" secondItem="8ir-te-OXr" secondAttribute="bottom" constant="-10" id="sYi-UT-51P"/>
+                            <constraint firstItem="8ir-te-OXr" firstAttribute="trailing" secondItem="vN6-uz-0ys" secondAttribute="trailing" constant="10" id="vqO-KN-lyp"/>
+                            <constraint firstItem="z2H-xY-hyz" firstAttribute="trailing" secondItem="8ir-te-OXr" secondAttribute="trailing" id="wAV-Y1-Ya6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8ir-te-OXr"/>
                     </view>
                 </viewController>
@@ -336,26 +351,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-S4-D9Y">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-S4-D9Y">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="second" id="wEw-HH-K1A">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="mdI-Sh-mx3">
                                             <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="epE-7d-x0q"/>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="tZA-D0-pLB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="Slo-Kp-qd7">
+                                            <color key="tintColor" red="0.021296002538071068" green="0.021296002538071068" blue="0.021296002538071068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <segue destination="cGr-zl-uCv" kind="show" id="HDm-Xn-r20"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chernyj_strizh.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="h2K-cA-FLc">
-                                <rect key="frame" x="67" y="182" width="240" height="329"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="backImg" image="chernyj_strizh.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="h2K-cA-FLc">
+                                <rect key="frame" x="10" y="98" width="355" height="670"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.82624710070950425" green="1" blue="0.99934172874748795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="h2K-cA-FLc" firstAttribute="top" secondItem="XgA-S4-D9Y" secondAttribute="bottom" constant="10" id="G5R-m3-bXv"/>
+                            <constraint firstItem="7QQ-4r-BaU" firstAttribute="bottom" secondItem="h2K-cA-FLc" secondAttribute="bottom" constant="10" id="Kr4-eE-aIE"/>
+                            <constraint firstItem="XgA-S4-D9Y" firstAttribute="trailing" secondItem="7QQ-4r-BaU" secondAttribute="trailing" id="OK7-Vh-uNL"/>
+                            <constraint firstItem="XgA-S4-D9Y" firstAttribute="top" secondItem="7QQ-4r-BaU" secondAttribute="top" id="QW2-bA-wK5"/>
+                            <constraint firstItem="h2K-cA-FLc" firstAttribute="leading" secondItem="7QQ-4r-BaU" secondAttribute="leading" constant="10" id="WlO-1t-2u8"/>
+                            <constraint firstItem="7QQ-4r-BaU" firstAttribute="trailing" secondItem="h2K-cA-FLc" secondAttribute="trailing" constant="10" id="dpi-n8-qaw"/>
+                            <constraint firstItem="XgA-S4-D9Y" firstAttribute="leading" secondItem="7QQ-4r-BaU" secondAttribute="leading" id="q3e-4e-0HY"/>
+                            <constraint firstItem="h2K-cA-FLc" firstAttribute="top" secondItem="XgA-S4-D9Y" secondAttribute="bottom" constant="10" id="vQ8-Ic-lTg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7QQ-4r-BaU"/>
                     </view>
                 </viewController>
@@ -382,6 +411,12 @@
                                                 <segue destination="BYZ-38-t0r" kind="show" id="Y1f-RG-bjR"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="RbW-Go-01i">
+                                            <color key="tintColor" red="0.026590260152284273" green="0.026590260152284273" blue="0.026590260152284273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <segue destination="Cub-AU-mTH" kind="show" id="6ri-6b-WJY"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -397,9 +432,11 @@
     </scenes>
     <resources>
         <image name="chernyj_strizh.jpg" width="370" height="332"/>
+        <image name="lili.jpeg" width="212" height="238"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SyO-Pu-ats"/>
-        <segue reference="Y1f-RG-bjR"/>
+        <segue reference="6ri-6b-WJY"/>
+        <segue reference="6ep-Xt-jbd"/>
+        <segue reference="tjK-Dz-acH"/>
     </inferredMetricsTieBreakers>
 </document>

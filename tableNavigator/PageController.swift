@@ -10,24 +10,31 @@ import UIKit
 
 class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    weak var myDelegate: PageController?
+    //weak var delegate: PageController?
     var pageControl = UIPageControl()
+    var editingCard: DiscountCard? = nil
     
+    //somewhere here we should get data about barcode (is/isnt)
     private (set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newColoredViewController(color: "front"),
-                self.newColoredViewController(color: "back"),
-                self.newColoredViewController(color: "barcode")]
-    }()
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let pageViewController = segue.destination as? PageController {
-            pageViewController.myDelegate = self
+        if editingCard != nil {
+            if editingCard?.barcode != nil {
+                return [self.newViewController(name: "front"),
+                        self.newViewController(name: "back"),
+                        self.newViewController(name: "barcode")]
+            }
+            else{
+                return [self.newViewController(name: "front"),
+                        self.newViewController(name: "back")]
+            }
         }
-    }
-    */
-    private func newColoredViewController(color: String) -> UIViewController {
+        else {
+            return [self.newViewController(name: "front")]
+        }
+    }()
+    
+    private func newViewController(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "\(color)View")
+            instantiateViewController(withIdentifier: "\(name)View")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -76,14 +83,14 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
  
     func configurePageControl() {
-        // The total number of pages that are available is based on how many available colors we have.
+        
         pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 70,width: UIScreen.main.bounds.width,height: 70))
-        self.pageControl.numberOfPages = orderedViewControllers.count
-        self.pageControl.currentPage = 0
-        self.pageControl.tintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
-        self.pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        self.pageControl.currentPageIndicatorTintColor = UIColor.black
-        self.view.addSubview(pageControl)
+        pageControl.numberOfPages = orderedViewControllers.count
+        pageControl.currentPage = 0
+        pageControl.tintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
+       // pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
+        view.addSubview(pageControl)
     }
     
     override func viewDidLoad() {
@@ -93,12 +100,15 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         delegate = self
         
         configurePageControl()
-        
-   
+         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
         
+        if editingCard != nil{
+            
+            print(editingCard?.nameOfCard as Any)
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -107,12 +117,9 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         // Dispose of any resources that can be recreated.
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return orderedViewControllers.count
-    }
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+   func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageContentViewController = pageViewController.viewControllers![0]
-        self.pageControl.currentPage = orderedViewControllers.index(of: pageContentViewController)!
+        pageControl.currentPage = orderedViewControllers.index(of: pageContentViewController)!
     }
 
     

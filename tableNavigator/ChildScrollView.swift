@@ -10,7 +10,7 @@
   import CoreData
 
   class ChildScrollView: UIView {
-        
+    /*
     var filter: String? = nil
     var manager = CardsManager()
     var editingCard: DiscountCard? = nil
@@ -30,16 +30,16 @@
     
     @IBAction func saveCard(_ sender: UIButton) {
         if editingCard != nil {
-            manager.editExisting(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, card: editingCard!, name: newCardName.text, descrip: descript.text, filter: filter)
+            manager.editExisting(card: editingCard!, name: newCardName.text, descrip: descript.text, filter: filter)
         }
         else{
-            manager.addNewCard(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, name: newCardName.text, descrip: descript.text, filter: filter)
+            manager.addNewCard(name: newCardName.text, descrip: descript.text, filter: filter)
         }
        
          // Only override draw() if you perform custom drawing.
          // An empty implementation adversely affects performance during animation.
     
-    }
+    }*/
         
 }
 

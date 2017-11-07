@@ -9,58 +9,140 @@
 import UIKit
 import CoreData
 
-class EditViewController: UIViewController, SendCard {
-
+class EditViewController: UIViewController, SendCard, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
    
-    @IBOutlet var childView: ChildScrollView!
     var editingCard: DiscountCard? = nil
     weak var delegate: SendCard?
     var manager = CardsManager()
     
-    /*static var persistentContainer: NSPersistentContainer{
-        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    }
-    static var viewContext: NSManagedObjectContext{
-        return persistentContainer.viewContext
-    }
-   //
- 
+    
+    
+    
+    
+    var filterColor: String? = nil
+    
+    @IBOutlet weak var frontImage: UIImageView!
+  
+    @IBOutlet weak var backImage: UIImageView!
+    
+    @IBOutlet weak var barcodeImage: UIImageView!
+    
+    @IBOutlet weak var name: UITextField!
+    
+    @IBOutlet weak var decriptionCard: UITextView!
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ToEdit")||(segue.identifier == "ToMainSave")||(segue.identifier == "ToMain"){
+        if (segue.identifier == "ToEdit"){
             let viewController = segue.destination as? ViewController
             viewController?.delegate = self
+            print("save")
         }
-     }*/
+        if (segue.identifier == "ToMain"){
+            let viewController = segue.destination as? ViewController
+            viewController?.delegate = self
+            print("back")
+        }
+     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        childView.defaultFrontImage.image = UIImage(named: "red.jpeg")
-        childView.backImage.image = UIImage(named: "kitty.jpeg")
+        frontImage.image = UIImage(named: "chernyj_strizh.jpg")
+        //backImage.image = UIImage(named: "kitty.jpeg")
        
-        childView.editingCard = editingCard
         if editingCard != nil{
-            childView.newCardName.text = editingCard?.nameOfCard
-            childView.descript.text = editingCard?.descriptionOfCard
+            name.text = editingCard?.nameOfCard
+            decriptionCard.text = editingCard?.descriptionOfCard
         }
         else {
-            childView.newCardName.text = "Type a new name"
+            name.text = "Type a new name"
         }
+        //checkPermission()
     }
+    /*func checkPermission() {
+        let photoAuthorizationStatus =
+            .authorizationStatus()
+        switch photoAuthorizationStatus {
+        case .authorized:
+            print("Access is granted by user")
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({
+                (newStatus) in
+                print("status is \(newStatus)")
+                if newStatus ==  PHAuthorizationStatus.authorized {
+                    /* do stuff here */
+                    print("success")
+                }
+            })
+            print("It is not determined until now")
+        case .restricted:
+            // same same
+            print("User do not have access to photo album.")
+        case .denied:
+            // same same
+            print("User has denied the permission.")
+        }
+    }*/
     override func viewDidLoad() {
          super.viewDidLoad()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        frontImage.isUserInteractionEnabled = true
+        frontImage.addGestureRecognizer(tapGestureRecognizer)
          // Do any additional setup after loading the view.
-       
-    }
 
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        backImage.contentMode = .scaleAspectFit
+        backImage.image = chosenImage
+ 
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+  
+    }
+   
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+       // let tappedImage = tapGestureRecognizer.view as! UIImageView
+        print("tapped")
+        frontImage.image = UIImage(named: "red.jpeg")
+        // Your action
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        //picker.sourceType = .savedPhotosAlbum
+        //picker.sourceType = .camera
+        //disablesAutomaticKeyboardDismissal = false
+        picker.modalPresentationStyle = .popover
+        present(picker, animated: true, completion: nil)
+        //picker.popoverPresentationController?.barButtonItem = self
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
    
-    func initCard (card: DiscountCard){
-       
-   }
+    func initCard (card: DiscountCard){   }
     
+    @IBAction func saveCard(_ sender: UIButton) {
+        if editingCard != nil {
+            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor)
+        }
+        else{
+            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor)
+        }
+    }
+    @IBAction func filter(_ sender: UISegmentedControl) {
+        filterColor = String(sender.selectedSegmentIndex)
+    }
     /*
     // MARK: - Navigation
 
