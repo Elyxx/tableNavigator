@@ -153,21 +153,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if searchActive == true {
             //filtered mas
+            if myCards[indexPath.row].frontImageOfCard != nil{
+                if let url = NSURL(string: myCards[indexPath.row].frontImageOfCard!) {
+                    print(url)
+                    if let data = NSData(contentsOf: url as URL) {
+                        cell.imageCell.image = UIImage(data: data as Data)
+                    }
+                }
+            }
+            else {
+                cell.imageCell.image = UIImage(named:"default.jpeg")
+            }
             cell.nameCell.text = filtered[indexPath.row].nameOfCard
-            
             cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
-            
             cell.descripCell.text = filtered[indexPath.row].descriptionOfCard
-            cell.imageCell.image = UIImage(named:"kitten.jpeg")
+            //cell.imageCell.image = UIImage(named:"kitten.jpeg")
             cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
         }
         else{
+            if myCards[indexPath.row].frontImageOfCard != nil{
+                if let url = NSURL(string: myCards[indexPath.row].frontImageOfCard!) {
+                    print(url)
+                    if let data = NSData(contentsOf: url as URL) {
+                        cell.imageCell.image = UIImage(data: data as Data)
+                        print("image")
+                    }
+                }
+            }
+            else {
+                cell.imageCell.image = UIImage(named:"default.jpeg")
+            }
+           
             cell.nameCell.text = myCards[indexPath.row].nameOfCard
-            
             cell.filterCell.backgroundColor = setColor(number: myCards[indexPath.row].filterByColor)
-            
             cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
-            cell.imageCell.image = UIImage(named:"britt.jpeg")
+            //cell.imageCell.image = UIImage(named:"britt.jpeg")
             cell.dataCell.text = dateFormatter.string(from: myCards[indexPath.row].dateOfCreation!)
         }
         return cell
@@ -181,7 +201,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         filter = String(sender.selectedSegmentIndex)
         myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
-        
+        /*
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
         
@@ -192,7 +212,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("Found \(item)")
             }
         } catch {    print("no such file")    }
-        UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)
+        //UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)
+ */
         
     }
     

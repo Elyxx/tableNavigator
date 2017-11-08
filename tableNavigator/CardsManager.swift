@@ -15,15 +15,14 @@ class CardsManager{
 
     func addNewCard(name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
-        let newCard = NSManagedObject(entity: entity!, insertInto:context)
-        newCard.setValue(name, forKey: "nameOfCard")
-        //newCard.setValue(frontIMG, forKey: "frontImageOfCard")
+        let newCard = DiscountCard(entity: entity!, insertInto:context)
+        newCard.nameOfCard = name
+        newCard.frontImageOfCard = frontIMG
         //newCard.setValue(backIMG, forKey: "backImageOfCard")
         //newCard.setValue(barcodeIMG, forKey: "barcode")
-        newCard.setValue(descrip, forKey: "descriptionOfCard")
-        newCard.setValue(filter, forKey: "filterByColor")
-        newCard.setValue(Date(), forKey: "dateOfCreation")
-     
+        newCard.descriptionOfCard = descrip
+        newCard.filterByColor = filter
+        newCard.dateOfCreation = Date()
         //var error: NSError?
         try! context.save()
     }
@@ -31,7 +30,8 @@ class CardsManager{
         card.nameOfCard = name
         card.descriptionOfCard = descrip
         card.filterByColor = filter
-        //!!!!!
+        card.frontImageOfCard = frontIMG
+        //!!!!!!!
         try! context.save()
     }
     func getFilteredCards(filter: String? = nil)->[DiscountCard]?{
@@ -41,22 +41,12 @@ class CardsManager{
         }
         //var error: NSError?
         var fetchedResults: [DiscountCard]? = nil
-        do {
-            fetchedResults = try context.fetch(fetchRequest) as? [DiscountCard] 
-            for item in fetchedResults!{
-                if item.dateOfCreation == nil{
-                    item.dateOfCreation = Date()
-                }
-            }
-        }
-        catch{
-            print("Could not fetch")
-        }
+        fetchedResults = try! context.fetch(fetchRequest) as? [DiscountCard]
         return fetchedResults
     }    
     func deleteCard(cardDeleted: DiscountCard){
          context.delete(cardDeleted)
-         do {            try context.save()         } catch {            print("wrong deleting")         }
+         try! context.save()
     }
 }
 

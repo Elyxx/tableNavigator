@@ -14,11 +14,7 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
     var editingCard: DiscountCard? = nil
     weak var delegate: SendCard?
     var manager = CardsManager()
-    
-    
-    
-    
-    
+  
     var filterColor: String? = nil
     
     @IBOutlet weak var frontImage: UIImageView!
@@ -31,6 +27,7 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
     
     @IBOutlet weak var decriptionCard: UITextView!
     
+    var frontPath: String = ""
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ToEdit"){
@@ -48,7 +45,15 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
         super.viewWillAppear(true)
         
         frontImage.image = UIImage(named: "chernyj_strizh.jpg")
-        //backImage.image = UIImage(named: "kitty.jpeg")
+        if editingCard?.frontImageOfCard != nil{
+            if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
+                //print(url)
+                if let data = NSData(contentsOf: url as URL) {
+                    backImage.image = UIImage(data: data as Data)
+                }
+            }
+        }
+       // backImage.image = editingCard?.frontImageOfCard
        
         if editingCard != nil{
             name.text = editingCard?.nameOfCard
@@ -93,10 +98,31 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
 
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        backImage.contentMode = .scaleAspectFit
-        backImage.image = chosenImage
- 
+        //let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        //backImage.contentMode = .scaleAspectFit
+        //backImage.image = chosenImage
+
+        //backImage.transform = backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
+        
+        let pickedImageURL = try? info[UIImagePickerControllerImageURL] as! URL
+        //print(pickedImageURL!)
+       
+        if let url = NSURL(string: (pickedImageURL?.description)!) {
+            if let data = NSData(contentsOf: url as URL) {
+                barcodeImage.image = UIImage(data: data as Data)
+                frontPath = (pickedImageURL?.description)!
+            }
+        }
+        //print(editingCard?.frontImageOfCard)
+        //this block of code adds data to the above path
+        //let path = localPath?.relativePath
+        /*let imageName = info[UIImagePickerControllerOriginalImage] as UIImage
+        let data = UIImagePNGRepresentation(imageName)
+        data?.writeToFile(imagePath, atomically: true)
+        
+        //this block grabs the NSURL so you can use it in CKASSET
+        let photoURL = NSURL(fileURLWithPath: path)*/
+    
         dismiss(animated: true, completion: nil)
         
     }
@@ -110,8 +136,7 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
     {
        // let tappedImage = tapGestureRecognizer.view as! UIImageView
         print("tapped")
-        frontImage.image = UIImage(named: "red.jpeg")
-        // Your action
+        //frontImage.image = UIImage(named: "red.jpeg")
         
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -122,7 +147,7 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
         //disablesAutomaticKeyboardDismissal = false
         picker.modalPresentationStyle = .popover
         present(picker, animated: true, completion: nil)
-        //picker.popoverPresentationController?.barButtonItem = self
+        //picker.popoverPresentationController?.barButtonItem = 
 
     }
     override func didReceiveMemoryWarning() {
@@ -134,10 +159,10 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
     
     @IBAction func saveCard(_ sender: UIButton) {
         if editingCard != nil {
-            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor)
+            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath)
         }
         else{
-            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor)
+            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath)
         }
     }
     @IBAction func filter(_ sender: UISegmentedControl) {

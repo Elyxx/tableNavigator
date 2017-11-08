@@ -28,6 +28,8 @@
 		257984A51FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */; };
 		2586F0A51FAB114A0082691D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586F0A41FAB114A0082691D /* Extensions.swift */; };
 		258B2BD11FAB521400C11748 /* ChildScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B2BD01FAB521400C11748 /* ChildScrollView.swift */; };
+		258FDA8F1FB31FDC00060AA8 /* default.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 258FDA8E1FB31FDC00060AA8 /* default.jpeg */; };
+		258FDA931FB3412100060AA8 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258FDA921FB3412100060AA8 /* ImageViewController.swift */; };
 		259341811FA8C8110093D751 /* red.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 259341801FA8C8110093D751 /* red.jpeg */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscountCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2586F0A41FAB114A0082691D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		258B2BD01FAB521400C11748 /* ChildScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildScrollView.swift; sourceTree = "<group>"; };
+		258FDA8E1FB31FDC00060AA8 /* default.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpeg; sourceTree = "<group>"; };
+		258FDA921FB3412100060AA8 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		259341801FA8C8110093D751 /* red.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = red.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +97,7 @@
 				2586F0A41FAB114A0082691D /* Extensions.swift */,
 				257218D71FA7395F0051699F /* CardsManager.swift */,
 				255BA7CC1FA4B87F00FB051B /* Protocols.swift */,
+				258FDA921FB3412100060AA8 /* ImageViewController.swift */,
 				25740D831FB1FE0A00A24429 /* FileManager.swift */,
 				25646CAD1FAC9DC50051944E /* PageController.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
@@ -102,6 +107,7 @@
 				25740D851FB2043D00A24429 /* lili.jpeg */,
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
 				255BA7CA1FA4A9F100FB051B /* kitty.jpeg */,
+				258FDA8E1FB31FDC00060AA8 /* default.jpeg */,
 				259341801FA8C8110093D751 /* red.jpeg */,
 				25646CAF1FACA0680051944E /* chernyj_strizh.jpg */,
 				255BA7C41FA4A0CE00FB051B /* kitten.jpeg */,
@@ -184,6 +190,7 @@
 				255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */,
 				25646CB01FACA0680051944E /* chernyj_strizh.jpg in Resources */,
 				259341811FA8C8110093D751 /* red.jpeg in Resources */,
+				258FDA8F1FB31FDC00060AA8 /* default.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +207,7 @@
 				255BA7B61FA4854100FB051B /* tableNavigator.xcdatamodeld in Sources */,
 				255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */,
 				258B2BD11FAB521400C11748 /* ChildScrollView.swift in Sources */,
+				258FDA931FB3412100060AA8 /* ImageViewController.swift in Sources */,
 				257218D81FA7395F0051699F /* CardsManager.swift in Sources */,
 				25646CAE1FAC9DC50051944E /* PageController.swift in Sources */,
 				25740D841FB1FE0A00A24429 /* FileManager.swift in Sources */,

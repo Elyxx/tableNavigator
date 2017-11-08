@@ -10,13 +10,14 @@ import UIKit
 
 class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    //weak var delegate: PageController?
+   
     var pageControl = UIPageControl()
     var editingCard: DiscountCard? = nil
     
     //somewhere here we should get data about barcode (is/isnt)
     private (set) lazy var orderedViewControllers: [UIViewController] = {
         if editingCard != nil {
+            print("array")
             if editingCard?.barcode != nil {
                 return [self.newViewController(name: "front"),
                         self.newViewController(name: "back"),
@@ -33,8 +34,10 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }()
     
     private func newViewController(name: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "\(name)View")
+        let b: ImageViewController = UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewController(withIdentifier: "\(name)View") as! ImageViewController
+      
+        return b
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -56,10 +59,24 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
-        
+        let b: ImageViewController = orderedViewControllers[orderedViewControllers.index(of: viewController)!] as! ImageViewController
+        if b.backImage != nil {
+            if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
+                //print(url)
+                if let data = NSData(contentsOf: url as URL) {
+                    b.backImage.image = UIImage(data: data as Data)
+                    // backView.backImage.transform = backView.backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
+                }
+            }
+        }
+        if b.frontImage != nil {
+            b.frontImage.image = UIImage(named: "britt.jpg")
+           
+        }
         let nextIndex = viewControllerIndex + 1
         let orderedViewControllersCount = orderedViewControllers.count
         
@@ -70,7 +87,24 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         guard orderedViewControllersCount > nextIndex else {
             return nil
         }
+        /*let backView: ImageBackViewController =  orderedViewControllers[1] as! ImageBackViewController
         
+        //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //let backView: ImageViewController = //storyboard.instantiateViewController(withIdentifier: "backView") as! ImageViewController
+        // self.present(backView, animated: true, completion: nil)
+        
+         let imageName = "yourImage.png"
+         let image = UIImage(named: imageName)
+         let imageView = UIImageView(image: image!)
+ 
+        if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
+            //print(url)
+            if let data = NSData(contentsOf: url as URL) {
+                backView.back.image = UIImage(data: data as Data)
+                // backView.backImage.transform = backView.backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
+            }
+        }*/
+       
         return orderedViewControllers[nextIndex]
     }
     
@@ -100,12 +134,41 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         delegate = self
         
         configurePageControl()
-         
+        print("did load")
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
         
+        //orderedViewControllers: [UIViewController]
+        
         if editingCard != nil{
+            let frontView: ImageViewController = orderedViewControllers[0] as! ImageViewController
+            frontView.frontImage.image = UIImage(named: "britt.jpg")
+            /*if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
+                //print(url)
+                if let data = NSData(contentsOf: url as URL) {
+                    frontView.frontImage.image = UIImage(data: data as Data)
+                    //frontView.frontImage.transform = frontView.frontImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
+               // }
+            }*/
+           // let backView: ImageViewController =  orderedViewControllers[0] as! ImageViewController
+            
+            //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            //let backView: ImageViewController = //storyboard.instantiateViewController(withIdentifier: "backView") as! ImageViewController
+            // self.present(backView, animated: true, completion: nil)
+            
+            //let imageName = "yourImage.png"
+            //let image = UIImage(named: imageName)
+            //let imageView = UIImageView(image: image!)
+            
+           /* if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
+                //print(url)
+                if let data = NSData(contentsOf: url as URL) {
+                    backView.back.image = UIImage(data: data as Data)
+                    // backView.backImage.transform = backView.backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
+                }
+            }
+            */
             
             print(editingCard?.nameOfCard as Any)
         }
