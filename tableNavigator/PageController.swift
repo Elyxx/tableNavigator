@@ -93,7 +93,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
  
     func configurePageControl() {
         
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 30,width: UIScreen.main.bounds.width,height: 70))
+        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 50,width: UIScreen.main.bounds.width,height: 70))
         pageControl.numberOfPages = orderedViewControllers.count
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
@@ -116,7 +116,9 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     func createImage(currentImage: UIImage)->UIImageView{
         let imageView = UIImageView(image: currentImage)
         imageView.transform = imageView.transform.rotated(by: CGFloat(-Double.pi / 2))
-        imageView.frame = CGRect(x: 10, y: 75, width:UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height - 95)
+        let newWidth = UIScreen.main.bounds.width - 20
+        let newHeight = newWidth/0.63
+        imageView.frame = CGRect(x: 10, y: 80, width: newWidth, height: newHeight)
         return imageView
     }
     override func viewDidLoad() {

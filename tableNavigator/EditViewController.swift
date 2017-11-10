@@ -35,6 +35,8 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if editingCard != nil{
             name.text = editingCard?.nameOfCard
             decriptionCard.text = editingCard?.descriptionOfCard
+            frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+            //bug // somewhere in mainview
         }
         else {
             name.text = "Type a new name"
@@ -55,7 +57,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         //backImage.contentMode = .scaleAspectFit
-        frontImage.image = chosenImage
+        backImage.image = chosenImage
 
         //backImage.transform = backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
         let pickedImageURL = try? info[UIImagePickerControllerImageURL] as! URL

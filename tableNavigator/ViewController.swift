@@ -89,10 +89,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == segueToNewCard){
+        /*if (segue.identifier == segueToNewCard){
             let editViewController = segue.destination as? EditViewController
             //editViewController?.delegate = self as? SendCard
-        }
+        }*/
         if (segue.identifier == segueToEditScreen){
             let editViewController = segue.destination as? EditViewController
             //editViewController?.delegate = self as? SendCard
