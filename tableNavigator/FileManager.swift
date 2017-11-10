@@ -7,12 +7,59 @@
 //
 
 import Foundation
+import UIKit
 
-class fileManaging{
-    var fileManager = FileManager()
+class FileManaging{
+    var fileManager = FileManager.default //NSFileManager.defaultManager()
     var tmpDir = NSTemporaryDirectory()
     let fileName = "sample.txt"
     
+    func saveImageDocumentDirectory(image: UIImage, nameOfImage: String)->String {
+       let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfImage)
+       let imageData = UIImageJPEGRepresentation(image, 1)
+       fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+        print("file's been created")
+       return paths
+    }
+    
+    func getImage(nameOfImage: String)->UIImage? {
+        let imagePAth = (getDirectoryPath() as NSString).appendingPathComponent(nameOfImage)
+        if fileManager.fileExists(atPath: imagePAth){
+            print("here is your image")
+            return UIImage(contentsOfFile: imagePAth)
+        }
+        else{
+            print("No Image")
+            return nil
+        }
+    }
+    
+    func getDirectoryPath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func createDirectory(){
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("customDirectory")
+        if !fileManager.fileExists(atPath: paths){
+            try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
+        }else{
+            print("Already dictionary created.")
+        }
+    }
+    /*
+ func deleteDirectory(){
+ let fileManager = NSFileManager.defaultManager()
+ let paths = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString).stringByAppendingPathComponent("customDirectory")
+ if fileManager.fileExistsAtPath(paths){
+ try! fileManager.removeItemAtPath(paths)
+ }else{
+ print("Something wronge.")
+ }
+ }*/
+    ////////
     func enumerateDirectory() -> String? {
         //var error: NSError?
         let filesInDirectory = try? fileManager.contentsOfDirectory(atPath: tmpDir)
@@ -65,6 +112,7 @@ class fileManaging{
             print("No file found")
         }
     }
+    
     func deleteFile() {
         //var error: NSError?
         

@@ -1,0 +1,6 @@
+framework module Pods_tableNavigator {
+  umbrella header "Pods-tableNavigator-umbrella.h"
+
+  export *
+  module * { export * }
+}

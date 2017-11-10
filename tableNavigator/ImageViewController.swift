@@ -8,25 +8,21 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
-
-    @IBOutlet weak var frontImage: UIImageView!
+class ImageViewController: UIViewController{
     
-   
+    var firstImage: UIImage?
     
+    var secndImage: UIImage?
     
-    @IBOutlet weak var backImage: UIImageView!
-    
-    @IBOutlet weak var barcodeImage: UIImageView!
+    var thirdImage: UIImage?
     
     override func viewWillAppear(_ animated: Bool) {
-    
+        super.viewWillAppear(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

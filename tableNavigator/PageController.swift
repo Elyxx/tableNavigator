@@ -11,13 +11,12 @@ import UIKit
 class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
    
+    var imageManager = FileManaging()
     var pageControl = UIPageControl()
     var editingCard: DiscountCard? = nil
     
-    //somewhere here we should get data about barcode (is/isnt)
     private (set) lazy var orderedViewControllers: [UIViewController] = {
         if editingCard != nil {
-            print("array")
             if editingCard?.barcode != nil {
                 return [self.newViewController(name: "front"),
                         self.newViewController(name: "back"),
@@ -25,7 +24,8 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
             }
             else{
                 return [self.newViewController(name: "front"),
-                        self.newViewController(name: "back")]
+                        self.newViewController(name: "back"),
+                        self.newViewController(name: "barcode")]
             }
         }
         else {
@@ -33,11 +33,18 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         }
     }()
     
+    private (set) lazy var images: [UIImageView] = {
+       // if editingCard != nil {
+            let first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+            //let secnd = createImage(name: "red.jpg")
+            //let third = createImage(name: "kitten.jpg")
+            return [createImage(currentImage: first!), createImage(currentImage: UIImage(named: "red.jpeg")!), createImage(currentImage: UIImage(named: "kitten.jpeg")!)]
+        //}
+    }()
+    
     private func newViewController(name: String) -> UIViewController {
-        let b: ImageViewController = UIStoryboard(name: "Main", bundle: nil) .
+        return UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewController(withIdentifier: "\(name)View") as! ImageViewController
-      
-        return b
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -54,7 +61,6 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         guard orderedViewControllers.count > previousIndex else {
             return nil
         }
-        
         return orderedViewControllers[previousIndex]
     }
     
@@ -63,20 +69,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
-        let b: ImageViewController = orderedViewControllers[orderedViewControllers.index(of: viewController)!] as! ImageViewController
-        if b.backImage != nil {
-            if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
-                //print(url)
-                if let data = NSData(contentsOf: url as URL) {
-                    b.backImage.image = UIImage(data: data as Data)
-                    // backView.backImage.transform = backView.backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
-                }
-            }
-        }
-        if b.frontImage != nil {
-            b.frontImage.image = UIImage(named: "britt.jpg")
-           
-        }
+        
         let nextIndex = viewControllerIndex + 1
         let orderedViewControllersCount = orderedViewControllers.count
         
@@ -87,25 +80,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         guard orderedViewControllersCount > nextIndex else {
             return nil
         }
-        /*let backView: ImageBackViewController =  orderedViewControllers[1] as! ImageBackViewController
-        
-        //let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        //let backView: ImageViewController = //storyboard.instantiateViewController(withIdentifier: "backView") as! ImageViewController
-        // self.present(backView, animated: true, completion: nil)
-        
-         let imageName = "yourImage.png"
-         let image = UIImage(named: imageName)
-         let imageView = UIImageView(image: image!)
- 
-        if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
-            //print(url)
-            if let data = NSData(contentsOf: url as URL) {
-                backView.back.image = UIImage(data: data as Data)
-                // backView.backImage.transform = backView.backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
-            }
-        }*/
-       
-        return orderedViewControllers[nextIndex]
+         return orderedViewControllers[nextIndex]
     }
     
     func pageViewController(pageViewController: UIPageViewController, didUpdatePageCount count: Int){
@@ -118,15 +93,32 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
  
     func configurePageControl() {
         
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 70,width: UIScreen.main.bounds.width,height: 70))
+        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 30,width: UIScreen.main.bounds.width,height: 70))
         pageControl.numberOfPages = orderedViewControllers.count
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
        // pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        pageControl.currentPageIndicatorTintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 139.0/255.0, green: 55.0/255.0, blue: 129.0/255.0, alpha: 1.0)
         view.addSubview(pageControl)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //for eachView in orderedViewControllers
+        //{
+            //eachView.view.addSubview(<#T##view: UIView##UIView#>)
+            //eachView.
+        //}
+        
+        orderedViewControllers[0].view.addSubview(images[0])
+        orderedViewControllers[1].view.addSubview(images[1])
+        orderedViewControllers[2].view.addSubview(images[2])
+    }
+    func createImage(currentImage: UIImage)->UIImageView{
+        let imageView = UIImageView(image: currentImage)
+        imageView.transform = imageView.transform.rotated(by: CGFloat(-Double.pi / 2))
+        imageView.frame = CGRect(x: 10, y: 75, width:UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height - 95)
+        return imageView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -134,44 +126,13 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         delegate = self
         
         configurePageControl()
-        print("did load")
+        
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
-        }
+         }
         
-        //orderedViewControllers: [UIViewController]
+        if editingCard != nil{            print(editingCard?.nameOfCard)        }
         
-        if editingCard != nil{
-            let frontView: ImageViewController = orderedViewControllers[0] as! ImageViewController
-            frontView.frontImage.image = UIImage(named: "britt.jpg")
-            /*if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
-                //print(url)
-                if let data = NSData(contentsOf: url as URL) {
-                    frontView.frontImage.image = UIImage(data: data as Data)
-                    //frontView.frontImage.transform = frontView.frontImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
-               // }
-            }*/
-           // let backView: ImageViewController =  orderedViewControllers[0] as! ImageViewController
-            
-            //let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            //let backView: ImageViewController = //storyboard.instantiateViewController(withIdentifier: "backView") as! ImageViewController
-            // self.present(backView, animated: true, completion: nil)
-            
-            //let imageName = "yourImage.png"
-            //let image = UIImage(named: imageName)
-            //let imageView = UIImageView(image: image!)
-            
-           /* if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
-                //print(url)
-                if let data = NSData(contentsOf: url as URL) {
-                    backView.back.image = UIImage(data: data as Data)
-                    // backView.backImage.transform = backView.backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
-                }
-            }
-            */
-            
-            print(editingCard?.nameOfCard as Any)
-        }
         // Do any additional setup after loading the view.
     }
 
@@ -185,7 +146,15 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         pageControl.currentPage = orderedViewControllers.index(of: pageContentViewController)!
     }
 
-    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "") {
+            let pageController = segue.destination as? PageController
+            //pageController?.delegate = self as? PageController
+            pageController?.editingCard = sender as? DiscountCard
+        }
+        
+    }
+    */
     /*
     // MARK: - Navigation
 

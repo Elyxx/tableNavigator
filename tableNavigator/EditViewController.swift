@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class EditViewController: UIViewController, SendCard, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class EditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
    
     var editingCard: DiscountCard? = nil
-    weak var delegate: SendCard?
+    //weak var delegate: SendCard?
     var manager = CardsManager()
-  
+    var imageManager = FileManaging()
+   
     var filterColor: String? = nil
     
     @IBOutlet weak var frontImage: UIImageView!
@@ -27,34 +28,10 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
     
     @IBOutlet weak var decriptionCard: UITextView!
     
-    var frontPath: String = ""
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ToEdit"){
-            let viewController = segue.destination as? ViewController
-            viewController?.delegate = self
-            print("save")
-        }
-        if (segue.identifier == "ToMain"){
-            let viewController = segue.destination as? ViewController
-            viewController?.delegate = self
-            print("back")
-        }
-     }
+    var frontPath: String?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        frontImage.image = UIImage(named: "chernyj_strizh.jpg")
-        if editingCard?.frontImageOfCard != nil{
-            if let url = NSURL(string: (editingCard?.frontImageOfCard!)!) {
-                //print(url)
-                if let data = NSData(contentsOf: url as URL) {
-                    backImage.image = UIImage(data: data as Data)
-                }
-            }
-        }
-       // backImage.image = editingCard?.frontImageOfCard
-       
         if editingCard != nil{
             name.text = editingCard?.nameOfCard
             decriptionCard.text = editingCard?.descriptionOfCard
@@ -64,65 +41,35 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
         }
         //checkPermission()
     }
-    /*func checkPermission() {
-        let photoAuthorizationStatus =
-            .authorizationStatus()
-        switch photoAuthorizationStatus {
-        case .authorized:
-            print("Access is granted by user")
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({
-                (newStatus) in
-                print("status is \(newStatus)")
-                if newStatus ==  PHAuthorizationStatus.authorized {
-                    /* do stuff here */
-                    print("success")
-                }
-            })
-            print("It is not determined until now")
-        case .restricted:
-            // same same
-            print("User do not have access to photo album.")
-        case .denied:
-            // same same
-            print("User has denied the permission.")
-        }
-    }*/
+   
     override func viewDidLoad() {
-         super.viewDidLoad()
-        
+        super.viewDidLoad()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         frontImage.isUserInteractionEnabled = true
         frontImage.addGestureRecognizer(tapGestureRecognizer)
          // Do any additional setup after loading the view.
-
+        //backImage.isUserInteractionEnabled = true
+       // backImage.addGestureRecognizer(tapGestureRecognizer)
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         //backImage.contentMode = .scaleAspectFit
-        //backImage.image = chosenImage
+        frontImage.image = chosenImage
 
         //backImage.transform = backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
-        
         let pickedImageURL = try? info[UIImagePickerControllerImageURL] as! URL
-        //print(pickedImageURL!)
-       
+        let nameOfImage = pickedImageURL?.lastPathComponent
+        frontPath = nameOfImage
+        
         if let url = NSURL(string: (pickedImageURL?.description)!) {
             if let data = NSData(contentsOf: url as URL) {
-                barcodeImage.image = UIImage(data: data as Data)
-                frontPath = (pickedImageURL?.description)!
+                //let imageSize = data.length
+                //print("size of image in KB: %f ", Double(imageSize) / 1024.0)
+                let imageTmp = UIImage(data: data as Data)!
+                imageManager.saveImageDocumentDirectory(image: imageTmp, nameOfImage: nameOfImage!)
             }
         }
-        //print(editingCard?.frontImageOfCard)
-        //this block of code adds data to the above path
-        //let path = localPath?.relativePath
-        /*let imageName = info[UIImagePickerControllerOriginalImage] as UIImage
-        let data = UIImagePNGRepresentation(imageName)
-        data?.writeToFile(imagePath, atomically: true)
-        
-        //this block grabs the NSURL so you can use it in CKASSET
-        let photoURL = NSURL(fileURLWithPath: path)*/
-    
         dismiss(animated: true, completion: nil)
         
     }
@@ -134,7 +81,7 @@ class EditViewController: UIViewController, SendCard, UIImagePickerControllerDel
    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-       // let tappedImage = tapGestureRecognizer.view as! UIImageView
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
         print("tapped")
         //frontImage.image = UIImage(named: "red.jpeg")
         

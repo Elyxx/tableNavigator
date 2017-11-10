@@ -11,13 +11,19 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
+    //weak var delegate: SendCard?
+    
+    let segueToEditScreen = "ForEditting"
+    let segueToNewCard = "ToEdit"
+    let segueToCardInfo = "ToPage"
+    
     var manager = CardsManager()
+    var imageManager = FileManaging()
     var myCards = [DiscountCard]()
    
     var data = [String] ()
     var searchActive : Bool = false
     var filter: String? = nil
-    var delegate: SendCard?
     
     var filtered = [DiscountCard]()
     
@@ -83,16 +89,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ToEdit"){
+        if (segue.identifier == segueToNewCard){
             let editViewController = segue.destination as? EditViewController
-            editViewController?.delegate = self as? SendCard
+            //editViewController?.delegate = self as? SendCard
         }
-        if (segue.identifier == "ForEditting"){
+        if (segue.identifier == segueToEditScreen){
             let editViewController = segue.destination as? EditViewController
-            editViewController?.delegate = self as? SendCard
+            //editViewController?.delegate = self as? SendCard
             editViewController?.editingCard = sender as? DiscountCard
         }
-        if (segue.identifier == "ToPage"){
+        if (segue.identifier == segueToCardInfo) {
             let pageController = segue.destination as? PageController
             //pageController?.delegate = self as? PageController
             pageController?.editingCard = sender as? DiscountCard
@@ -115,7 +121,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            self.performSegue(withIdentifier: "ForEditting", sender: self.myCards[indexPath.row])
+            self.performSegue(withIdentifier: self.segueToEditScreen, sender: self.myCards[indexPath.row])
         }
         let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         editAction.backgroundColor = lightViolet
@@ -154,12 +160,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if searchActive == true {
             //filtered mas
             if myCards[indexPath.row].frontImageOfCard != nil{
-                if let url = NSURL(string: myCards[indexPath.row].frontImageOfCard!) {
-                    print(url)
-                    if let data = NSData(contentsOf: url as URL) {
-                        cell.imageCell.image = UIImage(data: data as Data)
-                    }
-                }
+                cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].frontImageOfCard!)
+                print("the adress is")
+                print(myCards[indexPath.row].frontImageOfCard!)
             }
             else {
                 cell.imageCell.image = UIImage(named:"default.jpeg")
@@ -167,27 +170,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.nameCell.text = filtered[indexPath.row].nameOfCard
             cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
             cell.descripCell.text = filtered[indexPath.row].descriptionOfCard
-            //cell.imageCell.image = UIImage(named:"kitten.jpeg")
             cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
         }
         else{
             if myCards[indexPath.row].frontImageOfCard != nil{
-                if let url = NSURL(string: myCards[indexPath.row].frontImageOfCard!) {
-                    print(url)
-                    if let data = NSData(contentsOf: url as URL) {
-                        cell.imageCell.image = UIImage(data: data as Data)
-                        print("image")
-                    }
-                }
+                cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].frontImageOfCard!)
+                print("the adress is")
+                print(myCards[indexPath.row].frontImageOfCard!)
             }
             else {
                 cell.imageCell.image = UIImage(named:"default.jpeg")
             }
-           
+            
             cell.nameCell.text = myCards[indexPath.row].nameOfCard
             cell.filterCell.backgroundColor = setColor(number: myCards[indexPath.row].filterByColor)
             cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
-            //cell.imageCell.image = UIImage(named:"britt.jpeg")
             cell.dataCell.text = dateFormatter.string(from: myCards[indexPath.row].dateOfCreation!)
         }
         return cell
@@ -215,6 +212,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)
  */
         
+    }
+    
+    @IBAction func sorting(_ sender: UIBarButtonItem) {
+        myCards = myCards.sorted { (firstCard, secndCard) -> Bool in
+            return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
+        }
+        tableOfCards.reloadData()
     }
     
     func setColor(number: String?) -> UIColor{
