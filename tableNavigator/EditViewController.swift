@@ -45,47 +45,36 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
             }
             if (editingCard?.backImageOfCard != nil) {
-                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
             }
             if (editingCard?.barcode != nil) {
-                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
             }
-            else{
-                frontImage.image = UIImage(named:"default.jpeg")
-            }
-            
         }
-        else {
-            //name.text = "Type a new name"
-        }
-        //checkPermission()
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let frontGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
         frontImage.isUserInteractionEnabled = true
-        frontImage.addGestureRecognizer(tapGestureRecognizer)
-         // Do any additional setup after loading the view.
-        //backImage.isUserInteractionEnabled = true
-       // backImage.addGestureRecognizer(tapGestureRecognizer)
+        frontImage.addGestureRecognizer(frontGestureRecognizer)
+        
+        let backGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BackImageTapped(tapGestureRecognizer:)))
+        backImage.isUserInteractionEnabled = true
+        backImage.addGestureRecognizer(backGestureRecognizer)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //backImage.contentMode = .scaleAspectFit
-        backImage.image = chosenImage
-      
-        let pickedImageURL = try? info[UIImagePickerControllerImageURL] as! URL
-        let nameOfImage = pickedImageURL?.lastPathComponent
-        frontPath = nameOfImage
         
-        if let url = NSURL(string: (pickedImageURL?.description)!) {
-            if let data = NSData(contentsOf: url as URL) {
-                //let imageSize = data.length
-                //print("size of image in KB: %f ", Double(imageSize) / 1024.0)
-                let imageTmp = UIImage(data: data as Data)!
-                imageManager.saveImageDocumentDirectory(image: imageTmp, nameOfImage: nameOfImage!)
+        //let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if let pickedImageURL = info[UIImagePickerControllerImageURL] as? URL{
+            frontPath = pickedImageURL.lastPathComponent
+            
+            if let url = NSURL(string: pickedImageURL.description) {
+                if let data = NSData(contentsOf: url as URL) {
+                    let imageTmp = UIImage(data: data as Data)!
+                    imageManager.saveImageDocumentDirectory(image: imageTmp, nameOfImage: frontPath!)
+                }
             }
         }
         dismiss(animated: true, completion: nil)
@@ -95,22 +84,43 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     {
         dismiss(animated: true, completion: nil)
     }
-   
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    @objc func BackImageTapped (tapGestureRecognizer: UITapGestureRecognizer)
     {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
-        print("tapped")
         
+    }
+    @objc func frontImageTapped (tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        //let tappedImage = tapGestureRecognizer.view as! UIImageView
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
-        //picker.sourceType = .savedPhotosAlbum
-        //picker.sourceType = .camera
-        //disablesAutomaticKeyboardDismissal = false
-        picker.modalPresentationStyle = .pageSheet
-        present(picker, animated: true, completion: nil)
+        
+        let alert = UIAlertController(title: "pick image", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        alert.addAction(UIAlertAction(title: "pictures", style: UIAlertActionStyle.default, handler: { action in
+                        picker.sourceType = .savedPhotosAlbum
+            picker.modalPresentationStyle = .popover
+            self.present(picker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "camera", style: UIAlertActionStyle.default, handler: { action in
+            
+            if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
+            {
+                picker.sourceType = UIImagePickerControllerSourceType.camera
+                self.present(picker, animated: true, completion: nil)
+            }
+            else
+            {
+                let alertWarning = UIAlertController(title: "sorry", message: "camera's not available (", preferredStyle: UIAlertControllerStyle.actionSheet)
+                    alertWarning.addAction(UIAlertAction(title: "got it", style: UIAlertActionStyle.cancel, handler: nil))
+                self.present(alertWarning, animated: true, completion: nil)
+                //alertWarning.show(
+            }
+            picker.modalPresentationStyle = .popover
+            self.present(picker, animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -119,21 +129,18 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func initCard (card: DiscountCard){   }
     
     @IBAction func barcodeNumber(_ sender: UITextField) {
-      /* 
-         
-         barcodeImage.image =
-            RSUnifiedCodeGenerator.shared.generateCode(sender.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
-         barcodePath = imageManager.saveImageDocumentDirectory(image: barcodeImage.image, nameOfImage: nameOfImage!)
-         */
-        
-        print(sender.text)
+        if sender.text != nil {
+            barcodePath = sender.text! + ".jpeg"
+             print(sender.text!)
+        }
+        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(sender.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+       
+        if barcodeImage.image != nil {
+            imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
+        }
     }
     
     @IBAction func saveCard(_ sender: UIButton) {
-        
-        
-       // RSUnifiedCodeGenerator open func generateCode
-        //var r: UnifiedCodeGeneratorSharedInstance
         if editingCard != nil {
             manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }

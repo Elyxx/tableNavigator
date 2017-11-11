@@ -8,7 +8,13 @@
 
 import UIKit
 
-class ImageViewController: UIViewController{
+class ImageViewController: UIViewController, SendCard{
+    
+    func initCard(card: DiscountCard) {
+        editingCard = card
+        print("to 3 send")
+    }
+    
     
     var firstImage: UIImage?
     
@@ -24,6 +30,8 @@ class ImageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if editingCard != nil { print(editingCard?.nameOfCard) }
+        
         //view.addSubview(<#T##view: UIView##UIView#>)
          // Do any additional setup after loading the view.
     }
@@ -32,8 +40,15 @@ class ImageViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
+   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "returnToEdit" {
+            let editController = segue.destination as? EditViewController
+            //pageController?.delegate = self as? PageController
+            editController?.editingCard = editingCard
+        }
+    }
+ 
     /*
     // MARK: - Navigation
 

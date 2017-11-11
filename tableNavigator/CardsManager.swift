@@ -13,20 +13,20 @@ import UIKit
 class CardsManager{
     var context:NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    func addNewCard(name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
+    func addNewCard(name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: String? = nil){
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
         let newCard = DiscountCard(entity: entity!, insertInto:context)
         newCard.nameOfCard = name
         newCard.frontImageOfCard = frontIMG
-        //newCard.setValue(backIMG, forKey: "backImageOfCard")
-        //newCard.setValue(barcodeIMG, forKey: "barcode")
+        newCard.backImageOfCard = backIMG
+        newCard.barcode = barcodeIMG
         newCard.descriptionOfCard = descrip
         newCard.filterByColor = filter
         newCard.dateOfCreation = Date()
         //var error: NSError?
         try! context.save()
     }
-    func editExisting(card: DiscountCard, name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
+    func editExisting(card: DiscountCard, name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: String? = nil){
         if name != nil { card.nameOfCard = name }
         if descrip != nil { card.descriptionOfCard = descrip }
         if filter != nil { card.filterByColor = filter }

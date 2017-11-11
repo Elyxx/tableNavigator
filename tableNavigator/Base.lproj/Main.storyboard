@@ -250,7 +250,7 @@
                                                     <constraint firstAttribute="width" secondItem="5jo-ZC-OVP" secondAttribute="height" multiplier="355:223" id="8We-e8-wrA"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ydr-TT-nWQ">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ydr-TT-nWQ">
                                                 <rect key="frame" x="10" y="447" width="300" height="93.5"/>
                                                 <color key="backgroundColor" red="0.99123572339999999" green="0.99123572339999999" blue="0.99123572339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
@@ -396,7 +396,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="tFI-Ag-Kkk">
                                             <color key="tintColor" red="0.012888642131979711" green="0.012888642131979711" blue="0.012888642131979711" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <segue destination="cGr-zl-uCv" kind="show" id="6ep-Xt-jbd"/>
+                                                <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="6ep-Xt-jbd"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -437,7 +437,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="Slo-Kp-qd7">
                                             <color key="tintColor" red="0.021296002538071068" green="0.021296002538071068" blue="0.021296002538071068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <segue destination="cGr-zl-uCv" kind="show" id="HDm-Xn-r20"/>
+                                                <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="HDm-Xn-r20"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -455,7 +455,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOJ-f8-ap7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="624.79999999999995" y="1481.5270935960591"/>
+            <point key="canvasLocation" x="1204" y="1480"/>
         </scene>
         <!--barcode-->
         <scene sceneID="JpE-rL-gzx">
@@ -477,9 +477,6 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="RbW-Go-01i">
                                             <color key="tintColor" red="0.026590260152284273" green="0.026590260152284273" blue="0.026590260152284273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="Cub-AU-mTH" kind="show" id="6ri-6b-WJY"/>
-                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -493,18 +490,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zsl-Xk-782"/>
                     </view>
+                    <connections>
+                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="MiW-IQ-2tH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XY-av-EvB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="1481.5270935960591"/>
+            <point key="canvasLocation" x="2486" y="1480"/>
         </scene>
     </scenes>
     <resources>
         <image name="Icon-29.png" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gch-Df-dQe"/>
-        <segue reference="1kG-NZ-q3q"/>
-        <segue reference="Mc8-BA-yr8"/>
+        <segue reference="MiW-IQ-2tH"/>
+        <segue reference="Y1f-RG-bjR"/>
     </inferredMetricsTieBreakers>
 </document>

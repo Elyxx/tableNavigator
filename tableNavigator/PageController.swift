@@ -14,6 +14,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var imageManager = FileManaging()
     var pageControl = UIPageControl()
     var editingCard: DiscountCard? = nil
+    weak var myDelegate: SendCard?
     
     private (set) lazy var orderedViewControllers: [UIViewController] = {
         if editingCard != nil {
@@ -35,9 +36,21 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     
     private (set) lazy var images: [UIImageView] = {
        // if editingCard != nil {
-            let first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
-        //при переходе из пейджинга на єдит крешит
-            //let secnd = createImage(name: "red.jpg")
+        var first: UIImage?
+        if editingCard?.frontImageOfCard != nil {
+            first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+        }
+        else {
+            first = UIImage(named: "red.jpeg")
+        }
+        var secnd: UIImage?
+        if editingCard?.backImageOfCard != nil {
+            secnd = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
+        }
+        else {
+            secnd = UIImage(named: "red.jpeg")
+        }
+      
             //let third = createImage(name: "kitten.jpg")
             return [createImage(currentImage: first!), createImage(currentImage: UIImage(named: "red.jpeg")!), createImage(currentImage: UIImage(named: "kitten.jpeg")!)]
         //}
@@ -136,8 +149,8 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
          }
         
-        if editingCard != nil{            print(editingCard?.nameOfCard)        }
-        
+        if editingCard != nil {            print(editingCard?.nameOfCard)        }
+        myDelegate?.initCard(card: editingCard!)
         // Do any additional setup after loading the view.
     }
 

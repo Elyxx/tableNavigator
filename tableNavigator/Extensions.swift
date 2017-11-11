@@ -23,6 +23,11 @@ extension UIImage{
         UIGraphicsEndImageContext()
         return newImage!
     }
+    /*
+     
+     //UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)
+     */
+    
     /*public func imageRotatedByDegrees(degrees: CGFloat, flip: Bool) -> UIImage {
         let radiansToDegrees: (CGFloat) -> CGFloat = {
             return $0 * (180.0 / CGFloat(Double.pi))
@@ -187,6 +192,7 @@ extension UIImage{
  print("User has denied the permission.")
  }
  }*/
+
 /*
  func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
  {
@@ -243,3 +249,7 @@ extension UIImage{
  println("picker cancel.")
  }
  */
+     //backImage.contentMode = .scaleAspectFit
+
+//let imageSize = data.length
+//print("size of image in KB: %f ", Double(imageSize) / 1024.0)
