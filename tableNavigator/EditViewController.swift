@@ -8,38 +8,55 @@
 
 import UIKit
 import CoreData
+import RSBarcodes_Swift
+import AVFoundation
 
 class EditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
    
-    var editingCard: DiscountCard? = nil
-    //weak var delegate: SendCard?
-    var manager = CardsManager()
-    var imageManager = FileManaging()
-   
-    var filterColor: String? = nil
-    
     @IBOutlet weak var frontImage: UIImageView!
-  
     @IBOutlet weak var backImage: UIImageView!
-    
     @IBOutlet weak var barcodeImage: UIImageView!
-    
     @IBOutlet weak var name: UITextField!
-    
     @IBOutlet weak var decriptionCard: UITextView!
+    @IBOutlet weak var barcodeNumber: UITextField!
+
+    var editingCard: DiscountCard? = nil
     
+    var manager = CardsManager()
+    
+    var imageManager = FileManaging()
+    
+    var filterColor: String? = nil
     var frontPath: String?
+    var backPath: String?
+    var barcodePath: String?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         if editingCard != nil{
-            name.text = editingCard?.nameOfCard
-            decriptionCard.text = editingCard?.descriptionOfCard
-            frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
-            //bug // somewhere in mainview
+            if editingCard?.nameOfCard != nil {
+                name.text = editingCard?.nameOfCard
+            }
+            if editingCard?.descriptionOfCard != nil {
+                decriptionCard.text = editingCard?.descriptionOfCard
+            }
+            if (editingCard?.frontImageOfCard != nil) {
+                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+            }
+            if (editingCard?.backImageOfCard != nil) {
+                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+            }
+            if (editingCard?.barcode != nil) {
+                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+            }
+            else{
+                frontImage.image = UIImage(named:"default.jpeg")
+            }
+            
         }
         else {
-            name.text = "Type a new name"
+            //name.text = "Type a new name"
         }
         //checkPermission()
     }
@@ -58,8 +75,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         //backImage.contentMode = .scaleAspectFit
         backImage.image = chosenImage
-
-        //backImage.transform = backImage.transform.rotated(by: CGFloat((Double.pi / 2)*(-1)))
+      
         let pickedImageURL = try? info[UIImagePickerControllerImageURL] as! URL
         let nameOfImage = pickedImageURL?.lastPathComponent
         frontPath = nameOfImage
@@ -73,19 +89,17 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
         }
         dismiss(animated: true, completion: nil)
-        
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
         dismiss(animated: true, completion: nil)
-  
     }
    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         print("tapped")
-        //frontImage.image = UIImage(named: "red.jpeg")
         
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -94,10 +108,8 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         //picker.sourceType = .savedPhotosAlbum
         //picker.sourceType = .camera
         //disablesAutomaticKeyboardDismissal = false
-        picker.modalPresentationStyle = .popover
+        picker.modalPresentationStyle = .pageSheet
         present(picker, animated: true, completion: nil)
-        //picker.popoverPresentationController?.barButtonItem = 
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,12 +118,27 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
    
     func initCard (card: DiscountCard){   }
     
+    @IBAction func barcodeNumber(_ sender: UITextField) {
+      /* 
+         
+         barcodeImage.image =
+            RSUnifiedCodeGenerator.shared.generateCode(sender.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+         barcodePath = imageManager.saveImageDocumentDirectory(image: barcodeImage.image, nameOfImage: nameOfImage!)
+         */
+        
+        print(sender.text)
+    }
+    
     @IBAction func saveCard(_ sender: UIButton) {
+        
+        
+       // RSUnifiedCodeGenerator open func generateCode
+        //var r: UnifiedCodeGeneratorSharedInstance
         if editingCard != nil {
-            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath)
+            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         else{
-            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath)
+            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
     }
     @IBAction func filter(_ sender: UISegmentedControl) {

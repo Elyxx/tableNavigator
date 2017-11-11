@@ -1,31 +1,19 @@
 //
-//  ImageViewController.swift
+//  PopViewController.swift
 //  tableNavigator
 //
-//  Created by adminaccount on 11/8/17.
+//  Created by adminaccount on 11/11/17.
 //  Copyright © 2017 adminaccount. All rights reserved.
 //
 
 import UIKit
 
-class ImageViewController: UIViewController{
-    
-    var firstImage: UIImage?
-    
-    var secndImage: UIImage?
-    
-    var thirdImage: UIImage?
-    
-    var editingCard: DiscountCard? = nil
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-    
+class PopViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.addSubview(<#T##view: UIView##UIView#>)
-         // Do any additional setup after loading the view.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

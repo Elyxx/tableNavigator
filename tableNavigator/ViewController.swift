@@ -215,10 +215,62 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func sorting(_ sender: UIBarButtonItem) {
+       
+        let alert = UIAlertController(title: "Notice", message: "Lauching this missile will destroy the entire universe. Is this what you intended to do?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add the actions (buttons)
+        let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 200);
+        
+        let width : NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 300);
+        
+        alert.view.addConstraint(height);
+        
+        alert.view.addConstraint(width);
+        
+        alert.addAction(UIAlertAction(title: "ascending names", style: UIAlertActionStyle.default, handler: { action in
+            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
+                return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
+            }
+            self.tableOfCards.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "discending names", style: UIAlertActionStyle.default, handler: { action in
+            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
+                return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
+            }
+            self.tableOfCards.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "ascending data", style: UIAlertActionStyle.default, handler: { action in
+            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
+                return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
+            }
+            self.tableOfCards.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "discending data", style: UIAlertActionStyle.default, handler: { action in
+            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
+                return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
+            }
+            self.tableOfCards.reloadData()
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        /*
+        let popController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortPopUp") as! PopViewController
+        popController.modalPresentationStyle = .popover
+        popController.view.frame = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
+            //.preferredContentSize = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
+          */
+       /* let popoverPresentationViewController = popController.popoverPresentationController
+        popoverPresentationViewController?.permittedArrowDirections = .any
+        popoverPresentationViewController?.delegate = self
+        popoverPresentationController?.sourceRect = sender.frame
+        presentViewController(playerInformationViewController, animated: true, completion: nil)
+ 
         myCards = myCards.sorted { (firstCard, secndCard) -> Bool in
             return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
         }
-        tableOfCards.reloadData()
+        tableOfCards.reloadData()*/
+        
     }
     
     func setColor(number: String?) -> UIColor{

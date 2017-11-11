@@ -18,15 +18,13 @@ class FileManaging{
        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfImage)
        let imageData = UIImageJPEGRepresentation(image, 1)
        fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
-        print("file's been created")
        return paths
     }
     
     func getImage(nameOfImage: String)->UIImage? {
         let imagePAth = (getDirectoryPath() as NSString).appendingPathComponent(nameOfImage)
         if fileManager.fileExists(atPath: imagePAth){
-            print("here is your image")
-            return UIImage(contentsOfFile: imagePAth)
+             return UIImage(contentsOfFile: imagePAth)
         }
         else{
             print("No Image")

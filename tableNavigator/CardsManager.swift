@@ -27,11 +27,12 @@ class CardsManager{
         try! context.save()
     }
     func editExisting(card: DiscountCard, name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: NSData? = nil){
-        card.nameOfCard = name
-        card.descriptionOfCard = descrip
-        card.filterByColor = filter
-        card.frontImageOfCard = frontIMG
-        //!!!!!!!
+        if name != nil { card.nameOfCard = name }
+        if descrip != nil { card.descriptionOfCard = descrip }
+        if filter != nil { card.filterByColor = filter }
+        if frontIMG != nil { card.frontImageOfCard = frontIMG }
+        if backIMG != nil {card.backImageOfCard = backIMG }
+        if barcodeIMG != nil { card.barcode = barcodeIMG }      
         try! context.save()
     }
     func getFilteredCards(filter: String? = nil)->[DiscountCard]?{

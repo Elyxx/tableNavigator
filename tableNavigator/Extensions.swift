@@ -187,3 +187,59 @@ extension UIImage{
  print("User has denied the permission.")
  }
  }*/
+/*
+ func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+ {
+ var alert:UIAlertController=UIAlertController(title: "Choose Image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+ var cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default)
+ {
+ UIAlertAction in
+ self.openCamera()
+ }
+ var gallaryAction = UIAlertAction(title: "Gallary", style: UIAlertActionStyle.Default)
+ {
+ UIAlertAction in
+ self.openGallary()
+ }
+ var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel)
+ {
+ UIAlertAction in
+ }
+ 
+ // Add the actions
+ picker?.delegate = self
+ alert.addAction(cameraAction)
+ alert.addAction(gallaryAction)
+ alert.addAction(cancelAction)
+ self.presentViewController(alert, animated: true, completion: nil)
+ }
+ func openCamera()
+ {
+ if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+ {
+ picker!.sourceType = UIImagePickerControllerSourceType.Camera
+ self .presentViewController(picker!, animated: true, completion: nil)
+ }
+ else
+ {
+ let alertWarning = UIAlertView(title:"Warning", message: "You don't have camera", delegate:nil, cancelButtonTitle:"OK", otherButtonTitles:"")
+ alertWarning.show()
+ }
+ }
+ func openGallary()
+ {
+ picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+ self.presentViewController(picker!, animated: true, completion: nil)
+ }
+ 
+ //PickerView Delegate Methods
+ func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
+ {
+ picker .dismissViewControllerAnimated(true, completion: nil)
+ imageView.image=info[UIImagePickerControllerOriginalImage] as? UIImage
+ }
+ func imagePickerControllerDidCancel(picker: UIImagePickerController)
+ {
+ println("picker cancel.")
+ }
+ */

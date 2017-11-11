@@ -36,6 +36,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     private (set) lazy var images: [UIImageView] = {
        // if editingCard != nil {
             let first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+        //при переходе из пейджинга на єдит крешит
             //let secnd = createImage(name: "red.jpg")
             //let third = createImage(name: "kitten.jpg")
             return [createImage(currentImage: first!), createImage(currentImage: UIImage(named: "red.jpeg")!), createImage(currentImage: UIImage(named: "kitten.jpeg")!)]
@@ -110,6 +111,8 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         //}
         
         orderedViewControllers[0].view.addSubview(images[0])
+        //orderedViewControllers[0].
+        
         orderedViewControllers[1].view.addSubview(images[1])
         orderedViewControllers[2].view.addSubview(images[2])
     }

@@ -23,7 +23,7 @@ public class DiscountCard: NSManagedObject {
     @NSManaged public var nameOfCard: String?
     @NSManaged public var frontImageOfCard: String?
     @NSManaged public var backImageOfCard: String?
-    @NSManaged public var barcode: NSData?
+    @NSManaged public var barcode: String?
     @NSManaged public var dateOfCreation: Date?
    
 }
