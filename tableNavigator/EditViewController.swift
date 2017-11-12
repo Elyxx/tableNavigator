@@ -26,6 +26,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var imageManager = FileManaging()
     
+    var tappedImage: UIImageView?
     var filterColor: String? = nil
     var frontPath: String?
     var backPath: String?
@@ -42,15 +43,25 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 decriptionCard.text = editingCard?.descriptionOfCard
             }
             if (editingCard?.frontImageOfCard != nil) {
-                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+               frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+           }
+            else{
+                frontImage.image = UIImage(named:"flag.jpeg")
             }
             if (editingCard?.backImageOfCard != nil) {
-                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
+                backImage.image = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
+            }
+            else{
+                backImage.image = UIImage(named:"flag.jpeg")
             }
             if (editingCard?.barcode != nil) {
-                frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
+                barcodeImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
             }
+         //   else{
+         //       barcodeImage.image = UIImage(named:"flag.jpeg")
+          //  }
         }
+        
     }
    
     override func viewDidLoad() {
@@ -59,22 +70,33 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         frontImage.isUserInteractionEnabled = true
         frontImage.addGestureRecognizer(frontGestureRecognizer)
         
-        let backGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BackImageTapped(tapGestureRecognizer:)))
+        let backGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
         backImage.isUserInteractionEnabled = true
         backImage.addGestureRecognizer(backGestureRecognizer)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        //let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        if let pickedImageURL = info[UIImagePickerControllerImageURL] as? URL{
-            frontPath = pickedImageURL.lastPathComponent
+        if let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            tappedImage?.image = newImage
+            //picker.view .image = info[UIImagePickerControllerOriginalImage] as! UIImage
             
-            if let url = NSURL(string: pickedImageURL.description) {
-                if let data = NSData(contentsOf: url as URL) {
-                    let imageTmp = UIImage(data: data as Data)!
-                    imageManager.saveImageDocumentDirectory(image: imageTmp, nameOfImage: frontPath!)
+            if let pickedImageURL = info[UIImagePickerControllerImageURL] as? URL{
+                let newImageName = pickedImageURL.lastPathComponent
+                    if tappedImage == frontImage { frontPath = newImageName
+                        print ("saving front")
                 }
+                    if tappedImage == backImage { backPath = newImageName
+                         print ("saving back")
+                }
+                
+                
+                 //   if let url = NSURL(string: pickedImageURL.description) {
+                  //      if let data = NSData(contentsOf: url as URL) {
+                  //          let imageTmp = UIImage(data: data as Data)!
+                imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: newImageName)//"\(name)View"
+              
+              //      }
+            //    }
             }
         }
         dismiss(animated: true, completion: nil)
@@ -84,18 +106,15 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     {
         dismiss(animated: true, completion: nil)
     }
-    @objc func BackImageTapped (tapGestureRecognizer: UITapGestureRecognizer)
-    {
-        
-    }
+   
     @objc func frontImageTapped (tapGestureRecognizer: UITapGestureRecognizer)
     {
-        //let tappedImage = tapGestureRecognizer.view as! UIImageView
+        tappedImage = tapGestureRecognizer.view as? UIImageView
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
         
-        let alert = UIAlertController(title: "pick image", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alert = UIAlertController(title: "pick an image", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         alert.addAction(UIAlertAction(title: "pictures", style: UIAlertActionStyle.default, handler: { action in
                         picker.sourceType = .savedPhotosAlbum
             picker.modalPresentationStyle = .popover
@@ -113,11 +132,11 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 let alertWarning = UIAlertController(title: "sorry", message: "camera's not available (", preferredStyle: UIAlertControllerStyle.actionSheet)
                     alertWarning.addAction(UIAlertAction(title: "got it", style: UIAlertActionStyle.cancel, handler: nil))
                 self.present(alertWarning, animated: true, completion: nil)
-                //alertWarning.show(
             }
             picker.modalPresentationStyle = .popover
             self.present(picker, animated: true, completion: nil)
         }))
+        alert.addAction(UIAlertAction(title: "i've changed my mind", style: UIAlertActionStyle.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
    
@@ -125,18 +144,18 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
+  
     func initCard (card: DiscountCard){   }
     
     @IBAction func barcodeNumber(_ sender: UITextField) {
         if sender.text != nil {
             barcodePath = sender.text! + ".jpeg"
-             print(sender.text!)
         }
         barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(sender.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
        
         if barcodeImage.image != nil {
             imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
+            print("barcode")
         }
     }
     
@@ -148,6 +167,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
     }
+    
     @IBAction func filter(_ sender: UISegmentedControl) {
         filterColor = String(sender.selectedSegmentIndex)
     }

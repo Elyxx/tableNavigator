@@ -13,7 +13,7 @@ import UIKit
 class CardsManager{
     var context:NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    func addNewCard(name: String? = nil, descrip: String? = nil, filter: String? = nil, frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: String? = nil){
+    func addNewCard(name: String? = nil, descrip: String? = nil, filter: String? = "0", frontIMG: String? = nil, backIMG: String? = nil, barcodeIMG: String? = nil){
         let entity =  NSEntityDescription.entity(forEntityName: "DiscountCard", in: context)
         let newCard = DiscountCard(entity: entity!, insertInto:context)
         newCard.nameOfCard = name

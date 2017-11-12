@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		250D00251FB86DFC006E4E78 /* flag.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 250D00241FB86DFC006E4E78 /* flag.jpeg */; };
 		255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7AD1FA4854100FB051B /* AppDelegate.swift */; };
 		255BA7B01FA4854100FB051B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7AF1FA4854100FB051B /* ViewController.swift */; };
 		255BA7B31FA4854100FB051B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7B11FA4854100FB051B /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		250D00241FB86DFC006E4E78 /* flag.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flag.jpeg; sourceTree = "<group>"; };
 		255BA7AA1FA4854100FB051B /* tableNavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tableNavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		255BA7AD1FA4854100FB051B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		255BA7AF1FA4854100FB051B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
 				255BA7CA1FA4A9F100FB051B /* kitty.jpeg */,
 				258FDA8E1FB31FDC00060AA8 /* default.jpeg */,
+				250D00241FB86DFC006E4E78 /* flag.jpeg */,
 				259341801FA8C8110093D751 /* red.jpeg */,
 				25646CAF1FACA0680051944E /* chernyj_strizh.jpg */,
 				255BA7C41FA4A0CE00FB051B /* kitten.jpeg */,
@@ -228,6 +231,7 @@
 				259341811FA8C8110093D751 /* red.jpeg in Resources */,
 				258FDA8F1FB31FDC00060AA8 /* default.jpeg in Resources */,
 				25846C0C1FB6FD4800D302D6 /* Icon-29.png in Resources */,
+				250D00251FB86DFC006E4E78 /* flag.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

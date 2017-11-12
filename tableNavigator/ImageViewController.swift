@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ImageViewController: UIViewController, SendCard{
+class ImageViewController: UIViewController{
     
-    func initCard(card: DiscountCard) {
-        editingCard = card
-        print("to 3 send")
-    }
-    
+    let segueToEdit = "returnToEdit"
     
     var firstImage: UIImage?
     
@@ -30,23 +26,19 @@ class ImageViewController: UIViewController, SendCard{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if editingCard != nil { print(editingCard?.nameOfCard) }
-        
-        //view.addSubview(<#T##view: UIView##UIView#>)
-         // Do any additional setup after loading the view.
     }
 
+    @IBAction func goToEdit(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "returnToEdit", sender: editingCard)    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "returnToEdit" {
+        if segue.identifier == segueToEdit {
             let editController = segue.destination as? EditViewController
-            //pageController?.delegate = self as? PageController
-            editController?.editingCard = editingCard
-        }
+            editController?.editingCard = sender as? DiscountCard
+         }
     }
  
     /*

@@ -14,7 +14,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var imageManager = FileManaging()
     var pageControl = UIPageControl()
     var editingCard: DiscountCard? = nil
-    weak var myDelegate: SendCard?
+    
     
     private (set) lazy var orderedViewControllers: [UIViewController] = {
         if editingCard != nil {
@@ -25,8 +25,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
             }
             else{
                 return [self.newViewController(name: "front"),
-                        self.newViewController(name: "back"),
-                        self.newViewController(name: "barcode")]
+                        self.newViewController(name: "back")]
             }
         }
         else {
@@ -35,30 +34,52 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }()
     
     private (set) lazy var images: [UIImageView] = {
-       // if editingCard != nil {
         var first: UIImage?
-        if editingCard?.frontImageOfCard != nil {
-            first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
-        }
-        else {
-            first = UIImage(named: "red.jpeg")
-        }
         var secnd: UIImage?
-        if editingCard?.backImageOfCard != nil {
-            secnd = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
+        var third: UIImage?
+        if editingCard != nil {
+            if editingCard?.frontImageOfCard != nil {
+                first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
+            }
+            else {
+                first = UIImage(named: "flag.jpeg")
+            }
+            if editingCard?.backImageOfCard != nil {
+                secnd = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
+            }
+            else {
+                secnd = UIImage(named: "flag.jpeg")
+            }
+            if editingCard?.barcode != nil {
+                if let tmpImage = imageManager.getImage(nameOfImage: (editingCard?.barcode)!){
+                    third = tmpImage
+                }
+                else {
+                    third = UIImage(named: "flag.jpeg")
+                }
+            }
+            else {
+                third = UIImage(named: "flag.jpeg")
+            }
+            if editingCard?.barcode != nil {
+                return [createImage(currentImage: first!),
+                        createImage(currentImage: secnd!),
+                        createImage(currentImage: third!)]
+            }
+            else {
+                return [createImage(currentImage: first!), createImage(currentImage: secnd!)]
+            }
         }
         else {
-            secnd = UIImage(named: "red.jpeg")
+            return [createImage(currentImage: UIImage(named: "flag.jpeg")!)]
         }
-      
-            //let third = createImage(name: "kitten.jpg")
-            return [createImage(currentImage: first!), createImage(currentImage: UIImage(named: "red.jpeg")!), createImage(currentImage: UIImage(named: "kitten.jpeg")!)]
-        //}
     }()
     
     private func newViewController(name: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil) .
+        let b = UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewController(withIdentifier: "\(name)View") as! ImageViewController
+        b.editingCard = editingCard
+        return b
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -117,17 +138,10 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //for eachView in orderedViewControllers
-        //{
-            //eachView.view.addSubview(<#T##view: UIView##UIView#>)
-            //eachView.
-        //}
-        
-        orderedViewControllers[0].view.addSubview(images[0])
-        //orderedViewControllers[0].
-        
-        orderedViewControllers[1].view.addSubview(images[1])
-        orderedViewControllers[2].view.addSubview(images[2])
+        for index in 0...orderedViewControllers.count - 1
+        {
+            orderedViewControllers[index].view.addSubview(images[index])
+        }
     }
     func createImage(currentImage: UIImage)->UIImageView{
         let imageView = UIImageView(image: currentImage)
@@ -149,8 +163,6 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
          }
         
-        if editingCard != nil {            print(editingCard?.nameOfCard)        }
-        myDelegate?.initCard(card: editingCard!)
         // Do any additional setup after loading the view.
     }
 
@@ -164,15 +176,15 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         pageControl.currentPage = orderedViewControllers.index(of: pageContentViewController)!
     }
 
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "") {
-            let pageController = segue.destination as? PageController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToFront" || segue.identifier == "ToBack" || segue.identifier == "ToBarcode"  {
+            let childController = segue.destination as? ImageViewController
             //pageController?.delegate = self as? PageController
-            pageController?.editingCard = sender as? DiscountCard
+            childController?.editingCard = sender as? DiscountCard
+            print("sended to child")
         }
-        
     }
-    */
+    
     /*
     // MARK: - Navigation
 

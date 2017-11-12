@@ -67,7 +67,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-   
+        myCards = manager.getFilteredCards(filter: nil)!
+        
         filtered = myCards.filter({ (card) -> Bool in
             let tmp: NSString = (card.nameOfCard as NSString?)!
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
@@ -123,7 +124,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         editAction.backgroundColor = lightViolet
         
         let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
-            }
+            let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
         shareAction.backgroundColor = lightGreen
         
@@ -139,8 +143,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("row's been selected")
-        performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
+         performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
     }
     
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,11 +158,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if searchActive == true {
             //filtered mas
-            if myCards[indexPath.row].frontImageOfCard != nil{
-                cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].frontImageOfCard!)
+            if filtered[indexPath.row].frontImageOfCard != nil{
+                cell.imageCell.image = imageManager.getImage(nameOfImage: filtered[indexPath.row].frontImageOfCard!)
             }
             else {
-                cell.imageCell.image = UIImage(named:"default.jpeg")
+                cell.imageCell.image = UIImage(named:"flag.jpeg")
             }
             cell.nameCell.text = filtered[indexPath.row].nameOfCard
             cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
@@ -171,7 +174,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].frontImageOfCard!)
             }
             else {
-                cell.imageCell.image = UIImage(named:"default.jpeg")
+                cell.imageCell.image = UIImage(named:"flag.jpeg")
             }
             
             cell.nameCell.text = myCards[indexPath.row].nameOfCard
@@ -188,6 +191,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
         filter = String(sender.selectedSegmentIndex)
+        if filter == "5" { filter = nil }
         myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
        

@@ -47,6 +47,7 @@ class FileManaging{
             print("Already dictionary created.")
         }
     }
+}
     /*
  func deleteDirectory(){
  let fileManager = NSFileManager.defaultManager()
@@ -58,7 +59,7 @@ class FileManaging{
  }
  }*/
     ////////
-    func enumerateDirectory() -> String? {
+ /*   func enumerateDirectory() -> String? {
         //var error: NSError?
         let filesInDirectory = try? fileManager.contentsOfDirectory(atPath: tmpDir)
         
@@ -121,4 +122,4 @@ class FileManaging{
             print("No file found")
         }
     }
-}
+}*/

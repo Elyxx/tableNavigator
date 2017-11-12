@@ -29,7 +29,7 @@
                                                 <action selector="sorting:" destination="BYZ-38-t0r" id="oTY-Vn-FDO"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="Icon-29.png" id="nMu-uc-jto">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="nMu-uc-jto">
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <segue destination="cGr-zl-uCv" kind="show" identifier="ToEdit" id="1kG-NZ-q3q"/>
@@ -133,6 +133,7 @@
                                     <segment title="market"/>
                                     <segment title="cinema"/>
                                     <segment title="other"/>
+                                    <segment title="all"/>
                                 </segments>
                                 <color key="tintColor" red="0.15388285194375165" green="0.22669574500579656" blue="0.23102395304568524" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -170,31 +171,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-673" y="-95"/>
-        </scene>
-        <!--sort-->
-        <scene sceneID="Kr6-94-UPX">
-            <objects>
-                <viewController storyboardIdentifier="SortPopUp" id="SQy-7D-86E" userLabel="sort" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RNY-Po-RHg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20P-Td-Mvj">
-                                <rect key="frame" x="16" y="48" width="266" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="ascending">
-                                    <color key="titleColor" red="0.20873651649746194" green="0.20873651649746194" blue="0.20873651649746194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.99123572339999999" green="0.99123572339999999" blue="0.99123572339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="Qnd-Ki-rs2"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HSv-7Y-JjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="176.25" y="-841.90140845070425"/>
         </scene>
         <!--Edit View Controller-->
         <scene sceneID="XDg-qM-XMq">
@@ -235,31 +211,22 @@
                                                 </connections>
                                             </button>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-Ez-egz">
-                                                <rect key="frame" x="10" y="50.5" width="300" height="188.5"/>
+                                                <rect key="frame" x="10" y="50" width="300" height="192"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="J7C-Ez-egz" secondAttribute="height" multiplier="355:223" id="DwF-BE-mtt"/>
-                                                </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5jo-ZC-OVP">
-                                                <rect key="frame" x="10" y="249" width="300" height="188"/>
+                                                <rect key="frame" x="10" y="252" width="300" height="192"/>
                                                 <color key="backgroundColor" red="0.99123572339999999" green="0.99123572339999999" blue="0.99123572339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="5jo-ZC-OVP" secondAttribute="height" multiplier="355:223" id="8We-e8-wrA"/>
-                                                </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ydr-TT-nWQ">
-                                                <rect key="frame" x="10" y="447" width="300" height="93.5"/>
+                                                <rect key="frame" x="10" y="454" width="300" height="63"/>
                                                 <color key="backgroundColor" red="0.99123572339999999" green="0.99123572339999999" blue="0.99123572339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Ydr-TT-nWQ" secondAttribute="height" multiplier="355:111" id="5hj-Qm-aAi"/>
-                                                </constraints>
                                             </imageView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-v7-3Nu" userLabel="filter">
-                                                <rect key="frame" x="10" y="691" width="300" height="26"/>
+                                                <rect key="frame" x="10" y="690.5" width="300" height="26.5"/>
                                                 <color key="backgroundColor" red="0.67536856919999999" green="0.98672083720000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <segments>
                                                     <segment title="beauty"/>
@@ -274,19 +241,19 @@
                                                 </connections>
                                             </segmentedControl>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="You may add here a short description of your new card ( 120 symbols )  " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
-                                                <rect key="frame" x="10" y="580.5" width="300" height="100.5"/>
+                                                <rect key="frame" x="10" y="567" width="300" height="113.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name is ..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioY-iM-7d3">
-                                                <rect key="frame" x="10" y="10" width="300" height="30.5"/>
+                                                <rect key="frame" x="10" y="10" width="300" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40p-Vt-EGx" userLabel="barcodeString">
-                                                <rect key="frame" x="10" y="550.5" width="300" height="20"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40p-Vt-EGx" userLabel="barcodeString">
+                                                <rect key="frame" x="10" y="527" width="300" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -336,8 +303,10 @@
                                     <constraint firstItem="pza-SQ-Nur" firstAttribute="leading" secondItem="AzY-jg-jdy" secondAttribute="leading" id="CeZ-MH-Rd4"/>
                                     <constraint firstItem="pza-SQ-Nur" firstAttribute="centerX" secondItem="AzY-jg-jdy" secondAttribute="centerX" id="QJD-qV-2RH"/>
                                     <constraint firstItem="8Xo-v7-3Nu" firstAttribute="height" secondItem="6WI-k7-vot" secondAttribute="height" multiplier="1:20" id="S0u-Ee-gk9"/>
-                                    <constraint firstItem="40p-Vt-EGx" firstAttribute="height" secondItem="6WI-k7-vot" secondAttribute="height" multiplier="1:25" id="dpe-Tu-X8c"/>
+                                    <constraint firstItem="J7C-Ez-egz" firstAttribute="height" secondItem="6WI-k7-vot" secondAttribute="width" multiplier="3:5" id="Z2k-u0-7b6"/>
+                                    <constraint firstItem="Ydr-TT-nWQ" firstAttribute="height" secondItem="6WI-k7-vot" secondAttribute="height" multiplier="1:8" id="azy-lc-n4Q"/>
                                     <constraint firstItem="pza-SQ-Nur" firstAttribute="height" secondItem="AzY-jg-jdy" secondAttribute="height" multiplier="3:2" id="yNO-Dh-V9g"/>
+                                    <constraint firstItem="5jo-ZC-OVP" firstAttribute="height" secondItem="6WI-k7-vot" secondAttribute="width" multiplier="3:5" id="zGe-Z6-tiL"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="6WI-k7-vot"/>
                             </scrollView>
@@ -370,10 +339,16 @@
         <!--Page Controller-->
         <scene sceneID="zsH-YZ-COB">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="qYV-kY-vI8" kind="show" identifier="ToFront" id="MPU-Bw-uIT"/>
+                        <segue destination="Ds3-Ce-0pm" kind="show" identifier="ToBack" id="A3H-kO-INw"/>
+                        <segue destination="J0M-Jg-kuv" kind="show" identifier="ToBarcode" id="x9T-Gm-xue"/>
+                    </connections>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-Wi-HEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1585" y="389"/>
+            <point key="canvasLocation" x="1393" y="493"/>
         </scene>
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
@@ -396,7 +371,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="tFI-Ag-Kkk">
                                             <color key="tintColor" red="0.012888642131979711" green="0.012888642131979711" blue="0.012888642131979711" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="6ep-Xt-jbd"/>
+                                                <action selector="goToEdit:" destination="qYV-kY-vI8" id="eWf-eA-xif"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -411,6 +386,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8ir-te-OXr"/>
                     </view>
+                    <connections>
+                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="9t4-ke-nTn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-Qg-yVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -437,7 +415,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="Slo-Kp-qd7">
                                             <color key="tintColor" red="0.021296002538071068" green="0.021296002538071068" blue="0.021296002538071068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="HDm-Xn-r20"/>
+                                                <action selector="goToEdit:" destination="Ds3-Ce-0pm" id="ppD-o5-htT"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -452,6 +430,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7QQ-4r-BaU"/>
                     </view>
+                    <connections>
+                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="5bn-Jf-v9S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOJ-f8-ap7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -477,6 +458,9 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="RbW-Go-01i">
                                             <color key="tintColor" red="0.026590260152284273" green="0.026590260152284273" blue="0.026590260152284273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="goToEdit:" destination="J0M-Jg-kuv" id="cbx-1K-Mkb"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -499,11 +483,8 @@
             <point key="canvasLocation" x="2486" y="1480"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Icon-29.png" width="29" height="29"/>
-    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MiW-IQ-2tH"/>
-        <segue reference="Y1f-RG-bjR"/>
+        <segue reference="9t4-ke-nTn"/>
+        <segue reference="Mc8-BA-yr8"/>
     </inferredMetricsTieBreakers>
 </document>
