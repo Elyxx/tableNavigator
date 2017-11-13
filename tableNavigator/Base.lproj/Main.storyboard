@@ -22,14 +22,14 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ch-4b-i9C">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="cardsHolder" id="dYN-gb-FdA">
+                                    <navigationItem title="HOLDER" id="dYN-gb-FdA">
                                         <barButtonItem key="leftBarButtonItem" title="sort" id="551-q1-TNu">
                                             <color key="tintColor" red="0.051296795685279228" green="0.051296795685279228" blue="0.051296795685279228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="sorting:" destination="BYZ-38-t0r" id="oTY-Vn-FDO"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="nMu-uc-jto">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nMu-uc-jto">
                                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <segue destination="cGr-zl-uCv" kind="show" identifier="ToEdit" id="1kG-NZ-q3q"/>
@@ -58,9 +58,9 @@
                                                     <color key="textColor" red="0.38042266853782147" green="0.33273959004812814" blue="0.40523873731827409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IKl-wS-l9A">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IKl-wS-l9A">
                                                     <rect key="frame" x="0.0" y="-0.5" width="252.5" height="158.5"/>
-                                                    <color key="backgroundColor" red="0.53727067674449658" green="0.99495315724425426" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="IKl-wS-l9A" secondAttribute="height" multiplier="86:54" id="zsL-wk-L5L"/>
                                                     </constraints>
@@ -109,7 +109,7 @@
                                                 <constraint firstItem="IKl-wS-l9A" firstAttribute="left" secondItem="p8r-OH-bTG" secondAttribute="left" id="xCL-Le-YBj"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.82882098178086161" green="1" blue="0.69277065271339944" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="dataCell" destination="nkF-6O-t8Z" id="IAS-qH-RHq"/>
                                             <outlet property="descripCell" destination="gJq-iE-5gh" id="rPI-IA-y5W"/>
@@ -128,12 +128,12 @@
                                 <rect key="frame" x="0.0" y="543" width="320" height="26"/>
                                 <color key="backgroundColor" red="0.67536856923543387" green="0.98672083723493587" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
-                                    <segment title="beauty"/>
+                                    <segment title="all"/>
                                     <segment title="food"/>
                                     <segment title="market"/>
                                     <segment title="cinema"/>
+                                    <segment title="beauty"/>
                                     <segment title="other"/>
-                                    <segment title="all"/>
                                 </segments>
                                 <color key="tintColor" red="0.15388285194375165" green="0.22669574500579656" blue="0.23102395304568524" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -184,7 +184,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.48681148934666463" blue="0.91730683720148198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
-                                    <navigationItem title="edit" id="6C4-cP-lPJ">
+                                    <navigationItem title="EDIT" id="6C4-cP-lPJ">
                                         <barButtonItem key="leftBarButtonItem" title="&lt;back" id="D2g-hR-LCP">
                                             <color key="tintColor" red="0.021474460659898442" green="0.020491141134261155" blue="0.018524223758641805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
@@ -226,13 +226,13 @@
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                             </imageView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-v7-3Nu" userLabel="filter">
-                                                <rect key="frame" x="10" y="690.5" width="300" height="26.5"/>
+                                                <rect key="frame" x="10" y="691" width="300" height="26"/>
                                                 <color key="backgroundColor" red="0.67536856919999999" green="0.98672083720000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <segments>
-                                                    <segment title="beauty"/>
                                                     <segment title="food"/>
                                                     <segment title="market"/>
                                                     <segment title="cinema"/>
+                                                    <segment title="beauty"/>
                                                     <segment title="other"/>
                                                 </segments>
                                                 <color key="tintColor" red="0.064788886779999999" green="0.094657269399999994" blue="0.095931154820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -241,7 +241,7 @@
                                                 </connections>
                                             </segmentedControl>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="You may add here a short description of your new card ( 120 symbols )  " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
-                                                <rect key="frame" x="10" y="567" width="300" height="113.5"/>
+                                                <rect key="frame" x="10" y="567" width="300" height="114"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -348,7 +348,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-Wi-HEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1393" y="493"/>
+            <point key="canvasLocation" x="1358" y="486"/>
         </scene>
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
@@ -485,6 +485,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="9t4-ke-nTn"/>
-        <segue reference="Mc8-BA-yr8"/>
+        <segue reference="PWK-na-SxP"/>
     </inferredMetricsTieBreakers>
 </document>

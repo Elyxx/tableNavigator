@@ -164,6 +164,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         else{
+            if filterColor == nil { filterColor = "5"}
             manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
     }
