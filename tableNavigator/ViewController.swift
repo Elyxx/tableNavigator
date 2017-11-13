@@ -39,25 +39,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableOfCards.dataSource = self //???
         tableOfCards.delegate = self
         searchCard.delegate = self
-
         
-        let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        //let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        let green = UIColor(red: 135.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        let yellow = UIColor(red: 255.0/255.0, green: 250.0/255.0, blue: 189.0/255.0, alpha: 1.0)
-        let violet = UIColor(red: 195.0/255.0, green: 186.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        let pink = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-        
-        var subViewOfSegment: UIView = coloredFilter.subviews[1] as UIView
-        subViewOfSegment.backgroundColor = yellow
-        subViewOfSegment = coloredFilter.subviews[2] as UIView
-        subViewOfSegment.backgroundColor = .gray
+        var subViewOfSegment: UIView = coloredFilter.subviews[4] as UIView
+        subViewOfSegment.backgroundColor = UIColor.cYellow
         subViewOfSegment = coloredFilter.subviews[3] as UIView
-        subViewOfSegment.backgroundColor = green
-        subViewOfSegment = coloredFilter.subviews[4] as UIView
-        subViewOfSegment.backgroundColor = pink
+        subViewOfSegment.backgroundColor = UIColor.cGray
+        subViewOfSegment = coloredFilter.subviews[2] as UIView
+        subViewOfSegment.backgroundColor = UIColor.cGreen
+        subViewOfSegment = coloredFilter.subviews[1] as UIView
+        subViewOfSegment.backgroundColor = UIColor.cPink
+        subViewOfSegment = coloredFilter.subviews[0] as UIView
+        subViewOfSegment.backgroundColor = UIColor.cViolet
         subViewOfSegment = coloredFilter.subviews[5] as UIView
-        subViewOfSegment.backgroundColor = violet
+        subViewOfSegment.backgroundColor = .white
+        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -131,8 +126,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
             self.performSegue(withIdentifier: self.segueToEditScreen, sender: self.myCards[indexPath.row])
         }
-        let lightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        editAction.backgroundColor = lightViolet
+        editAction.backgroundColor = UIColor.cLightViolet
         
         let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
             let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
@@ -168,7 +162,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
        
         
         if searchActive == true {
-            //filtered mas
             if filtered[indexPath.row].frontImageOfCard != nil{
                 cell.imageCell.image = imageManager.getImage(nameOfImage: filtered[indexPath.row].frontImageOfCard!)
             }
@@ -263,16 +256,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func setColor(number: String?) -> UIColor{
         switch number {
         case "0"?:
-            return UIColor(red: 195.0/255.0, green: 186.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+            return UIColor.cYellow
         case "1"?:
-            return .lightGray //UIColor(red: 230.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-        case "2"?: //green
-            return UIColor(red: 135.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        case "3"?://pink
-            return UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-        case "4"?://yellow
-            return UIColor(red: 255.0/255.0, green: 250.0/255.0, blue: 189.0/255.0, alpha: 1.0)
-        
+            return UIColor.cGray
+        case "2"?:
+            return UIColor.cGreen
+        case "3"?:
+            return UIColor.cPink
+        case "4"?:
+            return UIColor.cViolet
         default:
             return .red
         }

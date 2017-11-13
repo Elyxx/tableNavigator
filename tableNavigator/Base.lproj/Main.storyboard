@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ERO-Jf-XgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--HOLDER-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,27 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ch-4b-i9C">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="HOLDER" id="dYN-gb-FdA">
-                                        <barButtonItem key="leftBarButtonItem" title="sort" id="551-q1-TNu">
-                                            <color key="tintColor" red="0.051296795685279228" green="0.051296795685279228" blue="0.051296795685279228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="sorting:" destination="BYZ-38-t0r" id="oTY-Vn-FDO"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nMu-uc-jto">
-                                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="cGr-zl-uCv" kind="show" identifier="ToEdit" id="1kG-NZ-q3q"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iek-ph-w9K">
-                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="76" width="320" height="448"/>
                                 <color key="backgroundColor" red="1" green="0.90084793546028819" blue="0.95342781446283864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.67088356598984777" green="0.34843898314277588" blue="0.51771023021442331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.94058693289120532" green="0.84840992270896554" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -51,7 +32,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsq-jv-XY0">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsq-jv-XY0">
                                                     <rect key="frame" x="252.5" y="-0.5" width="57.5" height="42"/>
                                                     <color key="backgroundColor" red="0.85993726517354618" green="0.68479459083211081" blue="0.87351284898477155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
@@ -121,11 +102,12 @@
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6Xs-JX-a4r">
-                                <rect key="frame" x="0.0" y="64" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="56"/>
+                                <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RDA-Sz-Gvg" userLabel="filter">
-                                <rect key="frame" x="0.0" y="543" width="320" height="26"/>
+                                <rect key="frame" x="0.0" y="499" width="320" height="26"/>
                                 <color key="backgroundColor" red="0.67536856923543387" green="0.98672083723493587" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="all"/>
@@ -144,22 +126,28 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Iek-ph-w9K" firstAttribute="top" secondItem="6Xs-JX-a4r" secondAttribute="bottom" id="8Bo-sf-Ley"/>
+                            <constraint firstItem="6Xs-JX-a4r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ItS-JY-WdP"/>
                             <constraint firstItem="Iek-ph-w9K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LJ0-EL-nnW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Iek-ph-w9K" secondAttribute="trailing" id="Pex-Ln-UQv"/>
                             <constraint firstItem="6Xs-JX-a4r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QN2-H6-R4a"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RDA-Sz-Gvg" secondAttribute="bottom" id="Rzk-mz-n39"/>
-                            <constraint firstItem="9Ch-4b-i9C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WFK-Hh-aej"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Iek-ph-w9K" secondAttribute="bottom" id="bp1-LS-nKV"/>
-                            <constraint firstItem="6Xs-JX-a4r" firstAttribute="top" secondItem="9Ch-4b-i9C" secondAttribute="bottom" id="hQz-ZJ-0na"/>
                             <constraint firstItem="RDA-Sz-Gvg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jnb-IO-lpc"/>
                             <constraint firstItem="RDA-Sz-Gvg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lGy-S3-rCS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Xs-JX-a4r" secondAttribute="trailing" id="ocv-e3-wOO"/>
-                            <constraint firstItem="9Ch-4b-i9C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qg0-0O-Ccf"/>
-                            <constraint firstAttribute="trailing" secondItem="9Ch-4b-i9C" secondAttribute="trailing" id="wfk-Zu-fRQ"/>
                             <constraint firstItem="RDA-Sz-Gvg" firstAttribute="top" secondItem="Iek-ph-w9K" secondAttribute="bottom" constant="-25" id="xiJ-Ur-JOb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="0AM-8p-CbE">
+                            <connections>
+                                <segue destination="cGr-zl-uCv" kind="show" id="Xff-AA-peg"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="HOLDER" id="qqx-vL-DFZ"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="coloredFilter" destination="RDA-Sz-Gvg" id="O1Y-Ro-wOE"/>
                         <outlet property="searchCard" destination="6Xs-JX-a4r" id="ujb-Bf-muC"/>
@@ -170,9 +158,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-673" y="-95"/>
+            <point key="canvasLocation" x="-275.625" y="-95.070422535211264"/>
         </scene>
-        <!--Edit View Controller-->
+        <!--EDIT-->
         <scene sceneID="XDg-qM-XMq">
             <objects>
                 <viewController id="cGr-zl-uCv" customClass="EditViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
@@ -180,53 +168,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QR3-E5-e5o">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.48681148934666463" blue="0.91730683720148198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <items>
-                                    <navigationItem title="EDIT" id="6C4-cP-lPJ">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;back" id="D2g-hR-LCP">
-                                            <color key="tintColor" red="0.021474460659898442" green="0.020491141134261155" blue="0.018524223758641805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" identifier="ToMain" id="Mc8-BA-yr8"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzY-jg-jdy">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pza-SQ-Nur">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="756"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="756.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQA-qM-hkc">
-                                                <rect key="frame" x="10" y="726" width="300" height="20"/>
+                                                <rect key="frame" x="10" y="726.5" width="300" height="20"/>
                                                 <state key="normal" title="save">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="saveCard:" destination="cGr-zl-uCv" eventType="touchUpInside" id="ZgB-3T-Zgs"/>
-                                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ToMainSave" id="PWK-na-SxP"/>
+                                                    <segue destination="BYZ-38-t0r" kind="show" id="JC4-vj-ln7"/>
                                                 </connections>
                                             </button>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-Ez-egz">
-                                                <rect key="frame" x="10" y="50" width="300" height="192"/>
+                                                <rect key="frame" x="10" y="50.5" width="300" height="192"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5jo-ZC-OVP">
-                                                <rect key="frame" x="10" y="252" width="300" height="192"/>
+                                                <rect key="frame" x="10" y="252.5" width="300" height="192"/>
                                                 <color key="backgroundColor" red="0.99123572339999999" green="0.99123572339999999" blue="0.99123572339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ydr-TT-nWQ">
-                                                <rect key="frame" x="10" y="454" width="300" height="63"/>
+                                                <rect key="frame" x="10" y="454.5" width="300" height="63"/>
                                                 <color key="backgroundColor" red="0.99123572339999999" green="0.99123572339999999" blue="0.99123572339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                             </imageView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-v7-3Nu" userLabel="filter">
-                                                <rect key="frame" x="10" y="691" width="300" height="26"/>
+                                                <rect key="frame" x="10" y="691.5" width="300" height="26"/>
                                                 <color key="backgroundColor" red="0.67536856919999999" green="0.98672083720000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <segments>
                                                     <segment title="food"/>
@@ -241,19 +215,19 @@
                                                 </connections>
                                             </segmentedControl>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="You may add here a short description of your new card ( 120 symbols )  " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-Tn-cjs">
-                                                <rect key="frame" x="10" y="567" width="300" height="114"/>
+                                                <rect key="frame" x="10" y="567.5" width="300" height="114"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name is ..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioY-iM-7d3">
-                                                <rect key="frame" x="10" y="10" width="300" height="30"/>
+                                                <rect key="frame" x="10" y="10" width="300" height="30.5"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40p-Vt-EGx" userLabel="barcodeString">
-                                                <rect key="frame" x="10" y="527" width="300" height="30"/>
+                                                <rect key="frame" x="10" y="527.5" width="300" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -299,7 +273,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="pza-SQ-Nur" secondAttribute="trailing" id="1RQ-sQ-Z1r"/>
                                     <constraint firstAttribute="bottom" secondItem="pza-SQ-Nur" secondAttribute="bottom" id="6B6-wU-dFh"/>
-                                    <constraint firstItem="pza-SQ-Nur" firstAttribute="top" secondItem="AzY-jg-jdy" secondAttribute="top" id="6lf-y8-uXC"/>
+                                    <constraint firstItem="pza-SQ-Nur" firstAttribute="top" secondItem="AzY-jg-jdy" secondAttribute="top" identifier="StretchyToTop" id="6lf-y8-uXC"/>
                                     <constraint firstItem="pza-SQ-Nur" firstAttribute="leading" secondItem="AzY-jg-jdy" secondAttribute="leading" id="CeZ-MH-Rd4"/>
                                     <constraint firstItem="pza-SQ-Nur" firstAttribute="centerX" secondItem="AzY-jg-jdy" secondAttribute="centerX" id="QJD-qV-2RH"/>
                                     <constraint firstItem="8Xo-v7-3Nu" firstAttribute="height" secondItem="6WI-k7-vot" secondAttribute="height" multiplier="1:20" id="S0u-Ee-gk9"/>
@@ -313,16 +287,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QR3-E5-e5o" firstAttribute="leading" secondItem="0bQ-WB-9Kd" secondAttribute="leading" id="4t9-kB-r5K"/>
-                            <constraint firstItem="AzY-jg-jdy" firstAttribute="top" secondItem="QR3-E5-e5o" secondAttribute="bottom" id="5Mg-7s-G18"/>
-                            <constraint firstItem="QR3-E5-e5o" firstAttribute="top" secondItem="0bQ-WB-9Kd" secondAttribute="top" id="JRv-FL-TH0"/>
-                            <constraint firstItem="0bQ-WB-9Kd" firstAttribute="bottom" secondItem="AzY-jg-jdy" secondAttribute="bottom" id="X8e-dn-q86"/>
+                            <constraint firstItem="0bQ-WB-9Kd" firstAttribute="bottom" secondItem="AzY-jg-jdy" secondAttribute="bottom" id="Ez4-sx-eDb"/>
+                            <constraint firstItem="0bQ-WB-9Kd" firstAttribute="top" secondItem="AzY-jg-jdy" secondAttribute="top" id="X8e-dn-q86"/>
                             <constraint firstItem="AzY-jg-jdy" firstAttribute="leading" secondItem="0bQ-WB-9Kd" secondAttribute="leading" id="aMH-DC-uHh"/>
-                            <constraint firstItem="QR3-E5-e5o" firstAttribute="trailing" secondItem="0bQ-WB-9Kd" secondAttribute="trailing" id="cuH-jU-9Ah"/>
                             <constraint firstItem="0bQ-WB-9Kd" firstAttribute="trailing" secondItem="AzY-jg-jdy" secondAttribute="trailing" id="g1L-iw-XGx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0bQ-WB-9Kd"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="EDIT" id="RUn-4N-xW5">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="fa8-dK-qdX">
+                            <color key="tintColor" red="0.017670853239773122" green="0.017845812182741172" blue="0.017845812182741172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="b7X-uH-FKk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="backImage" destination="5jo-ZC-OVP" id="Hlq-WD-k7D"/>
                         <outlet property="barcodeImage" destination="Ydr-TT-nWQ" id="qKC-wK-6lQ"/>
@@ -330,25 +311,38 @@
                         <outlet property="decriptionCard" destination="gUF-Tn-cjs" id="cvj-7b-8Oa"/>
                         <outlet property="frontImage" destination="J7C-Ez-egz" id="n1B-Ig-box"/>
                         <outlet property="name" destination="ioY-iM-7d3" id="PFK-Ad-AFn"/>
+                        <outlet property="stretchy" destination="pza-SQ-Nur" id="XRF-QZ-BYT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FyR-3I-Jq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="-422"/>
+            <point key="canvasLocation" x="1065" y="-645"/>
         </scene>
-        <!--Page Controller-->
+        <!--IMAGES-->
         <scene sceneID="zsH-YZ-COB">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="IMAGES" id="5ME-H5-TOr">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="yRf-Cq-2dY">
+                            <color key="tintColor" red="0.029156907845625531" green="0.029445590101522812" blue="0.029445590101522812" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="zXd-7K-SHE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit &gt;" id="xn5-Bi-pRG">
+                            <color key="tintColor" red="0.05360158816064501" green="0.054132296954314763" blue="0.054132296954314763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="goToEdit:" destination="Cub-AU-mTH" id="R1H-LK-h9X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <segue destination="qYV-kY-vI8" kind="show" identifier="ToFront" id="MPU-Bw-uIT"/>
-                        <segue destination="Ds3-Ce-0pm" kind="show" identifier="ToBack" id="A3H-kO-INw"/>
-                        <segue destination="J0M-Jg-kuv" kind="show" identifier="ToBarcode" id="x9T-Gm-xue"/>
+                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="kYl-TZ-5is"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-Wi-HEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="486"/>
+            <point key="canvasLocation" x="1065" y="415"/>
         </scene>
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
@@ -357,38 +351,9 @@
                     <view key="view" contentMode="scaleToFill" id="RYW-wn-aWp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2H-xY-hyz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="front" id="zsV-ml-d3a">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;back" id="sa9-Lm-V0u">
-                                            <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="tjK-Dz-acH"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="tFI-Ag-Kkk">
-                                            <color key="tintColor" red="0.012888642131979711" green="0.012888642131979711" blue="0.012888642131979711" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="goToEdit:" destination="qYV-kY-vI8" id="eWf-eA-xif"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="0.91250973928164936" blue="0.99831244689481358" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="z2H-xY-hyz" firstAttribute="leading" secondItem="8ir-te-OXr" secondAttribute="leading" id="6dX-do-l8H"/>
-                            <constraint firstItem="z2H-xY-hyz" firstAttribute="top" secondItem="8ir-te-OXr" secondAttribute="top" id="qmx-Zu-BRW"/>
-                            <constraint firstItem="z2H-xY-hyz" firstAttribute="trailing" secondItem="8ir-te-OXr" secondAttribute="trailing" id="wAV-Y1-Ya6"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8ir-te-OXr"/>
                     </view>
-                    <connections>
-                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="9t4-ke-nTn"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-Qg-yVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -401,38 +366,9 @@
                     <view key="view" contentMode="scaleToFill" id="gEd-R7-N5H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-S4-D9Y">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="back" id="wEw-HH-K1A">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;back" id="mdI-Sh-mx3">
-                                            <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="tZA-D0-pLB"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="Slo-Kp-qd7">
-                                            <color key="tintColor" red="0.021296002538071068" green="0.021296002538071068" blue="0.021296002538071068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="goToEdit:" destination="Ds3-Ce-0pm" id="ppD-o5-htT"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" red="0.82624710070950425" green="1" blue="0.99934172874748795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="XgA-S4-D9Y" firstAttribute="trailing" secondItem="7QQ-4r-BaU" secondAttribute="trailing" id="OK7-Vh-uNL"/>
-                            <constraint firstItem="XgA-S4-D9Y" firstAttribute="top" secondItem="7QQ-4r-BaU" secondAttribute="top" id="QW2-bA-wK5"/>
-                            <constraint firstItem="XgA-S4-D9Y" firstAttribute="leading" secondItem="7QQ-4r-BaU" secondAttribute="leading" id="q3e-4e-0HY"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7QQ-4r-BaU"/>
                     </view>
-                    <connections>
-                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="5bn-Jf-v9S"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOJ-f8-ap7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -445,46 +381,35 @@
                     <view key="view" contentMode="scaleToFill" id="dE6-B4-GEi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgq-69-gLM">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="barcode" id="S7a-8g-DV8">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;back" id="D8t-V8-9Yo">
-                                            <color key="tintColor" red="0.034026015228426409" green="0.032467957697499737" blue="0.029351401634191508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="Y1f-RG-bjR"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="edit&gt;" id="RbW-Go-01i">
-                                            <color key="tintColor" red="0.026590260152284273" green="0.026590260152284273" blue="0.026590260152284273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="goToEdit:" destination="J0M-Jg-kuv" id="cbx-1K-Mkb"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="0.95420981503514335" blue="0.86261648439134353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="lgq-69-gLM" firstAttribute="trailing" secondItem="Zsl-Xk-782" secondAttribute="trailing" id="93O-Ce-lxa"/>
-                            <constraint firstItem="lgq-69-gLM" firstAttribute="leading" secondItem="Zsl-Xk-782" secondAttribute="leading" id="idu-u3-eHU"/>
-                            <constraint firstItem="lgq-69-gLM" firstAttribute="top" secondItem="Zsl-Xk-782" secondAttribute="top" id="jrV-Gh-EIS"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Zsl-Xk-782"/>
                     </view>
-                    <connections>
-                        <segue destination="cGr-zl-uCv" kind="show" identifier="returnToEdit" id="MiW-IQ-2tH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XY-av-EvB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2486" y="1480"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QE6-PY-EMQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ERO-Jf-XgQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2VX-gn-sPX">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Wgo-9O-QvH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U8O-nY-Q7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1256" y="-95"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9t4-ke-nTn"/>
-        <segue reference="PWK-na-SxP"/>
+        <segue reference="SyO-Pu-ats"/>
+        <segue reference="b7X-uH-FKk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,8 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var decriptionCard: UITextView!
     @IBOutlet weak var barcodeNumber: UITextField!
 
+    @IBOutlet weak var stretchy: UIView!
+    
     var editingCard: DiscountCard? = nil
     
     var manager = CardsManager()
@@ -34,6 +36,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         
         if editingCard != nil{
             if editingCard?.nameOfCard != nil {
@@ -56,7 +59,12 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
             if (editingCard?.barcode != nil) {
                 barcodeImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
+                //var tmp = editingCard?.barcode
+                //barcodeNumber.text = tmp?.dropLast()
             }
+            stretchy.frame =  CGRect(x: 0,y :0, width: 100, height: 100)
+            
+           //screenSize.height * 0.2, 50
          //   else{
          //       barcodeImage.image = UIImage(named:"flag.jpeg")
           //  }
@@ -78,25 +86,14 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
             tappedImage?.image = newImage
-            //picker.view .image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            
+           
             if let pickedImageURL = info[UIImagePickerControllerImageURL] as? URL{
                 let newImageName = pickedImageURL.lastPathComponent
                     if tappedImage == frontImage { frontPath = newImageName
-                        print ("saving front")
                 }
                     if tappedImage == backImage { backPath = newImageName
-                         print ("saving back")
                 }
-                
-                
-                 //   if let url = NSURL(string: pickedImageURL.description) {
-                  //      if let data = NSData(contentsOf: url as URL) {
-                  //          let imageTmp = UIImage(data: data as Data)!
                 imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: newImageName)//"\(name)View"
-              
-              //      }
-            //    }
             }
         }
         dismiss(animated: true, completion: nil)

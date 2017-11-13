@@ -9,14 +9,8 @@
 import UIKit
 
 class ImageViewController: UIViewController{
-    
+    /*
     let segueToEdit = "returnToEdit"
-    
-    var firstImage: UIImage?
-    
-    var secndImage: UIImage?
-    
-    var thirdImage: UIImage?
     
     var editingCard: DiscountCard? = nil
     
@@ -34,13 +28,14 @@ class ImageViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueToEdit {
             let editController = segue.destination as? EditViewController
             editController?.editingCard = sender as? DiscountCard
          }
     }
- 
+ */
     /*
     // MARK: - Navigation
 

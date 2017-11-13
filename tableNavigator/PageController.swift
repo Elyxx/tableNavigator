@@ -14,7 +14,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     var imageManager = FileManaging()
     var pageControl = UIPageControl()
     var editingCard: DiscountCard? = nil
-    
+    var segueToEdit = "returnToEdit"
     
     private (set) lazy var orderedViewControllers: [UIViewController] = {
         if editingCard != nil {
@@ -76,10 +76,8 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }()
     
     private func newViewController(name: String) -> UIViewController {
-        let b = UIStoryboard(name: "Main", bundle: nil) .
+         return UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewController(withIdentifier: "\(name)View") as! ImageViewController
-        b.editingCard = editingCard
-        return b
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -143,6 +141,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
             orderedViewControllers[index].view.addSubview(images[index])
         }
     }
+    
     func createImage(currentImage: UIImage)->UIImageView{
         let imageView = UIImageView(image: currentImage)
         imageView.transform = imageView.transform.rotated(by: CGFloat(-Double.pi / 2))
@@ -151,6 +150,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         imageView.frame = CGRect(x: 10, y: 80, width: newWidth, height: newHeight)
         return imageView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -177,14 +177,16 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToFront" || segue.identifier == "ToBack" || segue.identifier == "ToBarcode"  {
-            let childController = segue.destination as? ImageViewController
+        if segue.identifier == segueToEdit  {
+            let editController = segue.destination as? EditViewController
             //pageController?.delegate = self as? PageController
-            childController?.editingCard = sender as? DiscountCard
-            print("sended to child")
+            editController?.editingCard = sender as? DiscountCard
         }
     }
     
+    @IBAction func goToEdit(_ sender: Any) {
+        performSegue(withIdentifier: segueToEdit, sender: editingCard)
+    }
     /*
     // MARK: - Navigation
 
