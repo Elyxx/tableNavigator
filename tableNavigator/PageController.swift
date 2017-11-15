@@ -140,6 +140,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         for index in 0...orderedViewControllers.count - 1
         {
             orderedViewControllers[index].view.addSubview(images[index])
+            orderedViewControllers[index].view.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
         }
     }
     
@@ -186,14 +187,14 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueToEdit  {
-            let editController = segue.destination as? EditViewController
-            //pageController?.delegate = self as? PageController
+            let editController = segue.destination as? StretchViewController
             editController?.editingCard = sender as? DiscountCard
         }
     }
     
     @IBAction func goToEdit(_ sender: Any) {
         performSegue(withIdentifier: segueToEdit, sender: editingCard)
+        print("to new edit")
     }
     /*
     // MARK: - Navigation

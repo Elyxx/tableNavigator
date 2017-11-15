@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import RSBarcodes_Swift
+import AVFoundation
 
-class StretchViewController: UIViewController, UIScrollViewDelegate {
+class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
+    let segueToMain = "ToMain"
     var scroll : UIScrollView!
     var container : UIView!
     
@@ -40,90 +43,105 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
     let currentWidth = UIScreen.main.bounds.width
     let currentHeight = UIScreen.main.bounds.height
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-     
+   
+    override func viewWillAppear(_ animated: Bool) {
         let logo = UIImage(named: "flag.jpeg")
         let imageView = UIImageView(image: logo)
-        self.navigationItem.titleView = imageView
+        navigationItem.titleView = imageView
         navigationItem.titleView?.sizeToFit()
-        
-        let frontGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
-        frontImage.isUserInteractionEnabled = true
-        frontImage.addGestureRecognizer(frontGestureRecognizer)
-        
-        let backGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
-        backImage.isUserInteractionEnabled = true
-        backImage.addGestureRecognizer(backGestureRecognizer)
-        
+      
+    }
+
+
+   override func viewDidLoad() {
+        super.viewDidLoad()
+    
         var additionalHeight: CGFloat = 0
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         scroll = UIScrollView(frame: view.bounds)
         scroll.delegate = self
         scroll.isScrollEnabled = true
         view.addSubview(scroll)
-      
+    
         container = UIView()
         scroll.addSubview(container)
-        scroll.backgroundColor = UIColor.cViolet
-        //scroll.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
-        
+        //scroll.backgroundColor = UIColor.cViolet
+        scroll.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+    
         //1//name
         additionalHeight = 30.00
         name = UITextField(frame: CGRect(x: margin, y: margin, width: currentWidth - margin*2, height: additionalHeight))
         name.backgroundColor = .cGreen
-        name.layer.cornerRadius = name.frame.width/20.0
+        name.layer.cornerRadius = name.frame.width/50.0
         name.clipsToBounds = true
         scroll.addSubview(name)
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         //2//front
         additionalHeight = (currentWidth - margin*2)*0.63
-        scroll.addSubview(createImageView(currentZero: CGPoint(x: margin ,y: totalHeight), height: additionalHeight, currentImage: UIImage(named: "empty.png")!))
+        frontImage = createImageView(currentZero: CGPoint(x: margin ,y: totalHeight), height: additionalHeight, currentImage: UIImage(named: "empty.png")!)
+        frontImage.isUserInteractionEnabled = true
+        scroll.addSubview(frontImage)
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         //3//back
         additionalHeight = (currentWidth - margin*2)*0.63
-        scroll.addSubview(createImageView(currentZero: CGPoint(x: margin ,y: totalHeight), height: additionalHeight, currentImage: UIImage(named: "empty.png")!))
+        backImage = createImageView(currentZero: CGPoint(x: margin ,y: totalHeight), height: additionalHeight, currentImage: UIImage(named: "empty.png")!)
+        backImage.isUserInteractionEnabled = true
+        scroll.addSubview(backImage)
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         //4//barcodeImage
         additionalHeight = (currentWidth - margin*2)*0.3
-        scroll.addSubview(createImageView(currentZero: CGPoint(x: margin ,y: totalHeight), height: additionalHeight, currentImage: UIImage(named: "Barcode2.png")!))
+        barcodeImage = createImageView(currentZero: CGPoint(x: margin ,y: totalHeight), height: additionalHeight, currentImage: UIImage(named: "Barcode2.png")!)
+        scroll.addSubview(barcodeImage)
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         //5//number
         additionalHeight = 30
         barcodeNumber = UITextField(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
         barcodeNumber.backgroundColor = .cPink
-        barcodeNumber.layer.cornerRadius = barcodeNumber.frame.width/20.0
-        barcodeNumber.clipsToBounds = true
+       // barcodeNumber.layer.cornerRadius = barcodeNumber.frame.width/13.0
+       // barcodeNumber.clipsToBounds = true
         scroll.addSubview(barcodeNumber)
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         //6//descriptionCard
         additionalHeight = 60
         decriptionCard = UITextView(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
         decriptionCard.backgroundColor = .cLightViolet
         decriptionCard.isScrollEnabled = false
-/*CGSize sizeThatFitsTextView = [TextView sizeThatFits:CGSizeMake(TextView.frame.size.width, MAXFLOAT)];
+        decriptionCard.isUserInteractionEnabled = true
+        decriptionCard.delegate = self
+    //decriptionCard.addInteraction(<#T##interaction: UIInteraction##UIInteraction#>)
+    /*
+ textView.font = UIFont.systemFont(ofSize: 20)
+ textView.textColor = UIColor.white
  
- TextViewHeightConstraint.constant = sizeThatFitsTextView.height;
- */
-        
-        decriptionCard.layer.cornerRadius = decriptionCard.frame.width/20.0
+ textView.font = UIFont.boldSystemFont(ofSize: 20)
+ textView.font = UIFont(name: "Verdana", size: 17)*/
+    
+        //decriptionCard.font = UIFont(name: (decriptionCard.font?.fontName)!, size: 18)
+    //decriptionCard.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    //textViewDidEndEditing
+        /*CGSize sizeThatFitsTextView = [TextView sizeThatFits:CGSizeMake(TextView.frame.size.width, MAXFLOAT)];
+     
+         TextViewHeightConstraint.constant = sizeThatFitsTextView.height;
+         */
+    
+        decriptionCard.layer.cornerRadius = decriptionCard.frame.width/40.0
         decriptionCard.clipsToBounds = true
         scroll.addSubview(decriptionCard)
         totalHeight += additionalHeight
         totalHeight += margin
-       
+    
         //filter
         additionalHeight = 30
         let items = ["food", "market", "cinema", "beauty", "other"]
@@ -133,7 +151,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
         //func changeColor(sender: UISegmentedControl)
         coloredFilter.frame = CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight)
         coloredFilter.backgroundColor = .black
-        coloredFilter.tintColor = .cNotWhite
+        coloredFilter.tintColor = UIColor(red: 139.0/255.0, green: 155.0/255.0, blue: 129.0/255.0, alpha: 1.0)
         coloredFilter.selectedSegmentIndex = 0
         coloredFilter.subviews[0].backgroundColor = UIColor.cYellow
         coloredFilter.subviews[1].backgroundColor = UIColor.cGray
@@ -143,7 +161,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
         scroll.addSubview(coloredFilter)
         totalHeight += additionalHeight
         totalHeight += margin
-        
+    
         //button
         additionalHeight = 60
         buttonSave = UIButton(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
@@ -151,20 +169,24 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
         buttonSave.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         buttonSave.setTitle("SAVE", for: .normal)
         buttonSave.setTitleColor(.black, for: .normal)
-        buttonSave.layer.cornerRadius = buttonSave.frame.width/20.0
+        buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
         buttonSave.clipsToBounds = true
         scroll.addSubview(buttonSave)
         totalHeight += additionalHeight
         totalHeight += margin
         //resize scroll
         scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: totalHeight)
-        
+    
         loadData()
+        
+        let frontGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
+        frontImage.isUserInteractionEnabled = true
+        frontImage.addGestureRecognizer(frontGestureRecognizer)
+        
+        let backGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
+        backImage.isUserInteractionEnabled = true
+        backImage.addGestureRecognizer(backGestureRecognizer)
         // Do any additional setup after loading the view.
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        <#code#>
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
@@ -191,7 +213,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
     {
         tappedImage = tapGestureRecognizer.view as? UIImageView
         let picker = UIImagePickerController()
-        picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        picker.delegate = self
         picker.allowsEditing = false
         
         let alert = UIAlertController(title: "pick an image", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -230,7 +252,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
         let newWidth = UIScreen.main.bounds.width - 20
         //let newHeight = newWidth*0.63
         imageView.frame = CGRect(x: currentZero.x, y: currentZero.y , width: newWidth, height: height)
-        imageView.backgroundColor = .cYellow
+        //imageView.backgroundColor = .cYellow
         imageView.layer.cornerRadius = imageView.frame.width/16.0
         imageView.clipsToBounds = true
         return imageView
@@ -245,7 +267,20 @@ class StretchViewController: UIViewController, UIScrollViewDelegate {
             if filterColor == nil { filterColor = "0"}
             manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
+        performSegue(withIdentifier: segueToMain , sender: self)
         print("Button tapped")
+    }
+    
+    func textViewDidEndEditing(_ decriptionCard: UITextView) {
+        if decriptionCard.text != nil {
+            barcodePath = decriptionCard.text! + ".jpeg"
+        }
+        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(decriptionCard.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+        
+        if barcodeImage.image != nil {
+            imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
+        }
+              print("barcode")
     }
     
     func loadData(){

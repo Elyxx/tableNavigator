@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
    
-    let segueToEditScreen = "ForEditting"
+    //let segueToEditScreen = "ForEditting"
     let segueToNewCard = "ToEdit"
     let segueToCardInfo = "ToPage"
     
@@ -47,6 +47,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let imageView = UIImageView(image: logo)
         self.navigationItem.titleView = imageView
         navigationItem.titleView?.sizeToFit()
+        
+        tableOfCards.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
         //navigationItem.leftBarButtonItem.
         //subViewOfSegment = coloredFilter.subviews[5] as UIView
         //subViewOfSegment.backgroundColor = .white
@@ -94,14 +96,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueToEditScreen {
-            let editViewController = segue.destination as? EditViewController
-            //editViewController?.delegate = self as? SendCard
+        if segue.identifier == segueToNewCard {
+            let editViewController = segue.destination as? StretchViewController
             editViewController?.editingCard = sender as? DiscountCard
         }
         if segue.identifier == segueToCardInfo {
             let pageController = segue.destination as? PageController
-            //pageController?.delegate = self as? PageController
             pageController?.editingCard = sender as? DiscountCard
         }
     }
@@ -122,7 +122,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            self.performSegue(withIdentifier: self.segueToEditScreen, sender: self.myCards[indexPath.row])
+            self.performSegue(withIdentifier: self.segueToNewCard, sender: self.myCards[indexPath.row])
         }
         editAction.backgroundColor = UIColor.cLightViolet
         
@@ -218,17 +218,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func sorting(_ sender: UIBarButtonItem) {
-        let button = UIButton(frame: CGRect(x: 0, y: -30, width: 100, height: 30))
-        button.backgroundColor = .green
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
+        button.backgroundColor = .cViolet
         button.setTitle("ascending", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         self.view.addSubview(button)
  
-        UIView.animate(withDuration: 0.5, delay: 0.4,
-         options: [.autoreverse],
-         animations: {
-         button.center.y += button.frame.height
+        UIView.animate(withDuration: 1, delay: 0.4, options: .autoreverse, animations: {   button.center.y = 50//button.frame.height
          },
          completion: nil
          )
