@@ -62,7 +62,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 //var tmp = editingCard?.barcode
                 //barcodeNumber.text = tmp?.dropLast()
             }
-            stretchy.frame =  CGRect(x: 0,y :0, width: 100, height: 100)
+            //stretchy.frame =  CGRect(x: 0,y :0, width: 100, height: 100)
             
            //screenSize.height * 0.2, 50
          //   else{
@@ -74,6 +74,24 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        coloredFilter.subviews[4].backgroundColor = UIColor.cYellow
+        coloredFilter.subviews[3].backgroundColor = UIColor.cGray
+        coloredFilter.subviews[2].backgroundColor = UIColor.cGreen
+        coloredFilter.subviews[1].backgroundColor = UIColor.cPink
+        coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
+        
+        let logo = UIImage(named: "flag.jpeg")
+        let imageView = UIImageView(image: logo)
+        self.navigationItem.titleView = imageView
+        navigationItem.titleView?.sizeToFit()
+        
+        let black = UIImage(named: "black.jpg")
+        //let imageMainView = UIImageView(image: black)
+        //self.view = imageMainView
+        //self.view.backgroundColor = UIColor(patternImage: black!)
+        //self.view.sizeToFit()
+        
         let frontGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
         frontImage.isUserInteractionEnabled = true
         frontImage.addGestureRecognizer(frontGestureRecognizer)
@@ -161,10 +179,12 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         else{
-            if filterColor == nil { filterColor = "5"}
+            if filterColor == nil { filterColor = "0"}
             manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
     }
+    
+    @IBOutlet weak var coloredFilter: UISegmentedControl!
     
     @IBAction func filter(_ sender: UISegmentedControl) {
         filterColor = String(sender.selectedSegmentIndex)

@@ -10,9 +10,7 @@ import UIKit
 //import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
-    
-    //weak var delegate: SendCard?
-    
+   
     let segueToEditScreen = "ForEditting"
     let segueToNewCard = "ToEdit"
     let segueToCardInfo = "ToPage"
@@ -30,28 +28,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var editViewController: EditViewController? = nil
     
     @IBOutlet weak var searchCard: UISearchBar!
-    
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
               
         tableOfCards.dataSource = self //???
         tableOfCards.delegate = self
         searchCard.delegate = self
+     
+        coloredFilter.subviews[4].backgroundColor = UIColor.cYellow
+        coloredFilter.subviews[3].backgroundColor = UIColor.cGray
+        coloredFilter.subviews[2].backgroundColor = UIColor.cGreen
+        coloredFilter.subviews[1].backgroundColor = UIColor.cPink
+        coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
+        coloredFilter.subviews[5].backgroundColor = .white
         
-        var subViewOfSegment: UIView = coloredFilter.subviews[4] as UIView
-        subViewOfSegment.backgroundColor = UIColor.cYellow
-        subViewOfSegment = coloredFilter.subviews[3] as UIView
-        subViewOfSegment.backgroundColor = UIColor.cGray
-        subViewOfSegment = coloredFilter.subviews[2] as UIView
-        subViewOfSegment.backgroundColor = UIColor.cGreen
-        subViewOfSegment = coloredFilter.subviews[1] as UIView
-        subViewOfSegment.backgroundColor = UIColor.cPink
-        subViewOfSegment = coloredFilter.subviews[0] as UIView
-        subViewOfSegment.backgroundColor = UIColor.cViolet
-        subViewOfSegment = coloredFilter.subviews[5] as UIView
-        subViewOfSegment.backgroundColor = .white
+        let logo = UIImage(named: "flag.jpeg")
+        let imageView = UIImageView(image: logo)
+        self.navigationItem.titleView = imageView
+        navigationItem.titleView?.sizeToFit()
+        //navigationItem.leftBarButtonItem.
+        //subViewOfSegment = coloredFilter.subviews[5] as UIView
+        //subViewOfSegment.backgroundColor = .white
         
     }
     
@@ -146,10 +144,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return [editAction, shareAction, deleteAction]
     }
+    /*
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // Call edit action
+            self.manager.deleteCard(cardDeleted: self.myCards[indexPath.row])
+            self.myCards = self.manager.getFilteredCards(filter: self.filter)!
+            self.tableOfCards.reloadData()
+            // Reset state
+            success(true)
+        })
+        deleteAction.image = UIImage(named: "icon-29.png")
+        deleteAction.backgroundColor = .cMildRed
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }*/
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
     }
+    
     
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -194,8 +207,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableOfCards: UITableView!
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
-        filter = String(sender.selectedSegmentIndex)
-        if filter == "0" { filter = nil }
+        if sender.selectedSegmentIndex == 0 { filter = nil}
+        else {filter = String(sender.selectedSegmentIndex - 1)}
         myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
        
@@ -205,15 +218,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func sorting(_ sender: UIBarButtonItem) {
-        /*let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: -30, width: 100, height: 30))
         button.backgroundColor = .green
-        button.setTitle("Test Button", for: .normal)
+        button.setTitle("ascending", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         self.view.addSubview(button)
-   */
-    
-   
+ 
+        UIView.animate(withDuration: 0.5, delay: 0.4,
+         options: [.autoreverse],
+         animations: {
+         button.center.y += button.frame.height
+         },
+         completion: nil
+         )
+        
+        /*UIView.animate(withDuration: 0.5, delay: 0.4,
+         options: [.repeat, .autoreverse],
+         animations: {
+         self.imageCell.center.x += self.dataCell.bounds.width
+         },
+         completion: nil
+         )*/
+        
        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
@@ -266,7 +293,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         case "4"?:
             return UIColor.cViolet
         default:
-            return .red
+            return .white
         }
     }
     @IBOutlet weak var coloredFilter: UISegmentedControl!

@@ -13,7 +13,17 @@ class CardTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         imageCell.layer.cornerRadius = imageCell.frame.width/13.0
-        nameCell.layer.cornerRadius = nameCell.frame.width/18.0
+        nameCell.layer.cornerRadius = nameCell.frame.width/14.0
+        
+        print(self.imageCell.center.x)
+        print(self.dataCell.bounds.width)
+        /*UIView.animate(withDuration: 0.5, delay: 0.4,
+                       options: [.repeat, .autoreverse],
+                       animations: {
+                        self.imageCell.center.x += self.dataCell.bounds.width
+        },
+                       completion: nil
+        )*/
         // Initialization code
     }
 

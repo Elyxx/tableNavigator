@@ -31,13 +31,13 @@ class FileManaging{
             return nil
         }
     }
-    
     func getDirectoryPath() -> String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
         return documentsDirectory
     }
-    
+}
+ /*
     func createDirectory(){
         let fileManager = FileManager.default
         let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("customDirectory")
@@ -47,7 +47,7 @@ class FileManaging{
             print("Already dictionary created.")
         }
     }
-}
+}*/
     /*
  func deleteDirectory(){
  let fileManager = NSFileManager.defaultManager()

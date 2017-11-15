@@ -77,7 +77,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     
     private func newViewController(name: String) -> UIViewController {
          return UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "\(name)View") as! ImageViewController
+            instantiateViewController(withIdentifier: "\(name)View")// as! ImageViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -129,11 +129,12 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 50,width: UIScreen.main.bounds.width,height: 70))
         pageControl.numberOfPages = orderedViewControllers.count
         pageControl.currentPage = 0
-        pageControl.tintColor = UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
-       // pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        pageControl.currentPageIndicatorTintColor = UIColor(red: 139.0/255.0, green: 55.0/255.0, blue: 129.0/255.0, alpha: 1.0)
+        //pageControl.tintColor = .red //UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
+        pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 139.0/255.0, green: 155.0/255.0, blue: 129.0/255.0, alpha: 1.0)
         view.addSubview(pageControl)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         for index in 0...orderedViewControllers.count - 1
@@ -148,6 +149,8 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         let newWidth = UIScreen.main.bounds.width - 20
         let newHeight = newWidth/0.63
         imageView.frame = CGRect(x: 10, y: 80, width: newWidth, height: newHeight)
+        imageView.layer.cornerRadius = imageView.frame.width/13.0
+        imageView.clipsToBounds = true
         return imageView
     }
     
@@ -158,6 +161,11 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         delegate = self
         
         configurePageControl()
+        
+        let logo = UIImage(named: "flag.jpeg")
+        let imageView = UIImageView(image: logo)
+        self.navigationItem.titleView = imageView
+        navigationItem.titleView?.sizeToFit()
         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
