@@ -20,4 +20,9 @@ extension UIColor {
     static var cNotWhite = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 }
 
+extension UIImage{
+    static var defaultImage = UIImage(named: "empty.png")
+    static var logo = UIImage(named: "hold.png")
+}
+
 

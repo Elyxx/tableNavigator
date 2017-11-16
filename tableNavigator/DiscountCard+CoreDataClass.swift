@@ -19,11 +19,11 @@ public class DiscountCard: NSManagedObject {
     }
   
     @NSManaged public var descriptionOfCard: String?
-    @NSManaged public var filterByColor: String?
+    @NSManaged public var filterByColor: Int16?
     @NSManaged public var nameOfCard: String?
     @NSManaged public var frontImageOfCard: String?
     @NSManaged public var backImageOfCard: String?
     @NSManaged public var barcode: String?
     @NSManaged public var dateOfCreation: Date?
-   
+    @NSManaged public var previewImageOfCard: String?
 }

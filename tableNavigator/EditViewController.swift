@@ -81,10 +81,9 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         coloredFilter.subviews[1].backgroundColor = UIColor.cPink
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         
-        let logo = UIImage(named: "flag.jpeg")
-        let imageView = UIImageView(image: logo)
-        self.navigationItem.titleView = imageView
+        navigationItem.titleView = UIImageView(image: .logo)
         navigationItem.titleView?.sizeToFit()
+        navigationItem.titleView?.isOpaque = true
         
         let black = UIImage(named: "black.jpg")
         //let imageMainView = UIImageView(image: black)
@@ -160,7 +159,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Dispose of any resources that can be recreated.
     }
   
-    func initCard (card: DiscountCard){   }
+  
     
     @IBAction func barcodeNumber(_ sender: UITextField) {
         if sender.text != nil {

@@ -10,15 +10,12 @@ import Foundation
 import UIKit
 
 class FileManaging{
-    var fileManager = FileManager.default //NSFileManager.defaultManager()
-    var tmpDir = NSTemporaryDirectory()
-    let fileName = "sample.txt"
+    var fileManager = FileManager.default
     
     func saveImageDocumentDirectory(image: UIImage, nameOfImage: String) {
        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfImage)
        let imageData = UIImageJPEGRepresentation(image, 1)
        fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
-       //return paths
     }
     
     func getImage(nameOfImage: String)->UIImage? {

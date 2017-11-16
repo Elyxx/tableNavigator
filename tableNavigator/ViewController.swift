@@ -27,12 +27,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var editViewController: EditViewController? = nil
     
+    @IBOutlet weak var tableOfCards: UITableView!
     @IBOutlet weak var searchCard: UISearchBar!
-   
+     
     override func viewDidLoad() {
         super.viewDidLoad()
               
-        tableOfCards.dataSource = self //???
+        tableOfCards.dataSource = self
         tableOfCards.delegate = self
         searchCard.delegate = self
      
@@ -43,16 +44,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         coloredFilter.subviews[5].backgroundColor = .white
         
-        let logo = UIImage(named: "flag.jpeg")
-        let imageView = UIImageView(image: logo)
-        self.navigationItem.titleView = imageView
+        navigationItem.titleView = UIImageView(image: UIImage.logo!)
         navigationItem.titleView?.sizeToFit()
+        navigationItem.titleView?.isOpaque = true
         
-        tableOfCards.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
-        //navigationItem.leftBarButtonItem.
-        //subViewOfSegment = coloredFilter.subviews[5] as UIView
-        //subViewOfSegment.backgroundColor = .white
+        tableOfCards.backgroundColor = UIColor.cViolet//UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
         
+        //loadImages()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -118,11 +116,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return myCards.count
     }
-    
+    /*
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            self.performSegue(withIdentifier: self.segueToNewCard, sender: self.myCards[indexPath.row])
+            if self.searchActive == true {
+                self.searchActive = false
+                self.performSegue(withIdentifier: self.segueToNewCard, sender: self.filtered[indexPath.row])
+            }
+            else
+            {
+                self.performSegue(withIdentifier: self.segueToNewCard, sender: self.myCards[indexPath.row])
+            }
         }
         editAction.backgroundColor = UIColor.cLightViolet
         
@@ -143,24 +148,56 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         deleteAction.backgroundColor = lightRed
         
         return [editAction, shareAction, deleteAction]
-    }
-    /*
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            // Call edit action
-            self.manager.deleteCard(cardDeleted: self.myCards[indexPath.row])
-            self.myCards = self.manager.getFilteredCards(filter: self.filter)!
-            self.tableOfCards.reloadData()
-            // Reset state
-            success(true)
-        })
-        deleteAction.image = UIImage(named: "icon-29.png")
-        deleteAction.backgroundColor = .cMildRed
-        return UISwipeActionsConfiguration(actions: [deleteAction])
     }*/
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            if self.searchActive == true {
+                self.searchActive = false
+                self.performSegue(withIdentifier: self.segueToNewCard, sender: self.filtered[indexPath.row])
+            }
+            else
+            {
+                self.performSegue(withIdentifier: self.segueToNewCard, sender: self.myCards[indexPath.row])
+            }
+            success(true)
+        })
+        editAction.image = UIImage(named: "pen40")
+        editAction.backgroundColor = .cGreen
+        /*
+        let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
+            //let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
+            //alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            //self.present(alert, animated: true, completion: nil)
+        }
+        let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        shareAction.backgroundColor = lightGreen
+        
+        */
+        let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let alert = UIAlertController(title: "warning", message: "are u sure?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "yep", style: UIAlertActionStyle.destructive, handler: { action in
+                    self.manager.deleteCard(cardDeleted: self.myCards[indexPath.row])
+                    self.myCards = self.manager.getFilteredCards(filter: self.filter)!
+                    self.tableOfCards.reloadData()
+               }))
+            alert.addAction(UIAlertAction(title: "my mistake", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            success(true)
+        })
+        deleteAction.image = UIImage(named: "trash40")
+        deleteAction.backgroundColor = .cMildRed
+        return UISwipeActionsConfiguration(actions: [editAction, deleteAction])
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
+        if searchActive == true {
+            searchActive = false
+            performSegue(withIdentifier: "ToPage", sender: self.filtered[indexPath.row])
+        }
+        else {
+            performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
+        }
     }
     
     
@@ -179,7 +216,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.imageCell.image = imageManager.getImage(nameOfImage: filtered[indexPath.row].frontImageOfCard!)
             }
             else {
-                cell.imageCell.image = UIImage(named:"flag.jpeg")
+                cell.imageCell.image = UIImage.defaultImage
             }
             cell.nameCell.text = filtered[indexPath.row].nameOfCard
             cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
@@ -191,7 +228,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].frontImageOfCard!)
             }
             else {
-                cell.imageCell.image = UIImage(named:"flag.jpeg")
+                cell.imageCell.image = UIImage.defaultImage
             }
             
             cell.nameCell.text = myCards[indexPath.row].nameOfCard
@@ -203,8 +240,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func numberOfSections(in tableOfCards: UITableView) -> Int {      return 1   }
-    
-    @IBOutlet weak var tableOfCards: UITableView!
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 { filter = nil}
@@ -219,17 +254,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func sorting(_ sender: UIBarButtonItem) {
         
-        let button = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
+        let button = UIButton(frame: CGRect(x: 0, y: 15, width: 100, height: 50))
         button.backgroundColor = .cViolet
         button.setTitle("ascending", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         self.view.addSubview(button)
  
-        UIView.animate(withDuration: 1, delay: 0.4, options: .autoreverse, animations: {   button.center.y = 50//button.frame.height
-         },
-         completion: nil
-         )
+        UIView.animate(withDuration: 1, delay: 0, animations: {   button.center.y += 50 },
+         completion: nil    )
         
         /*UIView.animate(withDuration: 0.5, delay: 0.4,
          options: [.repeat, .autoreverse],
@@ -277,7 +310,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
+    /*
+    @IBAction func scaleTable(_ sender: UIPinchGestureRecognizer) {
+        
+        tableOfCards.transform = CGAffineTransform.identity.scaledBy(x: sender.scale, y: sender.scale)
+        sender.scale = 1
+        print("scale")
+    }
+   */
     func setColor(number: String?) -> UIColor{
         switch number {
         case "0"?:
@@ -295,5 +335,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     @IBOutlet weak var coloredFilter: UISegmentedControl!
+    func loadImages(){
+        if let imageToLoad = UIImage(named:"chernyj_strizh.jpg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"kitty.jpeg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"britt.jpeg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"flag.jpeg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"kitten.jpg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"lili.jpg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"paper.jpg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"Apple.png"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        if let imageToLoad = UIImage(named:"chernyj_strizh.jpg"){
+            UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
+        }
+        
+    }
 }
 

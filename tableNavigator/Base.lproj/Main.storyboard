@@ -35,6 +35,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsq-jv-XY0">
                                                     <rect key="frame" x="261" y="-0.5" width="51" height="43"/>
                                                     <color key="backgroundColor" red="0.87165711239999999" green="0.84289596830000002" blue="0.89010945429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <color key="textColor" red="0.38042266853782147" green="0.33273959004812814" blue="0.40523873731827409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -46,9 +47,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="IKl-wS-l9A" secondAttribute="height" multiplier="86:54" id="zsL-wk-L5L"/>
                                                     </constraints>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="49Y-5V-l43" appends="YES" id="Fp4-T3-boi"/>
-                                                    </connections>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gJq-iE-5gh">
                                                     <rect key="frame" x="261" y="42.5" width="51" height="121.5"/>
@@ -167,7 +165,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="49Y-5V-l43"/>
             </objects>
             <point key="canvasLocation" x="-176" y="-138"/>
         </scene>
@@ -182,7 +179,14 @@
                         <viewLayoutGuide key="safeArea" id="PMH-uV-l5E"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="EDIT" id="7Gh-qh-k9R"/>
+                    <navigationItem key="navigationItem" title="EDIT" id="7Gh-qh-k9R">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Main" id="n7a-PG-apJ" userLabel="&lt; Main">
+                            <color key="tintColor" red="0.025618654822335052" green="0.025618654822335052" blue="0.025618654822335052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="bakToMain:" destination="A7z-Xh-pLi" id="Ofl-7h-iYQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ToMain" id="vdp-Vt-0fN"/>
@@ -283,7 +287,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="edf-9i-oic"/>
-        <segue reference="zXd-7K-SHE"/>
+        <segue reference="kje-pU-4ye"/>
+        <segue reference="vdp-Vt-0fN"/>
     </inferredMetricsTieBreakers>
 </document>

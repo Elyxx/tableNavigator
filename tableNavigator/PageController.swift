@@ -42,24 +42,24 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
                 first = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
             }
             else {
-                first = UIImage(named: "flag.jpeg")
+                first = UIImage.defaultImage
             }
             if editingCard?.backImageOfCard != nil {
                 secnd = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
             }
             else {
-                secnd = UIImage(named: "flag.jpeg")
+                secnd = UIImage.defaultImage
             }
             if editingCard?.barcode != nil {
                 if let tmpImage = imageManager.getImage(nameOfImage: (editingCard?.barcode)!){
                     third = tmpImage
                 }
                 else {
-                    third = UIImage(named: "flag.jpeg")
+                    third = UIImage.defaultImage
                 }
             }
             else {
-                third = UIImage(named: "flag.jpeg")
+                third = UIImage.defaultImage
             }
             if editingCard?.barcode != nil {
                 return [createImage(currentImage: first!),
@@ -71,7 +71,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
             }
         }
         else {
-            return [createImage(currentImage: UIImage(named: "flag.jpeg")!)]
+            return [createImage(currentImage: UIImage.defaultImage!)]
         }
     }()
     
@@ -140,7 +140,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         for index in 0...orderedViewControllers.count - 1
         {
             orderedViewControllers[index].view.addSubview(images[index])
-            orderedViewControllers[index].view.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+            orderedViewControllers[index].view.backgroundColor = UIColor.cViolet//UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
         }
     }
     
@@ -163,10 +163,9 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         
         configurePageControl()
         
-        let logo = UIImage(named: "flag.jpeg")
-        let imageView = UIImageView(image: logo)
-        self.navigationItem.titleView = imageView
+        navigationItem.titleView = UIImageView(image: .logo)
         navigationItem.titleView?.sizeToFit()
+        navigationItem.titleView?.isOpaque = true
         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
@@ -194,7 +193,6 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
     
     @IBAction func goToEdit(_ sender: Any) {
         performSegue(withIdentifier: segueToEdit, sender: editingCard)
-        print("to new edit")
     }
     /*
     // MARK: - Navigation

@@ -10,7 +10,7 @@ import UIKit
 import RSBarcodes_Swift
 import AVFoundation
 
-class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
     
     let segueToMain = "ToMain"
     var scroll : UIScrollView!
@@ -43,14 +43,13 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     let currentWidth = UIScreen.main.bounds.width
     let currentHeight = UIScreen.main.bounds.height
     
-   
+    var userCaution = false
+
     override func viewWillAppear(_ animated: Bool) {
-        let logo = UIImage(named: "flag.jpeg")
-        let imageView = UIImageView(image: logo)
-        navigationItem.titleView = imageView
+        navigationItem.titleView = UIImageView(image: .logo)
         navigationItem.titleView?.sizeToFit()
-      
-    }
+        navigationItem.titleView?.isOpaque = true
+   }
 
 
    override func viewDidLoad() {
@@ -67,13 +66,13 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     
         container = UIView()
         scroll.addSubview(container)
-        //scroll.backgroundColor = UIColor.cViolet
-        scroll.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+        scroll.backgroundColor = UIColor.cViolet
+        //scroll.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
     
         //1//name
         additionalHeight = 30.00
         name = UITextField(frame: CGRect(x: margin, y: margin, width: currentWidth - margin*2, height: additionalHeight))
-        name.backgroundColor = .cGreen
+        name.backgroundColor = .cNotWhite
         name.layer.cornerRadius = name.frame.width/50.0
         name.clipsToBounds = true
         scroll.addSubview(name)
@@ -107,6 +106,8 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         additionalHeight = 30
         barcodeNumber = UITextField(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
         barcodeNumber.backgroundColor = .cPink
+        barcodeNumber.isUserInteractionEnabled = true
+        barcodeNumber.delegate = self
        // barcodeNumber.layer.cornerRadius = barcodeNumber.frame.width/13.0
        // barcodeNumber.clipsToBounds = true
         scroll.addSubview(barcodeNumber)
@@ -116,11 +117,12 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         //6//descriptionCard
         additionalHeight = 60
         decriptionCard = UITextView(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
-        decriptionCard.backgroundColor = .cLightViolet
+        decriptionCard.backgroundColor = .cNotWhite
         decriptionCard.isScrollEnabled = false
         decriptionCard.isUserInteractionEnabled = true
+        //decriptionCard.sizeToFit()
         decriptionCard.delegate = self
-    //decriptionCard.addInteraction(<#T##interaction: UIInteraction##UIInteraction#>)
+    
     /*
  textView.font = UIFont.systemFont(ofSize: 20)
  textView.textColor = UIColor.white
@@ -128,9 +130,6 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
  textView.font = UIFont.boldSystemFont(ofSize: 20)
  textView.font = UIFont(name: "Verdana", size: 17)*/
     
-        //decriptionCard.font = UIFont(name: (decriptionCard.font?.fontName)!, size: 18)
-    //decriptionCard.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-    //textViewDidEndEditing
         /*CGSize sizeThatFitsTextView = [TextView sizeThatFits:CGSizeMake(TextView.frame.size.width, MAXFLOAT)];
      
          TextViewHeightConstraint.constant = sizeThatFitsTextView.height;
@@ -194,9 +193,11 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
             
             if let pickedImageURL = info[UIImagePickerControllerImageURL] as? URL{
                 let newImageName = pickedImageURL.lastPathComponent
-                if tappedImage == frontImage { frontPath = newImageName
+                if tappedImage == frontImage {
+                    frontPath = newImageName
                 }
-                if tappedImage == backImage { backPath = newImageName
+                if tappedImage == backImage {
+                    backPath = newImageName
                 }
                 imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: newImageName)//"\(name)View"
             }
@@ -265,22 +266,29 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         }
         else{
             if filterColor == nil { filterColor = "0"}
+            if name.text == nil && decriptionCard.text == nil && filterColor == nil && frontPath == nil && backPath == nil && barcodePath == nil && userCaution == false {
+                let alert = UIAlertController(title: "all fields are empty", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+                alert.addAction(UIAlertAction(title: "i know", style: UIAlertActionStyle.cancel, handler: { action in self.userCaution = true } ))
+                self.present(alert, animated: true, completion: nil)
+            }
             manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         performSegue(withIdentifier: segueToMain , sender: self)
-        print("Button tapped")
     }
     
-    func textViewDidEndEditing(_ decriptionCard: UITextView) {
-        if decriptionCard.text != nil {
-            barcodePath = decriptionCard.text! + ".jpeg"
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if barcodeNumber.text != nil {
+            barcodePath = barcodeNumber.text! + ".jpeg"
         }
-        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(decriptionCard.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
+        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
         
         if barcodeImage.image != nil {
             imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
         }
-              print("barcode")
+        print("barcode")
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        print("oops")
     }
     
     func loadData(){
@@ -295,13 +303,13 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
                 frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
             }
             else{
-                frontImage.image = UIImage(named:"flag.jpeg")
+                frontImage.image = UIImage.defaultImage
             }
             if (editingCard?.backImageOfCard != nil) {
                 backImage.image = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
             }
             else{
-                backImage.image = UIImage(named:"flag.jpeg")
+                backImage.image = UIImage.defaultImage
             }
             if (editingCard?.barcode != nil) {
                 barcodeImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
@@ -310,6 +318,12 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
             }
         }
     }
+    
+    @IBAction func bakToMain(_ sender: UIBarButtonItem) {
+             performSegue(withIdentifier: segueToMain, sender: self)
+        
+    }
+    
     /*
     // MARK: - Navigation
 
