@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		250D00251FB86DFC006E4E78 /* flag.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 250D00241FB86DFC006E4E78 /* flag.jpeg */; };
 		255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7AD1FA4854100FB051B /* AppDelegate.swift */; };
 		255BA7B01FA4854100FB051B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7AF1FA4854100FB051B /* ViewController.swift */; };
 		255BA7B31FA4854100FB051B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7B11FA4854100FB051B /* Main.storyboard */; };
@@ -15,38 +14,28 @@
 		255BA7B81FA4854100FB051B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7B71FA4854100FB051B /* Assets.xcassets */; };
 		255BA7BB1FA4854100FB051B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7B91FA4854100FB051B /* LaunchScreen.storyboard */; };
 		255BA7C31FA4880400FB051B /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7C21FA4880400FB051B /* CardTableViewCell.swift */; };
-		255BA7C51FA4A0CE00FB051B /* kitten.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7C41FA4A0CE00FB051B /* kitten.jpeg */; };
-		255BA7C71FA4A4B200FB051B /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7C61FA4A4B200FB051B /* EditViewController.swift */; };
-		255BA7C91FA4A6AE00FB051B /* britt.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7C81FA4A6AD00FB051B /* britt.jpeg */; };
-		255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7CA1FA4A9F100FB051B /* kitty.jpeg */; };
-		255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7CC1FA4B87F00FB051B /* Protocols.swift */; };
 		25646CAE1FAC9DC50051944E /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25646CAD1FAC9DC50051944E /* PageController.swift */; };
-		25646CB01FACA0680051944E /* chernyj_strizh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25646CAF1FACA0680051944E /* chernyj_strizh.jpg */; };
 		25716F841FBC4B9E00CC65FF /* StretchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25716F831FBC4B9E00CC65FF /* StretchViewController.swift */; };
 		25716F861FBC4DD100CC65FF /* GrayLeather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25716F851FBC4DD000CC65FF /* GrayLeather.jpg */; };
-		25716F881FBC7FA000CC65FF /* barcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25716F871FBC7FA000CC65FF /* barcode.jpg */; };
-		25716F8A1FBC7FBE00CC65FF /* barcode-ol-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 25716F891FBC7FBE00CC65FF /* barcode-ol-512.png */; };
-		25716F8C1FBC7FD500CC65FF /* Barcode2.png in Resources */ = {isa = PBXBuildFile; fileRef = 25716F8B1FBC7FD500CC65FF /* Barcode2.png */; };
 		25716F8E1FBC883A00CC65FF /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 25716F8D1FBC883A00CC65FF /* empty.png */; };
 		257218D81FA7395F0051699F /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257218D71FA7395F0051699F /* CardsManager.swift */; };
 		25740D841FB1FE0A00A24429 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25740D831FB1FE0A00A24429 /* FileManager.swift */; };
-		25740D861FB2043D00A24429 /* lili.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 25740D851FB2043D00A24429 /* lili.jpeg */; };
-		2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2574E7491FA62D78005EB3A7 /* funny.jpeg */; };
-		257984A51FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */; };
 		2586F0A51FAB114A0082691D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586F0A41FAB114A0082691D /* Extensions.swift */; };
-		258FDA8F1FB31FDC00060AA8 /* default.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 258FDA8E1FB31FDC00060AA8 /* default.jpeg */; };
-		258FDA931FB3412100060AA8 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258FDA921FB3412100060AA8 /* ImageViewController.swift */; };
-		2591C08E1FB72B1E00F92911 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2591C08D1FB72B1E00F92911 /* Colours.swift */; };
 		2592FA241FBDA32C007D01F9 /* hold.png in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA231FBDA32C007D01F9 /* hold.png */; };
-		259341811FA8C8110093D751 /* red.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 259341801FA8C8110093D751 /* red.jpeg */; };
-		259BBD3E1FBB13BE00569BF9 /* Apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 259BBD3D1FBB13BD00569BF9 /* Apple.png */; };
-		259BBD401FBB1FC300569BF9 /* paper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 259BBD3F1FBB1FC300569BF9 /* paper.jpg */; };
+		2592FA3F1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592FA3D1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift */; };
+		2592FA431FBDEE4B007D01F9 /* Barcode2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA421FBDEE4B007D01F9 /* Barcode2.png */; };
+		2592FA451FBDEE60007D01F9 /* panda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA441FBDEE60007D01F9 /* panda.jpg */; };
+		2592FA471FBDEE66007D01F9 /* spar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA461FBDEE65007D01F9 /* spar.jpg */; };
+		2592FA491FBDEE6B007D01F9 /* sport.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA481FBDEE6B007D01F9 /* sport.jpg */; };
+		2592FA4B1FBDEE71007D01F9 /* premium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA4A1FBDEE71007D01F9 /* premium.jpg */; };
+		2592FA4D1FBDEE76007D01F9 /* walker.png in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA4C1FBDEE76007D01F9 /* walker.png */; };
+		2592FA4F1FBDEE7E007D01F9 /* pass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA4E1FBDEE7E007D01F9 /* pass.jpg */; };
+		2592FA511FBDEE84007D01F9 /* karavan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA501FBDEE84007D01F9 /* karavan.jpg */; };
 		259BBD461FBB360100569BF9 /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 259BBD451FBB360100569BF9 /* black.jpg */; };
 		65875E39CC0D787DD59A1CFC /* Pods_tableNavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ED035AB60B14C0B2358B4EB /* Pods_tableNavigator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		250D00241FB86DFC006E4E78 /* flag.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flag.jpeg; sourceTree = "<group>"; };
 		255BA7AA1FA4854100FB051B /* tableNavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tableNavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		255BA7AD1FA4854100FB051B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		255BA7AF1FA4854100FB051B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,32 +45,23 @@
 		255BA7BA1FA4854100FB051B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		255BA7BC1FA4854100FB051B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		255BA7C21FA4880400FB051B /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
-		255BA7C41FA4A0CE00FB051B /* kitten.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitten.jpeg; sourceTree = "<group>"; };
-		255BA7C61FA4A4B200FB051B /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
-		255BA7C81FA4A6AD00FB051B /* britt.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = britt.jpeg; sourceTree = "<group>"; };
-		255BA7CA1FA4A9F100FB051B /* kitty.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitty.jpeg; sourceTree = "<group>"; };
-		255BA7CC1FA4B87F00FB051B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		25646CAD1FAC9DC50051944E /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
-		25646CAF1FACA0680051944E /* chernyj_strizh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chernyj_strizh.jpg; sourceTree = "<group>"; };
 		25716F831FBC4B9E00CC65FF /* StretchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchViewController.swift; sourceTree = "<group>"; };
 		25716F851FBC4DD000CC65FF /* GrayLeather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GrayLeather.jpg; sourceTree = "<group>"; };
-		25716F871FBC7FA000CC65FF /* barcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barcode.jpg; sourceTree = "<group>"; };
-		25716F891FBC7FBE00CC65FF /* barcode-ol-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode-ol-512.png"; sourceTree = "<group>"; };
-		25716F8B1FBC7FD500CC65FF /* Barcode2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Barcode2.png; sourceTree = "<group>"; };
 		25716F8D1FBC883A00CC65FF /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		257218D71FA7395F0051699F /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
 		25740D831FB1FE0A00A24429 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		25740D851FB2043D00A24429 /* lili.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lili.jpeg; sourceTree = "<group>"; };
-		2574E7491FA62D78005EB3A7 /* funny.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funny.jpeg; sourceTree = "<group>"; };
-		257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscountCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2586F0A41FAB114A0082691D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		258FDA8E1FB31FDC00060AA8 /* default.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpeg; sourceTree = "<group>"; };
-		258FDA921FB3412100060AA8 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		2591C08D1FB72B1E00F92911 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		2592FA231FBDA32C007D01F9 /* hold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hold.png; sourceTree = "<group>"; };
-		259341801FA8C8110093D751 /* red.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = red.jpeg; sourceTree = "<group>"; };
-		259BBD3D1FBB13BD00569BF9 /* Apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Apple.png; sourceTree = "<group>"; };
-		259BBD3F1FBB1FC300569BF9 /* paper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paper.jpg; sourceTree = "<group>"; };
+		2592FA3D1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscountCard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2592FA421FBDEE4B007D01F9 /* Barcode2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Barcode2.png; sourceTree = "<group>"; };
+		2592FA441FBDEE60007D01F9 /* panda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panda.jpg; sourceTree = "<group>"; };
+		2592FA461FBDEE65007D01F9 /* spar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spar.jpg; sourceTree = "<group>"; };
+		2592FA481FBDEE6B007D01F9 /* sport.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sport.jpg; sourceTree = "<group>"; };
+		2592FA4A1FBDEE71007D01F9 /* premium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = premium.jpg; sourceTree = "<group>"; };
+		2592FA4C1FBDEE76007D01F9 /* walker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walker.png; sourceTree = "<group>"; };
+		2592FA4E1FBDEE7E007D01F9 /* pass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pass.jpg; sourceTree = "<group>"; };
+		2592FA501FBDEE84007D01F9 /* karavan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = karavan.jpg; sourceTree = "<group>"; };
 		259BBD451FBB360100569BF9 /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
 		5DE88E1682672BC6198D2307 /* Pods-tableNavigator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tableNavigator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tableNavigator/Pods-tableNavigator.debug.xcconfig"; sourceTree = "<group>"; };
 		8ED035AB60B14C0B2358B4EB /* Pods_tableNavigator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tableNavigator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,38 +101,28 @@
 		255BA7AC1FA4854100FB051B /* tableNavigator */ = {
 			isa = PBXGroup;
 			children = (
+				2592FA3D1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift */,
 				255BA7AD1FA4854100FB051B /* AppDelegate.swift */,
-				257984A31FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift */,
 				2586F0A41FAB114A0082691D /* Extensions.swift */,
 				257218D71FA7395F0051699F /* CardsManager.swift */,
-				255BA7CC1FA4B87F00FB051B /* Protocols.swift */,
-				258FDA921FB3412100060AA8 /* ImageViewController.swift */,
-				2591C08D1FB72B1E00F92911 /* Colours.swift */,
 				25740D831FB1FE0A00A24429 /* FileManager.swift */,
 				25646CAD1FAC9DC50051944E /* PageController.swift */,
 				25716F831FBC4B9E00CC65FF /* StretchViewController.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
-				255BA7C61FA4A4B200FB051B /* EditViewController.swift */,
 				255BA7C21FA4880400FB051B /* CardTableViewCell.swift */,
-				25740D851FB2043D00A24429 /* lili.jpeg */,
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
 				2592FA231FBDA32C007D01F9 /* hold.png */,
-				255BA7CA1FA4A9F100FB051B /* kitty.jpeg */,
-				258FDA8E1FB31FDC00060AA8 /* default.jpeg */,
-				259BBD3F1FBB1FC300569BF9 /* paper.jpg */,
-				250D00241FB86DFC006E4E78 /* flag.jpeg */,
-				25716F8B1FBC7FD500CC65FF /* Barcode2.png */,
-				259BBD3D1FBB13BD00569BF9 /* Apple.png */,
+				2592FA421FBDEE4B007D01F9 /* Barcode2.png */,
 				25716F8D1FBC883A00CC65FF /* empty.png */,
-				25716F891FBC7FBE00CC65FF /* barcode-ol-512.png */,
-				259341801FA8C8110093D751 /* red.jpeg */,
+				2592FA441FBDEE60007D01F9 /* panda.jpg */,
+				2592FA461FBDEE65007D01F9 /* spar.jpg */,
 				25716F851FBC4DD000CC65FF /* GrayLeather.jpg */,
-				25646CAF1FACA0680051944E /* chernyj_strizh.jpg */,
-				255BA7C41FA4A0CE00FB051B /* kitten.jpeg */,
-				25716F871FBC7FA000CC65FF /* barcode.jpg */,
-				2574E7491FA62D78005EB3A7 /* funny.jpeg */,
 				259BBD451FBB360100569BF9 /* black.jpg */,
-				255BA7C81FA4A6AD00FB051B /* britt.jpeg */,
+				2592FA481FBDEE6B007D01F9 /* sport.jpg */,
+				2592FA4E1FBDEE7E007D01F9 /* pass.jpg */,
+				2592FA4C1FBDEE76007D01F9 /* walker.png */,
+				2592FA501FBDEE84007D01F9 /* karavan.jpg */,
+				2592FA4A1FBDEE71007D01F9 /* premium.jpg */,
 				255BA7B71FA4854100FB051B /* Assets.xcassets */,
 				255BA7B91FA4854100FB051B /* LaunchScreen.storyboard */,
 				255BA7BC1FA4854100FB051B /* Info.plist */,
@@ -240,27 +210,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2592FA451FBDEE60007D01F9 /* panda.jpg in Resources */,
+				2592FA4F1FBDEE7E007D01F9 /* pass.jpg in Resources */,
+				2592FA471FBDEE66007D01F9 /* spar.jpg in Resources */,
 				2592FA241FBDA32C007D01F9 /* hold.png in Resources */,
 				255BA7BB1FA4854100FB051B /* LaunchScreen.storyboard in Resources */,
+				2592FA491FBDEE6B007D01F9 /* sport.jpg in Resources */,
 				25716F8E1FBC883A00CC65FF /* empty.png in Resources */,
-				25740D861FB2043D00A24429 /* lili.jpeg in Resources */,
-				25716F8A1FBC7FBE00CC65FF /* barcode-ol-512.png in Resources */,
-				2574E74A1FA62D78005EB3A7 /* funny.jpeg in Resources */,
-				255BA7C91FA4A6AE00FB051B /* britt.jpeg in Resources */,
 				25716F861FBC4DD100CC65FF /* GrayLeather.jpg in Resources */,
 				255BA7B81FA4854100FB051B /* Assets.xcassets in Resources */,
-				255BA7C51FA4A0CE00FB051B /* kitten.jpeg in Resources */,
+				2592FA431FBDEE4B007D01F9 /* Barcode2.png in Resources */,
 				255BA7B31FA4854100FB051B /* Main.storyboard in Resources */,
-				25716F8C1FBC7FD500CC65FF /* Barcode2.png in Resources */,
-				255BA7CB1FA4A9F100FB051B /* kitty.jpeg in Resources */,
+				2592FA4B1FBDEE71007D01F9 /* premium.jpg in Resources */,
 				259BBD461FBB360100569BF9 /* black.jpg in Resources */,
-				259BBD3E1FBB13BE00569BF9 /* Apple.png in Resources */,
-				25646CB01FACA0680051944E /* chernyj_strizh.jpg in Resources */,
-				259341811FA8C8110093D751 /* red.jpeg in Resources */,
-				259BBD401FBB1FC300569BF9 /* paper.jpg in Resources */,
-				258FDA8F1FB31FDC00060AA8 /* default.jpeg in Resources */,
-				250D00251FB86DFC006E4E78 /* flag.jpeg in Resources */,
-				25716F881FBC7FA000CC65FF /* barcode.jpg in Resources */,
+				2592FA511FBDEE84007D01F9 /* karavan.jpg in Resources */,
+				2592FA4D1FBDEE76007D01F9 /* walker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,14 +290,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				25716F841FBC4B9E00CC65FF /* StretchViewController.swift in Sources */,
-				257984A51FA9DF2D002828FD /* DiscountCard+CoreDataClass.swift in Sources */,
-				2591C08E1FB72B1E00F92911 /* Colours.swift in Sources */,
-				255BA7C71FA4A4B200FB051B /* EditViewController.swift in Sources */,
 				255BA7B01FA4854100FB051B /* ViewController.swift in Sources */,
 				255BA7B61FA4854100FB051B /* tableNavigator.xcdatamodeld in Sources */,
-				255BA7CD1FA4B87F00FB051B /* Protocols.swift in Sources */,
-				258FDA931FB3412100060AA8 /* ImageViewController.swift in Sources */,
 				257218D81FA7395F0051699F /* CardsManager.swift in Sources */,
+				2592FA3F1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift in Sources */,
 				25646CAE1FAC9DC50051944E /* PageController.swift in Sources */,
 				25740D841FB1FE0A00A24429 /* FileManager.swift in Sources */,
 				255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */,
@@ -533,6 +493,7 @@
 			currentVersion = 255BA7B51FA4854100FB051B /* tableNavigator.xcdatamodel */;
 			path = tableNavigator.xcdatamodeld;
 			sourceTree = "<group>";
+			usesTabs = 0;
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */

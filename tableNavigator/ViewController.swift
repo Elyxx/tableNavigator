@@ -20,13 +20,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var myCards = [DiscountCard]()
    
     var data = [String] ()
+    var buttons = [UIButton]()
     var searchActive : Bool = false
-    var filter: String? = nil
+    var sortFinished :Bool = false
+    var filter: Int32? = nil
     
     var filtered = [DiscountCard]()
-    
-    var editViewController: EditViewController? = nil
-    
+   
     @IBOutlet weak var tableOfCards: UITableView!
     @IBOutlet weak var searchCard: UISearchBar!
      
@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationItem.titleView?.sizeToFit()
         navigationItem.titleView?.isOpaque = true
         
-        tableOfCards.backgroundColor = UIColor.cViolet//UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+        tableOfCards.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
         
         //loadImages()
     }
@@ -116,39 +116,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return myCards.count
     }
-    /*
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        let editAction = UITableViewRowAction(style: .normal, title: "edit") { (rowAction, indexPath) in
-            if self.searchActive == true {
-                self.searchActive = false
-                self.performSegue(withIdentifier: self.segueToNewCard, sender: self.filtered[indexPath.row])
-            }
-            else
-            {
-                self.performSegue(withIdentifier: self.segueToNewCard, sender: self.myCards[indexPath.row])
-            }
-        }
-        editAction.backgroundColor = UIColor.cLightViolet
-        
-        let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
-            let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        shareAction.backgroundColor = lightGreen
-        
-        let deleteAction = UITableViewRowAction(style: .normal, title: "delete") { (rowAction, indexPath) in
-            self.manager.deleteCard(cardDeleted: self.myCards[indexPath.row])
-            self.myCards = self.manager.getFilteredCards(filter: self.filter)!
-            self.tableOfCards.reloadData()
-        }
-        let lightRed = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        deleteAction.backgroundColor = lightRed
-        
-        return [editAction, shareAction, deleteAction]
-    }*/
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
@@ -164,22 +131,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         editAction.image = UIImage(named: "pen40")
         editAction.backgroundColor = .cGreen
-        /*
-        let shareAction = UITableViewRowAction(style: .normal, title: "share") { (rowAction, indexPath) in
-            //let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
-            //alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
-            //self.present(alert, animated: true, completion: nil)
-        }
-        let lightGreen = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        shareAction.backgroundColor = lightGreen
         
-        */
+        let shareAction = UIContextualAction(style: .normal, title: "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+ /*         let card = self.myCards[indexPath.row]
+            let activity = UIActivityViewController(activityItems: [card.nameOfCard as Any, card.descriptionOfCard as Any,
+                 self.imageManager.getImage(nameOfImage: card.frontImageOfCard!) as Any], applicationActivities: nil)
+             activity.popoverPresentationController?.sourceView = self.view
+            self.present(activity, animated: true, completion: nil)*/
+            success(true)
+        })
+        shareAction.image = UIImage(named: "share40")
+        shareAction.backgroundColor = .cYellow
+    
         let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let alert = UIAlertController(title: "warning", message: "are u sure?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "yep", style: UIAlertActionStyle.destructive, handler: { action in
+                if self.searchActive == true {
+                    self.manager.deleteCard(cardDeleted: self.filtered[indexPath.row])
+                    self.filtered = self.manager.getFilteredCards(filter: self.filter)!
+                    self.tableOfCards.reloadData()
+                }
+                else{
                     self.manager.deleteCard(cardDeleted: self.myCards[indexPath.row])
                     self.myCards = self.manager.getFilteredCards(filter: self.filter)!
                     self.tableOfCards.reloadData()
+                }
                }))
             alert.addAction(UIAlertAction(title: "my mistake", style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -187,16 +166,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         deleteAction.image = UIImage(named: "trash40")
         deleteAction.backgroundColor = .cMildRed
-        return UISwipeActionsConfiguration(actions: [editAction, deleteAction])
+        return UISwipeActionsConfiguration(actions: [editAction, shareAction, deleteAction])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if searchActive == true {
             searchActive = false
-            performSegue(withIdentifier: "ToPage", sender: self.filtered[indexPath.row])
+            performSegue(withIdentifier: segueToCardInfo, sender: self.filtered[indexPath.row])
         }
         else {
-            performSegue(withIdentifier: "ToPage", sender: self.myCards[indexPath.row])
+            performSegue(withIdentifier: segueToCardInfo, sender: self.myCards[indexPath.row])
         }
     }
     
@@ -212,8 +191,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
        
         
         if searchActive == true {
-            if filtered[indexPath.row].frontImageOfCard != nil{
-                cell.imageCell.image = imageManager.getImage(nameOfImage: filtered[indexPath.row].frontImageOfCard!)
+            if filtered[indexPath.row].previewImageOfCard != nil{
+                cell.imageCell.image = imageManager.getImage(nameOfImage: filtered[indexPath.row].previewImageOfCard!)
             }
             else {
                 cell.imageCell.image = UIImage.defaultImage
@@ -224,8 +203,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
         }
         else{
-            if myCards[indexPath.row].frontImageOfCard != nil{
-                cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].frontImageOfCard!)
+            if myCards[indexPath.row].previewImageOfCard != nil{
+                cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].previewImageOfCard!)
             }
             else {
                 cell.imageCell.image = UIImage.defaultImage
@@ -243,92 +222,103 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 { filter = nil}
-        else {filter = String(sender.selectedSegmentIndex - 1)}
+        else {filter = Int32( sender.selectedSegmentIndex - 1 )}
         myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
        
     }
-    @objc func buttonAction(sender: UIButton!) {
-        print("Button tapped")
+    @objc func buttonAcsending(sender: UIButton!) {
+        sortFinished = false
+        removeMenu()
+        myCards = myCards.sorted { (firstCard, secndCard) -> Bool in
+            return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
+        }
+        tableOfCards.reloadData()
     }
-    
+    @objc func buttonDiscending(sender: UIButton!) {
+        sortFinished = false
+        removeMenu()
+        myCards = myCards.sorted { (firstCard, secndCard) -> Bool in
+            return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedDescending
+        }
+        tableOfCards.reloadData()
+    }
+    @objc func buttonEalier(sender: UIButton!) {
+        sortFinished = false
+        removeMenu()
+        myCards = myCards.sorted { (firstCard, secndCard) -> Bool in
+            return (firstCard.dateOfCreation)?.compare((secndCard.dateOfCreation)!) == ComparisonResult.orderedAscending
+        }
+        tableOfCards.reloadData()
+    }
+    @objc func buttonLater(sender: UIButton!) {
+        sortFinished = false
+        removeMenu()
+        myCards = myCards.sorted { (firstCard, secndCard) -> Bool in
+            return (firstCard.dateOfCreation)?.compare((secndCard.dateOfCreation)!) == ComparisonResult.orderedDescending
+        }
+        tableOfCards.reloadData()
+    }
     @IBAction func sorting(_ sender: UIBarButtonItem) {
         
-        let button = UIButton(frame: CGRect(x: 0, y: 15, width: 100, height: 50))
-        button.backgroundColor = .cViolet
-        button.setTitle("ascending", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
-        self.view.addSubview(button)
- 
-        UIView.animate(withDuration: 1, delay: 0, animations: {   button.center.y += 50 },
-         completion: nil    )
-        
-        /*UIView.animate(withDuration: 0.5, delay: 0.4,
-         options: [.repeat, .autoreverse],
-         animations: {
-         self.imageCell.center.x += self.dataCell.bounds.width
-         },
-         completion: nil
-         )*/
-        
-       
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        // add the actions (buttons)
-        let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 280);
-        
-        let width : NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 180);
-        
-        alert.view.addConstraint(height);
-        
-        alert.view.addConstraint(width);
-        
-        alert.addAction(UIAlertAction(title: "ascending", style: UIAlertActionStyle.default, handler: { action in
-            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
-                return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedAscending
-            }
-            self.tableOfCards.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "discending", style: UIAlertActionStyle.default, handler: { action in
-            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
-                return firstCard.nameOfCard?.caseInsensitiveCompare(secndCard.nameOfCard!) == ComparisonResult.orderedDescending
-            }
-            self.tableOfCards.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "earlier first", style: UIAlertActionStyle.default, handler: { action in
-            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
-                return (firstCard.dateOfCreation)?.compare((secndCard.dateOfCreation)!) == ComparisonResult.orderedAscending
-            }
-            self.tableOfCards.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "later first", style: UIAlertActionStyle.default, handler: { action in
-            self.myCards = self.myCards.sorted { (firstCard, secndCard) -> Bool in
-                return (firstCard.dateOfCreation)?.compare((secndCard.dateOfCreation)!) == ComparisonResult.orderedDescending
-            }
-            self.tableOfCards.reloadData()
-        }))
-        self.present(alert, animated: true, completion: nil)
+        if sortFinished == false{
+            sortFinished = true
+            
+            buttons.append(createMenuButton(name: "later first"))
+            buttons.append(createMenuButton(name: "earlier first"))
+            buttons.append(createMenuButton(name: "discending"))
+            buttons.append(createMenuButton(name: "ascending"))
+            
+            buttons[0].addTarget(self, action: #selector(buttonLater), for: .touchUpInside)
+            view.addSubview(buttons[0])
+            UIView.animate(withDuration: 0.8, delay: 0, animations: {   self.buttons[0].center.y += 200 },  completion: nil )
+            
+            
+            buttons[1].addTarget(self, action: #selector(buttonEalier), for: .touchUpInside)
+            view.addSubview(buttons[1])
+            UIView.animate(withDuration: 0.6, delay: 0, animations: {   self.buttons[1].center.y += 150 },  completion: nil )
+            
+            
+            buttons[2].addTarget(self, action: #selector(buttonDiscending), for: .touchUpInside)
+            view.addSubview(buttons[2])
+            UIView.animate(withDuration: 0.4, delay: 0, animations: {   self.buttons[2].center.y += 100 },  completion: nil )
+            
+            
+            buttons[3].addTarget(self, action: #selector(buttonAcsending), for: .touchUpInside)
+            view.addSubview(buttons[3])
+            UIView.animate(withDuration: 0.2, delay: 0, animations: {   self.buttons[3].center.y += 50 },  completion: nil )
+        }
+        else {
+            removeMenu()
+        }
     }
-    /*
-    @IBAction func scaleTable(_ sender: UIPinchGestureRecognizer) {
-        
-        tableOfCards.transform = CGAffineTransform.identity.scaledBy(x: sender.scale, y: sender.scale)
-        sender.scale = 1
-        print("scale")
+      
+    
+    func createMenuButton(name: String)->UIButton{
+        let button = UIButton(frame: CGRect(x: 0, y: 10, width: 100, height: 50))
+        button.backgroundColor = .cGray
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle(name, for: .normal)
+        return button
     }
-   */
-    func setColor(number: String?) -> UIColor{
+    func removeMenu(){
+        for button in buttons{
+            button.removeFromSuperview()
+        }
+        buttons = []
+        sortFinished = false
+    }
+    func setColor(number: Int32) -> UIColor{
         switch number {
-        case "0"?:
+        case 0:
             return UIColor.cYellow
-        case "1"?:
+        case 1:
             return UIColor.cGray
-        case "2"?:
+        case 2:
             return UIColor.cGreen
-        case "3"?:
+        case 3:
             return UIColor.cPink
-        case "4"?:
+        case 4:
             return UIColor.cViolet
         default:
             return .white
@@ -336,25 +326,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBOutlet weak var coloredFilter: UISegmentedControl!
     func loadImages(){
-        if let imageToLoad = UIImage(named:"chernyj_strizh.jpg"){
+        if let imageToLoad = UIImage(named:"panda.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"kitty.jpeg"){
+        if let imageToLoad = UIImage(named:"spar.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"britt.jpeg"){
+        if let imageToLoad = UIImage(named:"sport.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"flag.jpeg"){
+        if let imageToLoad = UIImage(named:"pass.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"kitten.jpg"){
+        if let imageToLoad = UIImage(named:"walker.png"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"lili.jpg"){
+        if let imageToLoad = UIImage(named:"karavan.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"paper.jpg"){
+        if let imageToLoad = UIImage(named:"premium.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
         if let imageToLoad = UIImage(named:"Apple.png"){
@@ -363,7 +353,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let imageToLoad = UIImage(named:"chernyj_strizh.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        
     }
 }
 

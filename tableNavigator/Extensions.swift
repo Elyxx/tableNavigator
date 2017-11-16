@@ -10,32 +10,45 @@ import Foundation
 import UIKit
 
 extension UIImage{
-    func resizeImageWith(newSize: CGSize) -> UIImage {
-        let horizontalRatio = newSize.width / size.width
-        let verticalRatio = newSize.height / size.height
-        
-        let ratio = max(horizontalRatio, verticalRatio)
-        let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
-        UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
-        draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
+    func resizeImage(newWidth: CGFloat) -> UIImage? {
+        let scale = newWidth / size.width
+        let newHeight = size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage!
+        return newImage
     }
+}
+extension UIColor {
+    static var cGreen = UIColor(red: 185.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+    static var cYellow = UIColor(red: 255.0/255.0, green: 250.0/255.0, blue: 189.0/255.0, alpha: 1.0)
+    static var cViolet = UIColor(red: 195.0/255.0, green: 186.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+    static var cPink = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+    static var cGray = UIColor(red: 222.0/255.0, green: 215.0/255.0, blue: 227.0/255.0, alpha: 1.0)
+    static var cLightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    static var cMildRed = UIColor(red: 255.0/255.0, green: 105.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+    static var cNotWhite = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    static var cLight = UIColor(red: 139.0/255.0, green: 155.0/255.0, blue: 129.0/255.0, alpha: 1.0)
+}
+
+extension UIImage{
+    static var defaultImage = UIImage(named: "empty.png")
+    static var logo = UIImage(named: "hold.png")
+    static var barcode = UIImage(named: "Barcode2.png")
+}
+
+
     /*
      
      //UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)
      */
-    
+
+/*CGSize sizeThatFitsTextView = [TextView sizeThatFits:CGSizeMake(TextView.frame.size.width, MAXFLOAT)];
+ 
+ TextViewHeightConstraint.constant = sizeThatFitsTextView.height;
+ */
+
     /*public func imageRotatedByDegrees(degrees: CGFloat, flip: Bool) -> UIImage {
         let radiansToDegrees: (CGFloat) -> CGFloat = {
             return $0 * (180.0 / CGFloat(Double.pi))
@@ -77,7 +90,7 @@ extension UIImage{
         
         return newImage
     }*/
-}
+
 
 /*
 
@@ -262,6 +275,92 @@ extension UIImage{
 //let imageSize = data.length
 //print("size of image in KB: %f ", Double(imageSize) / 1024.0)
 
+/*
+ func createDirectory(){
+ let fileManager = FileManager.default
+ let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("customDirectory")
+ if !fileManager.fileExists(atPath: paths){
+ try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
+ }else{
+ print("Already dictionary created.")
+ }
+ }
+ }*/
+/*
+ func deleteDirectory(){
+ let fileManager = NSFileManager.defaultManager()
+ let paths = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString).stringByAppendingPathComponent("customDirectory")
+ if fileManager.fileExistsAtPath(paths){
+ try! fileManager.removeItemAtPath(paths)
+ }else{
+ print("Something wronge.")
+ }
+ }*/
+////////
+/*   func enumerateDirectory() -> String? {
+ //var error: NSError?
+ let filesInDirectory = try? fileManager.contentsOfDirectory(atPath: tmpDir)
+ 
+ if let files = filesInDirectory {
+ if files.count > 0 {
+ if files[0] == fileName {
+ print("sample.txt found")
+ return files[0]
+ } else {
+ print("File not found")
+ return nil
+ }
+ }
+ }
+ return nil
+ }
+ func createFile() {
+ let path = (tmpDir as NSString).appendingPathComponent(fileName)
+ let contentsOfFile = "Sample Text"
+ //var error: NSError?
+ 
+ // Write File
+ do{
+ try contentsOfFile.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+ //if let errorMessage = error {
+ //    print("Failed to create file")
+ //    print("\(errorMessage)")
+ //}
+ }
+ catch {
+ print("Failed to create file")
+ }
+ }
+ func listDirectory() {
+ // List Content of Path
+ let isFileInDir = enumerateDirectory() ?? "Empty"
+ print("Contents of Directory =  \(isFileInDir)")
+ }
+ 
+ func viewFileContent() {
+ let isFileInDir = enumerateDirectory() ?? ""
+ 
+ let path = (tmpDir as NSString).appendingPathComponent(isFileInDir)
+ let contentsOfFile = try? NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+ 
+ if let content = contentsOfFile {
+ print("Content of file = \(content)")
+ } else {
+ print("No file found")
+ }
+ }
+ 
+ func deleteFile() {
+ //var error: NSError?
+ 
+ if let isFileInDir = enumerateDirectory() {
+ let path = (tmpDir as NSString).appendingPathComponent(isFileInDir)
+ try? fileManager.removeItem(atPath: path)
+ } else {
+ print("No file found")
+ }
+ }
+ }*/
 /*
  func createDirectory(){
  let fileManager = FileManager.default

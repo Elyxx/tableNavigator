@@ -32,10 +32,11 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     var imageManager = FileManaging()
     
     var tappedImage: UIImageView?
-    var filterColor: String?
+    var filterColor: Int32?
     var frontPath: String?
     var backPath: String?
     var barcodePath: String?
+    var previewPath: String?
     
     let margin: CGFloat = 10
     var totalHeight: CGFloat = 0
@@ -64,17 +65,17 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         scroll.isScrollEnabled = true
         view.addSubview(scroll)
     
-        container = UIView()
-        scroll.addSubview(container)
-        scroll.backgroundColor = UIColor.cViolet
-        //scroll.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+        //container = UIView()
+        //scroll.addSubview(container)
+        scroll.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
     
         //1//name
         additionalHeight = 30.00
         name = UITextField(frame: CGRect(x: margin, y: margin, width: currentWidth - margin*2, height: additionalHeight))
-        name.backgroundColor = .cNotWhite
+        name.backgroundColor = .white
         name.layer.cornerRadius = name.frame.width/50.0
         name.clipsToBounds = true
+       
         scroll.addSubview(name)
         totalHeight += additionalHeight
         totalHeight += margin
@@ -104,72 +105,28 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     
         //5//number
         additionalHeight = 30
-        barcodeNumber = UITextField(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
-        barcodeNumber.backgroundColor = .cPink
-        barcodeNumber.isUserInteractionEnabled = true
-        barcodeNumber.delegate = self
-       // barcodeNumber.layer.cornerRadius = barcodeNumber.frame.width/13.0
-       // barcodeNumber.clipsToBounds = true
+        barcodeNumber = createBarcodeNumber(height: additionalHeight)
         scroll.addSubview(barcodeNumber)
         totalHeight += additionalHeight
         totalHeight += margin
     
         //6//descriptionCard
         additionalHeight = 60
-        decriptionCard = UITextView(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
-        decriptionCard.backgroundColor = .cNotWhite
-        decriptionCard.isScrollEnabled = false
-        decriptionCard.isUserInteractionEnabled = true
-        //decriptionCard.sizeToFit()
-        decriptionCard.delegate = self
-    
-    /*
- textView.font = UIFont.systemFont(ofSize: 20)
- textView.textColor = UIColor.white
- 
- textView.font = UIFont.boldSystemFont(ofSize: 20)
- textView.font = UIFont(name: "Verdana", size: 17)*/
-    
-        /*CGSize sizeThatFitsTextView = [TextView sizeThatFits:CGSizeMake(TextView.frame.size.width, MAXFLOAT)];
-     
-         TextViewHeightConstraint.constant = sizeThatFitsTextView.height;
-         */
-    
-        decriptionCard.layer.cornerRadius = decriptionCard.frame.width/40.0
-        decriptionCard.clipsToBounds = true
+        decriptionCard = createDescriptionCard(height: additionalHeight)
         scroll.addSubview(decriptionCard)
         totalHeight += additionalHeight
         totalHeight += margin
     
         //filter
         additionalHeight = 30
-        let items = ["food", "market", "cinema", "beauty", "other"]
-        coloredFilter = UISegmentedControl(items: items)
-        //coloredFilter.backgroundColor = .white
-        //coloredFilter.addTarget(self, action: "changeColor:", for: .ValueChanged)
-        //func changeColor(sender: UISegmentedControl)
-        coloredFilter.frame = CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight)
-        coloredFilter.backgroundColor = .black
-        coloredFilter.tintColor = UIColor(red: 139.0/255.0, green: 155.0/255.0, blue: 129.0/255.0, alpha: 1.0)
-        coloredFilter.selectedSegmentIndex = 0
-        coloredFilter.subviews[0].backgroundColor = UIColor.cYellow
-        coloredFilter.subviews[1].backgroundColor = UIColor.cGray
-        coloredFilter.subviews[2].backgroundColor = UIColor.cGreen
-        coloredFilter.subviews[3].backgroundColor = UIColor.cPink
-        coloredFilter.subviews[4].backgroundColor = UIColor.cViolet
+        coloredFilter = createFilter(height: additionalHeight)
         scroll.addSubview(coloredFilter)
         totalHeight += additionalHeight
         totalHeight += margin
     
         //button
         additionalHeight = 60
-        buttonSave = UIButton(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: additionalHeight))
-        buttonSave.backgroundColor = .cLightViolet
-        buttonSave.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        buttonSave.setTitle("SAVE", for: .normal)
-        buttonSave.setTitleColor(.black, for: .normal)
-        buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
-        buttonSave.clipsToBounds = true
+        buttonSave = createButton(height: additionalHeight)
         scroll.addSubview(buttonSave)
         totalHeight += additionalHeight
         totalHeight += margin
@@ -195,11 +152,22 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
                 let newImageName = pickedImageURL.lastPathComponent
                 if tappedImage == frontImage {
                     frontPath = newImageName
+                    if frontPath != nil{
+                        imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: frontPath!)
+                    }
+                    previewPath = "p" + frontPath!
+                    if previewPath != nil{
+                        if let previewImage = newImage.resizeImage(newWidth: 128){
+                             imageManager.saveImageDocumentDirectory(image: previewImage, nameOfImage: previewPath!)
+                        }
+                    }
                 }
                 if tappedImage == backImage {
                     backPath = newImageName
+                    if backPath != nil{
+                        imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: backPath!)
+                    }
                 }
-                imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: newImageName)//"\(name)View"
             }
         }
         dismiss(animated: true, completion: nil)
@@ -233,7 +201,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
             else
             {
                 let alertWarning = UIAlertController(title: "sorry", message: "camera's not available (", preferredStyle: UIAlertControllerStyle.actionSheet)
-                alertWarning.addAction(UIAlertAction(title: "got it", style: UIAlertActionStyle.cancel, handler: nil))
+                    alertWarning.addAction(UIAlertAction(title: "got it", style: UIAlertActionStyle.cancel, handler: nil))
                 self.present(alertWarning, animated: true, completion: nil)
             }
             picker.modalPresentationStyle = .popover
@@ -260,18 +228,17 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     }
    
     @objc func buttonAction(sender: UIButton!) {
-        filterColor = String(coloredFilter.selectedSegmentIndex)
+        filterColor = Int32(coloredFilter.selectedSegmentIndex)
         if editingCard != nil {
-            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
+            manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, previewIMG: previewPath, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         else{
-            if filterColor == nil { filterColor = "0"}
-            if name.text == nil && decriptionCard.text == nil && filterColor == nil && frontPath == nil && backPath == nil && barcodePath == nil && userCaution == false {
+           if name.text == nil && decriptionCard.text == nil && filterColor == nil && frontPath == nil && backPath == nil && barcodePath == nil && userCaution == false {
                 let alert = UIAlertController(title: "all fields are empty", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
                 alert.addAction(UIAlertAction(title: "i know", style: UIAlertActionStyle.cancel, handler: { action in self.userCaution = true } ))
                 self.present(alert, animated: true, completion: nil)
             }
-            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
+            manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, previewIMG: previewPath, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         performSegue(withIdentifier: segueToMain , sender: self)
     }
@@ -285,10 +252,9 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         if barcodeImage.image != nil {
             imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
         }
-        print("barcode")
     }
     func textViewDidChange(_ textView: UITextView) {
-        print("oops")
+       
     }
     
     func loadData(){
@@ -316,14 +282,61 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
                 //var tmp = editingCard?.barcode
                 //barcodeNumber.text = tmp?.dropLast()
             }
+            else{
+                barcodeImage.image = UIImage.barcode
+            }
         }
     }
     
     @IBAction func bakToMain(_ sender: UIBarButtonItem) {
              performSegue(withIdentifier: segueToMain, sender: self)
-        
+       }
+   
+    func createDescriptionCard(height: CGFloat)->UITextView{
+        let decCard = UITextView(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: height))
+        decCard.backgroundColor = .white
+        decCard.isScrollEnabled = false
+        decCard.isUserInteractionEnabled = true
+        //decCard.sizeToFit()
+        decCard.delegate = self
+        decCard.font = UIFont.boldSystemFont(ofSize: 20)
+        decCard.font = UIFont(name: "Verdana", size: 17)
+        decCard.layer.cornerRadius = decCard.frame.width/40.0
+        decCard.clipsToBounds = true
+        return decCard
     }
     
+    func createFilter(height: CGFloat) ->UISegmentedControl{
+        let items = ["food", "market", "cinema", "beauty", "other"]
+        let cFilter = UISegmentedControl(items: items)
+        cFilter.frame = CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: height)
+        cFilter.backgroundColor = .cLight
+        cFilter.tintColor = .black
+        cFilter.selectedSegmentIndex = 0
+        cFilter.subviews[0].backgroundColor = UIColor.cYellow
+        cFilter.subviews[1].backgroundColor = UIColor.cGray
+        cFilter.subviews[2].backgroundColor = UIColor.cGreen
+        cFilter.subviews[3].backgroundColor = UIColor.cPink
+        cFilter.subviews[4].backgroundColor = UIColor.cViolet
+        return cFilter
+    }
+    func createButton(height: CGFloat)->UIButton{
+        let bSave = UIButton(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: height))
+        bSave.backgroundColor = .cLightViolet
+        bSave.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        bSave.setTitle("SAVE", for: .normal)
+        bSave.setTitleColor(.black, for: .normal)
+        bSave.layer.cornerRadius = bSave.frame.width/50.0
+        bSave.clipsToBounds = true
+        return bSave
+    }
+    func createBarcodeNumber(height: CGFloat)->UITextField{
+        let bNumber = UITextField(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: height))
+        bNumber.backgroundColor = .white
+        bNumber.isUserInteractionEnabled = true
+        bNumber.delegate = self
+        return bNumber
+    }
     /*
     // MARK: - Navigation
 

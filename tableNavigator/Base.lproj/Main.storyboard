@@ -80,7 +80,7 @@
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="width" secondItem="p8r-OH-bTG" secondAttribute="width" multiplier="1:40" id="Lrs-bn-yo8"/>
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="leading" secondItem="gJq-iE-5gh" secondAttribute="trailing" id="OEl-kq-RjH"/>
                                                 <constraint firstItem="IKl-wS-l9A" firstAttribute="top" secondItem="p8r-OH-bTG" secondAttribute="top" id="T2B-K7-b3t"/>
-                                                <constraint firstItem="IKl-wS-l9A" firstAttribute="width" secondItem="p8r-OH-bTG" secondAttribute="width" multiplier="3:5" id="Y95-2f-hf5"/>
+                                                <constraint firstItem="IKl-wS-l9A" firstAttribute="width" secondItem="p8r-OH-bTG" secondAttribute="width" multiplier="3:5" identifier="constraintToKill" id="Y95-2f-hf5"/>
                                                 <constraint firstItem="nkF-6O-t8Z" firstAttribute="top" secondItem="gJq-iE-5gh" secondAttribute="bottom" id="b4w-X8-JJI"/>
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="leading" secondItem="Vsq-jv-XY0" secondAttribute="trailing" id="fQl-LL-FOI"/>
                                                 <constraint firstItem="5B5-7L-91H" firstAttribute="top" secondItem="p8r-OH-bTG" secondAttribute="top" id="feS-N0-yx7"/>
@@ -143,7 +143,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="HOLDER" id="f6b-jH-cJ2">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="6Tf-8b-obu" userLabel="sort">
+                        <barButtonItem key="leftBarButtonItem" title="sort" id="6Tf-8b-obu" userLabel="sort">
                             <color key="tintColor" red="0.057900066020000002" green="0.0534777076" blue="0.06006107234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sorting:" destination="BYZ-38-t0r" id="kRw-gn-FP7"/>
@@ -225,7 +225,7 @@
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
             <objects>
-                <viewController storyboardIdentifier="frontView" id="qYV-kY-vI8" userLabel="front" customClass="ImageViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="frontView" id="qYV-kY-vI8" userLabel="front" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RYW-wn-aWp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

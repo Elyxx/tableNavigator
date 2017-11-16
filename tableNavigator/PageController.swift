@@ -140,7 +140,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         for index in 0...orderedViewControllers.count - 1
         {
             orderedViewControllers[index].view.addSubview(images[index])
-            orderedViewControllers[index].view.backgroundColor = UIColor.cViolet//UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+            orderedViewControllers[index].view.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
         }
     }
     
@@ -169,9 +169,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
-         }
-        
-        // Do any additional setup after loading the view.
+         }   
     }
 
     override func didReceiveMemoryWarning() {
