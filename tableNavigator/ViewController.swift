@@ -29,7 +29,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
    
     @IBOutlet weak var tableOfCards: UITableView!
     @IBOutlet weak var searchCard: UISearchBar!
-     
+    @IBOutlet weak var coloredFilter: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
               
@@ -133,14 +134,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         editAction.backgroundColor = .cGreen
         
         let shareAction = UIContextualAction(style: .normal, title: "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
+   /*         let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
- /*         let card = self.myCards[indexPath.row]
+            self.present(alert, animated: true, completion: nil)*/
+          let card = self.myCards[indexPath.row]
             let activity = UIActivityViewController(activityItems: [card.nameOfCard as Any, card.descriptionOfCard as Any,
                  self.imageManager.getImage(nameOfImage: card.frontImageOfCard!) as Any], applicationActivities: nil)
              activity.popoverPresentationController?.sourceView = self.view
-            self.present(activity, animated: true, completion: nil)*/
+            self.present(activity, animated: true, completion: nil)
             success(true)
         })
         shareAction.image = UIImage(named: "share40")
@@ -324,7 +325,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return .white
         }
     }
-    @IBOutlet weak var coloredFilter: UISegmentedControl!
+    
+    
     func loadImages(){
         if let imageToLoad = UIImage(named:"panda.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
@@ -347,10 +349,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let imageToLoad = UIImage(named:"premium.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"Apple.png"){
+        if let imageToLoad = UIImage(named:"joiner.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
-        if let imageToLoad = UIImage(named:"chernyj_strizh.jpg"){
+        if let imageToLoad = UIImage(named:"parfum.png"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
     }

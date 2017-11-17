@@ -40,6 +40,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     
     let margin: CGFloat = 10
     var totalHeight: CGFloat = 0
+    var descPositionY: CGFloat = 0
     
     let currentWidth = UIScreen.main.bounds.width
     let currentHeight = UIScreen.main.bounds.height
@@ -152,22 +153,10 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
                 let newImageName = pickedImageURL.lastPathComponent
                 if tappedImage == frontImage {
                     frontPath = newImageName
-                    if frontPath != nil{
-                        imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: frontPath!)
-                    }
-                    previewPath = "p" + frontPath!
-                    if previewPath != nil{
-                        if let previewImage = newImage.resizeImage(newWidth: 128){
-                             imageManager.saveImageDocumentDirectory(image: previewImage, nameOfImage: previewPath!)
-                        }
-                    }
                 }
                 if tappedImage == backImage {
                     backPath = newImageName
-                    if backPath != nil{
-                        imageManager.saveImageDocumentDirectory(image: newImage, nameOfImage: backPath!)
-                    }
-                }
+               }
             }
         }
         dismiss(animated: true, completion: nil)
@@ -219,15 +208,28 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     func createImageView(currentZero: CGPoint, height: CGFloat, currentImage: UIImage) -> UIImageView{
         let imageView = UIImageView(image: currentImage)
         let newWidth = UIScreen.main.bounds.width - 20
-        //let newHeight = newWidth*0.63
         imageView.frame = CGRect(x: currentZero.x, y: currentZero.y , width: newWidth, height: height)
-        //imageView.backgroundColor = .cYellow
         imageView.layer.cornerRadius = imageView.frame.width/16.0
         imageView.clipsToBounds = true
         return imageView
     }
    
     @objc func buttonAction(sender: UIButton!) {
+        
+        if frontPath != nil{
+            imageManager.saveImageDocumentDirectory(image: frontImage.image!, nameOfImage: frontPath!)
+            
+            previewPath = "p" + frontPath!
+            if previewPath != nil{
+                if let previewImage = frontImage.image?.resizeImage(newWidth: 128){
+                    imageManager.saveImageDocumentDirectory(image: previewImage, nameOfImage: previewPath!)
+                }
+            }
+        }
+        if backPath != nil{
+            imageManager.saveImageDocumentDirectory(image: backImage.image!, nameOfImage: backPath!)
+        }
+        
         filterColor = Int32(coloredFilter.selectedSegmentIndex)
         if editingCard != nil {
             manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, previewIMG: previewPath, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
@@ -244,17 +246,23 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        if barcodeNumber.text != nil {
-            barcodePath = barcodeNumber.text! + ".jpeg"
-        }
-        barcodeImage.image = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue)
-        
-        if barcodeImage.image != nil {
-            imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
+        if barcodeNumber.text != nil{
+            if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
+                imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
+                barcodePath = barcodeNumber.text! + ".jpeg"
+            }
         }
     }
     func textViewDidChange(_ textView: UITextView) {
-       
+        print ("changged")
+       /* textView.sizeToFit()
+        let h = textView.frame.height
+        textView.frame = CGRect(x: margin, y: descPositionY, width: self.view.frame.size.width - margin*2 /*currentWidth - margin*2*/, height: h)
+        textView.translatesAutoresizingMaskIntoConstraints = true
+        
+        textView.isScrollEnabled = false
+        totalHeight += h
+        scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: totalHeight)*/
     }
     
     func loadData(){
@@ -264,6 +272,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
             }
             if editingCard?.descriptionOfCard != nil {
                 decriptionCard.text = editingCard?.descriptionOfCard
+                textViewDidChange(decriptionCard)
             }
             if (editingCard?.frontImageOfCard != nil) {
                 frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
@@ -279,8 +288,6 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
             }
             if (editingCard?.barcode != nil) {
                 barcodeImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
-                //var tmp = editingCard?.barcode
-                //barcodeNumber.text = tmp?.dropLast()
             }
             else{
                 barcodeImage.image = UIImage.barcode
@@ -294,10 +301,16 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
    
     func createDescriptionCard(height: CGFloat)->UITextView{
         let decCard = UITextView(frame: CGRect(x: margin, y: totalHeight, width: currentWidth - margin*2, height: height))
+        descPositionY = totalHeight
+        ///
         decCard.backgroundColor = .white
         decCard.isScrollEnabled = false
         decCard.isUserInteractionEnabled = true
+        /////
+        //decCard.translatesAutoresizingMaskIntoConstraints = true
         //decCard.sizeToFit()
+        //decCard.isEditable = true
+        //////
         decCard.delegate = self
         decCard.font = UIFont.boldSystemFont(ofSize: 20)
         decCard.font = UIFont(name: "Verdana", size: 17)

@@ -53,12 +53,7 @@ class CardTableViewCell: UITableViewCell {
             let transform = CGAffineTransform(scaleX: newScale, y: newScale)
             self.imageCell.transform = transform
             sender.scale = 1
-        } /*else if sender.state == .ended {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.imageCell.transform = CGAffineTransform.identity
-            })
-
-        } */
+        } 
         //const.isActive = true
     }
 

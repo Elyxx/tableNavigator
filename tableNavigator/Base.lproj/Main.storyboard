@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iek-ph-w9K">
-                                <rect key="frame" x="0.0" y="76" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="404"/>
                                 <color key="backgroundColor" red="1" green="0.90084793546028819" blue="0.95342781446283864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.67088356598984777" green="0.34843898314277588" blue="0.51771023021442331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="0.70106106714943817" blue="0.97648236569848357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -104,7 +104,7 @@
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6Xs-JX-a4r">
-                                <rect key="frame" x="0.0" y="20" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="56"/>
                                 <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -240,7 +240,7 @@
         <!--back-->
         <scene sceneID="muY-bA-B1y">
             <objects>
-                <viewController storyboardIdentifier="backView" id="Ds3-Ce-0pm" userLabel="back" customClass="ImageViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="backView" id="Ds3-Ce-0pm" userLabel="back" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gEd-R7-N5H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,7 +255,7 @@
         <!--barcode-->
         <scene sceneID="JpE-rL-gzx">
             <objects>
-                <viewController storyboardIdentifier="barcodeView" id="J0M-Jg-kuv" userLabel="barcode" customClass="ImageViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="barcodeView" id="J0M-Jg-kuv" userLabel="barcode" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dE6-B4-GEi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -275,6 +275,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2VX-gn-sPX">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -288,6 +289,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="kje-pU-4ye"/>
-        <segue reference="vdp-Vt-0fN"/>
+        <segue reference="Wgo-9O-QvH"/>
     </inferredMetricsTieBreakers>
 </document>
