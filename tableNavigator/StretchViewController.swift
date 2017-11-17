@@ -248,8 +248,9 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if barcodeNumber.text != nil{
             if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
-                imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
                 barcodePath = barcodeNumber.text! + ".jpeg"
+                imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
+                barcodeImage.image = tmpBarcode
             }
         }
     }
