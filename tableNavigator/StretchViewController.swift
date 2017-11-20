@@ -226,14 +226,22 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
                 }
             }
         }
+        
         if backPath != nil{
             imageManager.saveImageDocumentDirectory(image: backImage.image!, nameOfImage: backPath!)
         }
         
+        if barcodePath != nil{
+            print("barcode")
+            imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
+        }
+        
         filterColor = Int32(coloredFilter.selectedSegmentIndex)
+        
         if editingCard != nil {
             manager.editExisting(card: editingCard!, name: name.text, descrip: decriptionCard.text, filter: filterColor, previewIMG: previewPath, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
+            
         else{
            if name.text == nil && decriptionCard.text == nil && filterColor == nil && frontPath == nil && backPath == nil && barcodePath == nil && userCaution == false {
                 let alert = UIAlertController(title: "all fields are empty", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -249,7 +257,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         if barcodeNumber.text != nil{
             if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
                 barcodePath = barcodeNumber.text! + ".jpeg"
-                imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
+                //imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
                 barcodeImage.image = tmpBarcode
             }
         }

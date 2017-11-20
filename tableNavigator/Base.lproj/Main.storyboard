@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ERO-Jf-XgQ">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,11 +16,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iek-ph-w9K">
-                                <rect key="frame" x="0.0" y="120" width="320" height="404"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="316"/>
                                 <color key="backgroundColor" red="1" green="0.90084793546028819" blue="0.95342781446283864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.67088356598984777" green="0.34843898314277588" blue="0.51771023021442331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="0.70106106714943817" blue="0.97648236569848357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -109,7 +109,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RDA-Sz-Gvg" userLabel="filter">
-                                <rect key="frame" x="0.0" y="499" width="320" height="26"/>
+                                <rect key="frame" x="0.0" y="411" width="320" height="26"/>
                                 <color key="backgroundColor" red="0.67536856923543387" green="0.98672083723493587" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="all"/>
@@ -173,7 +173,7 @@
             <objects>
                 <viewController id="A7z-Xh-pLi" customClass="StretchViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aIm-3D-Cwu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PMH-uV-l5E"/>
@@ -227,7 +227,7 @@
             <objects>
                 <viewController storyboardIdentifier="frontView" id="qYV-kY-vI8" userLabel="front" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RYW-wn-aWp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.87165711239999999" green="0.84289596830000002" blue="0.89010945429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="8ir-te-OXr"/>
@@ -242,7 +242,7 @@
             <objects>
                 <viewController storyboardIdentifier="backView" id="Ds3-Ce-0pm" userLabel="back" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gEd-R7-N5H">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.87165711239999999" green="0.84289596830000002" blue="0.89010945429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="7QQ-4r-BaU"/>
@@ -257,7 +257,7 @@
             <objects>
                 <viewController storyboardIdentifier="barcodeView" id="J0M-Jg-kuv" userLabel="barcode" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dE6-B4-GEi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.87165711239999999" green="0.84289596830000002" blue="0.89010945429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Zsl-Xk-782"/>
