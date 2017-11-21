@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RSBarcodes_Swift
+//import RSBarcodes_Swift
 import AVFoundation
 
 class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
@@ -255,11 +255,11 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if barcodeNumber.text != nil{
-            if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
+           // if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
                 barcodePath = barcodeNumber.text! + ".jpeg"
                 //imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
-                barcodeImage.image = tmpBarcode
-            }
+               // barcodeImage.image = tmpBarcode
+          //  }
         }
     }
     func textViewDidChange(_ textView: UITextView) {
