@@ -196,15 +196,15 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
             if (editingCard?.frontImageOfCard != nil) {
                 frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
             }
-            else{
-                frontImage.image = UIImage.defaultImage
-            }
+       //     else{
+       //         frontImage.image = UIImage.defaultImage
+       //     }
             if (editingCard?.backImageOfCard != nil) {
                 backImage.image = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
             }
-            else{
-                backImage.image = UIImage.defaultImage
-            }
+       //     else{
+       //         backImage.image = UIImage.defaultImage
+       //     }
             if (editingCard?.barcode != nil) {
                 barcodeImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
             }

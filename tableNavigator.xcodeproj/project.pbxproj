@@ -26,7 +26,6 @@
 		2586F0A51FAB114A0082691D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586F0A41FAB114A0082691D /* Extensions.swift */; };
 		2592FA241FBDA32C007D01F9 /* hold.png in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA231FBDA32C007D01F9 /* hold.png */; };
 		2592FA3F1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592FA3D1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift */; };
-		2592FA431FBDEE4B007D01F9 /* Barcode2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA421FBDEE4B007D01F9 /* Barcode2.png */; };
 		2592FA451FBDEE60007D01F9 /* panda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA441FBDEE60007D01F9 /* panda.jpg */; };
 		2592FA471FBDEE66007D01F9 /* spar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA461FBDEE65007D01F9 /* spar.jpg */; };
 		2592FA491FBDEE6B007D01F9 /* sport.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2592FA481FBDEE6B007D01F9 /* sport.jpg */; };
@@ -60,7 +59,6 @@
 		2586F0A41FAB114A0082691D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2592FA231FBDA32C007D01F9 /* hold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hold.png; sourceTree = "<group>"; };
 		2592FA3D1FBDD6AC007D01F9 /* DiscountCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscountCard+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2592FA421FBDEE4B007D01F9 /* Barcode2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Barcode2.png; sourceTree = "<group>"; };
 		2592FA441FBDEE60007D01F9 /* panda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panda.jpg; sourceTree = "<group>"; };
 		2592FA461FBDEE65007D01F9 /* spar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spar.jpg; sourceTree = "<group>"; };
 		2592FA481FBDEE6B007D01F9 /* sport.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sport.jpg; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				255BA7C21FA4880400FB051B /* CardTableViewCell.swift */,
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
 				2592FA231FBDA32C007D01F9 /* hold.png */,
-				2592FA421FBDEE4B007D01F9 /* Barcode2.png */,
 				25716F8D1FBC883A00CC65FF /* empty.png */,
 				2592FA441FBDEE60007D01F9 /* panda.jpg */,
 				2592FA461FBDEE65007D01F9 /* spar.jpg */,
@@ -229,7 +226,6 @@
 				25716F861FBC4DD100CC65FF /* GrayLeather.jpg in Resources */,
 				2572E1901FBEBD960072CA66 /* parfum.png in Resources */,
 				255BA7B81FA4854100FB051B /* Assets.xcassets in Resources */,
-				2592FA431FBDEE4B007D01F9 /* Barcode2.png in Resources */,
 				255BA7B31FA4854100FB051B /* Main.storyboard in Resources */,
 				2592FA4B1FBDEE71007D01F9 /* premium.jpg in Resources */,
 				259BBD461FBB360100569BF9 /* black.jpg in Resources */,

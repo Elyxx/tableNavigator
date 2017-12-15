@@ -36,13 +36,13 @@ extension UIColor {
 extension UIImage{
     static var defaultImage = UIImage(named: "empty.png")
     static var logo = UIImage(named: "hold.png")
-    static var barcode = UIImage(named: "Barcode2.png")
+    static var barcode = UIImage(named: "barcode.png")
     
     static var food = UIImage(named: "food.png")
-    static var market = UIImage(named: "cinema.png")
+    static var market = UIImage(named: "market.png")
     static var cinema = UIImage(named: "cinema.png")
-    static var beauty = UIImage(named: "cinema.png")
-    static var other = UIImage(named: "cinema.png")
+    static var beauty = UIImage(named: "beauty.png")
+    static var other = UIImage(named: "other.png")
 }
 
 

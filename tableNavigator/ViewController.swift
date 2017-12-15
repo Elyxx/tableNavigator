@@ -45,10 +45,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         coloredFilter.subviews[5].backgroundColor = .white
         
-        navigationItem.titleView = UIImageView(image: UIImage.logo!)
-        navigationItem.titleView?.sizeToFit()
-        navigationItem.titleView?.isOpaque = true
+        navigationItem.title = "HOLDER"//String(describing: navigatorItemTitle())
+       // navigationItem.
+      //      .titleView = UIImageView(image: UIImage.logo!)
+      //  navigationItem.titleView?.sizeToFit()
+      //  navigationItem.titleView?.isOpaque = true
+        navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
+        //navigationItem.title
         
+        view.backgroundColor = UIColor.mainBackGround
         tableOfCards.backgroundColor = UIColor.mainBackGround//(patternImage: UIImage(named: "GrayLeather.jpg")!)
         
         //loadImages()
@@ -357,6 +362,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let imageToLoad = UIImage(named:"parfum.png"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
         }
+    }
+    
+    @IBAction func resizeImages(_ sender: UIPinchGestureRecognizer) {
+        
+    }
+    
+    func navigatorItemTitle() -> NSAttributedString {
+        let tmpString = "HOLDER"
+       
+        let myShadow = NSShadow()
+        myShadow.shadowBlurRadius = 3
+        myShadow.shadowOffset = CGSize(width: 3, height: 3)
+        myShadow.shadowColor = UIColor.gray
+        
+        let multipleAttributes: [NSAttributedStringKey : Any] = [
+             NSAttributedStringKey.foregroundColor: UIColor.cPink,
+             NSAttributedStringKey.backgroundColor: UIColor.mainBackGround,
+             NSAttributedStringKey.font: UIFont(name: "Chalkduster", size: 18.0)!,
+             NSAttributedStringKey.shadow: myShadow ]
+        
+        let title = NSAttributedString(string: tmpString, attributes: multipleAttributes)
+        return title
     }
 }
 
