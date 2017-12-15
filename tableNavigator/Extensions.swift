@@ -27,15 +27,22 @@ extension UIColor {
     static var cPink = UIColor(red: 255.0/255.0, green: 236.0/255.0, blue: 250.0/255.0, alpha: 1.0)
     static var cGray = UIColor(red: 222.0/255.0, green: 215.0/255.0, blue: 227.0/255.0, alpha: 1.0)
     static var cLightViolet = UIColor(red: 229.0/255.0, green: 236.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-    static var cMildRed = UIColor(red: 255.0/255.0, green: 105.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+    static var cMildRed = UIColor(red: 238.0/255.0, green: 99.0/255.0, blue: 145.0/255.0, alpha: 1.0)
     static var cNotWhite = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 230.0/255.0, alpha: 1.0)
     static var cLight = UIColor(red: 139.0/255.0, green: 155.0/255.0, blue: 129.0/255.0, alpha: 1.0)
+    static var mainBackGround = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 171.0/255.0, alpha: 1.0)
 }
 
 extension UIImage{
     static var defaultImage = UIImage(named: "empty.png")
     static var logo = UIImage(named: "hold.png")
     static var barcode = UIImage(named: "Barcode2.png")
+    
+    static var food = UIImage(named: "food.png")
+    static var market = UIImage(named: "cinema.png")
+    static var cinema = UIImage(named: "cinema.png")
+    static var beauty = UIImage(named: "cinema.png")
+    static var other = UIImage(named: "cinema.png")
 }
 
 

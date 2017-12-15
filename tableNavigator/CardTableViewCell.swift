@@ -25,7 +25,7 @@ class CardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageCell: UIImageView!
     
-    @IBOutlet weak var filterCell: UILabel!
+    @IBOutlet weak var filterCell: UIImageView!
     
     @IBOutlet weak var descripCell: UITextView!
     
@@ -44,9 +44,9 @@ class CardTableViewCell: UITableViewCell {
         if sender.state == .changed {
             let currentScale = self.imageCell.frame.size.width / self.imageCell.bounds.size.width
             var newScale = currentScale*sender.scale
-            if newScale < 1 {
-                newScale = 0.1
-            }
+         //   if newScale < 1 {
+         //      newScale = 0.1
+         //   }
             if newScale > 1 {
                 newScale = 1
             }

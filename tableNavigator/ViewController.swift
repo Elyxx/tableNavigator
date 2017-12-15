@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationItem.titleView?.sizeToFit()
         navigationItem.titleView?.isOpaque = true
         
-        tableOfCards.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+        tableOfCards.backgroundColor = UIColor.mainBackGround//(patternImage: UIImage(named: "GrayLeather.jpg")!)
         
         //loadImages()
     }
@@ -96,7 +96,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueToNewCard {
-            let editViewController = segue.destination as? StretchViewController
+            let editViewController = segue.destination as? EditViewController
             editViewController?.editingCard = sender as? DiscountCard
         }
         if segue.identifier == segueToCardInfo {
@@ -131,7 +131,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             success(true)
         })
         editAction.image = UIImage(named: "pen40")
-        editAction.backgroundColor = .cGreen
+        editAction.backgroundColor = .mainBackGround
         
         let shareAction = UIContextualAction(style: .normal, title: "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
    /*         let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
@@ -145,7 +145,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             success(true)
         })
         shareAction.image = UIImage(named: "share40")
-        shareAction.backgroundColor = .cYellow
+        shareAction.backgroundColor = .black
     
         let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let alert = UIAlertController(title: "warning", message: "are u sure?", preferredStyle: UIAlertControllerStyle.alert)
@@ -199,7 +199,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.imageCell.image = UIImage.defaultImage
             }
             cell.nameCell.text = filtered[indexPath.row].nameOfCard
-            cell.filterCell.backgroundColor = setColor(number: filtered[indexPath.row].filterByColor)
+            cell.filterCell.image = setImage(number: filtered[indexPath.row].filterByColor)
             cell.descripCell.text = filtered[indexPath.row].descriptionOfCard
             cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
         }
@@ -212,7 +212,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             cell.nameCell.text = myCards[indexPath.row].nameOfCard
-            cell.filterCell.backgroundColor = setColor(number: myCards[indexPath.row].filterByColor)
+            cell.filterCell.image = setImage(number: myCards[indexPath.row].filterByColor)
             cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
             cell.dataCell.text = dateFormatter.string(from: myCards[indexPath.row].dateOfCreation!)
         }
@@ -295,34 +295,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
       
     
-    func createMenuButton(name: String)->UIButton{
+    func createMenuButton(name: String) -> UIButton {
         let button = UIButton(frame: CGRect(x: 0, y: 10, width: 100, height: 50))
         button.backgroundColor = .cGray
+        button.titleLabel?.font =  UIFont(name: "Times New Roman", size: 18)
         button.setTitleColor(.black, for: .normal)
         button.setTitle(name, for: .normal)
         return button
     }
-    func removeMenu(){
-        for button in buttons{
+    
+    func removeMenu() {
+        for button in buttons {
             button.removeFromSuperview()
         }
         buttons = []
         sortFinished = false
     }
-    func setColor(number: Int32) -> UIColor{
+    func setImage(number: Int32) -> UIImage {
         switch number {
         case 0:
-            return UIColor.cYellow
+            return UIImage.food!
         case 1:
-            return UIColor.cGray
+            return UIImage.market!
         case 2:
-            return UIColor.cGreen
+            return UIImage.cinema!
         case 3:
-            return UIColor.cPink
+            return UIImage.beauty!
         case 4:
-            return UIColor.cViolet
+            return UIImage.other!
         default:
-            return .white
+            return UIImage.other!
         }
     }
     

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import RSBarcodes_Swift
+import RSBarcodes_Swift
 import AVFoundation
 
 class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
@@ -215,13 +215,11 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     }
    
     @objc func buttonAction(sender: UIButton!) {
-        
         if frontPath != nil{
             imageManager.saveImageDocumentDirectory(image: frontImage.image!, nameOfImage: frontPath!)
-            
             previewPath = "p" + frontPath!
             if previewPath != nil{
-                if let previewImage = frontImage.image?.resizeImage(newWidth: 128){
+                if let previewImage = frontImage.image?.resizeImage(newWidth: 256){
                     imageManager.saveImageDocumentDirectory(image: previewImage, nameOfImage: previewPath!)
                 }
             }
@@ -232,8 +230,7 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
         }
         
         if barcodePath != nil{
-            print("barcode")
-            imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
+             imageManager.saveImageDocumentDirectory(image: barcodeImage.image!, nameOfImage: barcodePath!)
         }
         
         filterColor = Int32(coloredFilter.selectedSegmentIndex)
@@ -255,11 +252,10 @@ class StretchViewController: UIViewController, UIScrollViewDelegate, UIImagePick
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if barcodeNumber.text != nil{
-           // if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
+           if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
                 barcodePath = barcodeNumber.text! + ".jpeg"
-                //imageManager.saveImageDocumentDirectory(image: tmpBarcode, nameOfImage: barcodePath!)
-               // barcodeImage.image = tmpBarcode
-          //  }
+                barcodeImage.image = tmpBarcode
+           }
         }
     }
     func textViewDidChange(_ textView: UITextView) {

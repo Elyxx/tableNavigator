@@ -131,7 +131,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         pageControl.currentPage = 0
         //pageControl.tintColor = .red //UIColor(red: 39.0/255.0, green: 55.0/255.0, blue: 29.0/255.0, alpha: 1.0)
         pageControl.pageIndicatorTintColor = UIColor(red: 239.0/255.0, green: 255.0/255.0, blue: 229.0/255.0, alpha: 1.0)
-        pageControl.currentPageIndicatorTintColor = UIColor(red: 139.0/255.0, green: 155.0/255.0, blue: 129.0/255.0, alpha: 1.0)
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 10.0/255.0, green: 10.0/255.0, blue: 20.0/255.0, alpha: 1.0)
         view.addSubview(pageControl)
     }
     
@@ -140,7 +140,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         for index in 0...orderedViewControllers.count - 1
         {
             orderedViewControllers[index].view.addSubview(images[index])
-            orderedViewControllers[index].view.backgroundColor = UIColor(patternImage: UIImage(named: "GrayLeather.jpg")!)
+            orderedViewControllers[index].view.backgroundColor = UIColor.mainBackGround
         }
     }
     
@@ -184,7 +184,7 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueToEdit  {
-            let editController = segue.destination as? StretchViewController
+            let editController = segue.destination as? EditViewController
             editController?.editingCard = sender as? DiscountCard
         }
     }

@@ -15,6 +15,7 @@
 		255BA7BB1FA4854100FB051B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255BA7B91FA4854100FB051B /* LaunchScreen.storyboard */; };
 		255BA7C31FA4880400FB051B /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BA7C21FA4880400FB051B /* CardTableViewCell.swift */; };
 		25646CAE1FAC9DC50051944E /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25646CAD1FAC9DC50051944E /* PageController.swift */; };
+		256EEBF81FE2890900E83A48 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256EEBF71FE2890900E83A48 /* EditViewController.swift */; };
 		25716F841FBC4B9E00CC65FF /* StretchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25716F831FBC4B9E00CC65FF /* StretchViewController.swift */; };
 		25716F861FBC4DD100CC65FF /* GrayLeather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25716F851FBC4DD000CC65FF /* GrayLeather.jpg */; };
 		25716F8E1FBC883A00CC65FF /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 25716F8D1FBC883A00CC65FF /* empty.png */; };
@@ -48,6 +49,7 @@
 		255BA7BC1FA4854100FB051B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		255BA7C21FA4880400FB051B /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		25646CAD1FAC9DC50051944E /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		256EEBF71FE2890900E83A48 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		25716F831FBC4B9E00CC65FF /* StretchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchViewController.swift; sourceTree = "<group>"; };
 		25716F851FBC4DD000CC65FF /* GrayLeather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GrayLeather.jpg; sourceTree = "<group>"; };
 		25716F8D1FBC883A00CC65FF /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				25740D831FB1FE0A00A24429 /* FileManager.swift */,
 				25646CAD1FAC9DC50051944E /* PageController.swift */,
 				25716F831FBC4B9E00CC65FF /* StretchViewController.swift */,
+				256EEBF71FE2890900E83A48 /* EditViewController.swift */,
 				255BA7AF1FA4854100FB051B /* ViewController.swift */,
 				255BA7C21FA4880400FB051B /* CardTableViewCell.swift */,
 				255BA7B11FA4854100FB051B /* Main.storyboard */,
@@ -306,6 +309,7 @@
 				25740D841FB1FE0A00A24429 /* FileManager.swift in Sources */,
 				255BA7AE1FA4854100FB051B /* AppDelegate.swift in Sources */,
 				2586F0A51FAB114A0082691D /* Extensions.swift in Sources */,
+				256EEBF81FE2890900E83A48 /* EditViewController.swift in Sources */,
 				255BA7C31FA4880400FB051B /* CardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
