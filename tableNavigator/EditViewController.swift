@@ -39,6 +39,7 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
         barcodeNumber.delegate = self
         decriptionCard.delegate = self
         
+        
         coloredFilter.subviews[4].backgroundColor = UIColor.cYellow
         coloredFilter.subviews[3].backgroundColor = UIColor.cGray
         coloredFilter.subviews[2].backgroundColor = UIColor.cGreen
@@ -46,7 +47,9 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         
         buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
-   
+        frontImage.layer.cornerRadius = frontImage.frame.width/16.0
+        backImage.layer.cornerRadius = frontImage.frame.width/16.0
+        
         loadData()
         
         let frontGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(frontImageTapped(tapGestureRecognizer:)))
@@ -64,8 +67,7 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        frontImage.layer.cornerRadius = frontImage.frame.width/16.0
-        backImage.layer.cornerRadius = frontImage.frame.width/16.0
+        
         navigationItem.titleView = UIImageView(image: .logo)
         navigationItem.titleView?.sizeToFit()
         navigationItem.titleView?.isOpaque = true
