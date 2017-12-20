@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardTableViewCell: UITableViewCell {
+class CardTableViewCell: UITableViewCell, ResizingImages {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -16,8 +16,8 @@ class CardTableViewCell: UITableViewCell {
         nameCell.layer.cornerRadius = nameCell.frame.width/14.0
         imageCell.isUserInteractionEnabled = true
     
-        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinch(sender:)))
-        imageCell.addGestureRecognizer(pinch)
+       // let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinch(sender:)))
+       // imageCell.addGestureRecognizer(pinch)
     }
 
     
@@ -38,7 +38,8 @@ class CardTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @objc func pinch(sender:UIPinchGestureRecognizer) {
+    //@objc
+    func pinch(sender: UIPinchGestureRecognizer) {
         
         //const.isActive = false
         if sender.state == .changed {
@@ -53,8 +54,15 @@ class CardTableViewCell: UITableViewCell {
             let transform = CGAffineTransform(scaleX: newScale, y: newScale)
             self.imageCell.transform = transform
             sender.scale = 1
-        } 
+        }
         //const.isActive = true
+    }
+    func transformImageCell(transformation: CGAffineTransform) {
+        self.imageCell.transform = transformation
+        
+    }
+    func getScale() -> CGFloat {
+        return self.imageCell.frame.size.width / self.imageCell.bounds.size.width
     }
 
 }

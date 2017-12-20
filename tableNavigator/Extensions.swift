@@ -34,7 +34,7 @@ extension UIColor {
 }
 
 extension UIImage{
-    static var defaultImage = UIImage(named: "empty.png")
+    static var defaultImage = UIImage(named: "default.png")
     static var logo = UIImage(named: "hold.png")
     static var barcode = UIImage(named: "barcode.png")
     
@@ -45,7 +45,10 @@ extension UIImage{
     static var other = UIImage(named: "other.png")
 }
 
-
+protocol ResizingImages: class{
+    func getScale() -> CGFloat
+    func transformImageCell(transformation: CGAffineTransform)
+}
     /*
      
      //UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)

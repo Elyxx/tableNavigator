@@ -187,7 +187,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="685"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI8-FE-Ghs">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="1027.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="1198.6666666666667"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="5hP-5k-lEf">
                                                 <rect key="frame" x="20" y="69.999999999999986" width="334" height="222.66666666666663"/>
@@ -223,13 +223,13 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Here goes description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ehg-vA-Sdi">
-                                                <rect key="frame" x="20" y="710" width="334" height="146.33333333333337"/>
+                                                <rect key="frame" x="20" y="710" width="334" height="317.33333333333326"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-pM-Lg4">
-                                                <rect key="frame" x="20" y="876.33333333333337" width="334" height="29"/>
+                                                <rect key="frame" x="20" y="1047.3333333333333" width="334" height="29"/>
                                                 <color key="backgroundColor" red="0.48079274719999998" green="0.56753649240000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <segments>
                                                     <segment title="food"/>
@@ -241,7 +241,7 @@
                                                 <color key="tintColor" red="0.12737135336794889" green="0.11695450886531024" blue="0.13279267132477157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coy-Pd-9JP">
-                                                <rect key="frame" x="20" y="924.33333333333337" width="334" height="83.333333333333371"/>
+                                                <rect key="frame" x="20" y="1095.3333333333333" width="334" height="83.333333333333258"/>
                                                 <color key="backgroundColor" red="0.21801669757115985" green="0.20018658132031814" blue="0.22729616117248741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Coy-Pd-9JP" secondAttribute="height" multiplier="4:1" id="XRe-1G-7wm"/>
@@ -291,7 +291,7 @@
                                     <constraint firstItem="RI8-FE-Ghs" firstAttribute="leading" secondItem="ZDT-p0-4CT" secondAttribute="leading" id="V2E-Gd-ELU"/>
                                     <constraint firstAttribute="trailing" secondItem="RI8-FE-Ghs" secondAttribute="trailing" id="v6g-uD-3mP"/>
                                     <constraint firstItem="RI8-FE-Ghs" firstAttribute="centerX" secondItem="ZDT-p0-4CT" secondAttribute="centerX" id="vc3-pa-MYY"/>
-                                    <constraint firstItem="RI8-FE-Ghs" firstAttribute="height" secondItem="ZDT-p0-4CT" secondAttribute="height" multiplier="3:2" id="vrf-Bx-zf2"/>
+                                    <constraint firstItem="RI8-FE-Ghs" firstAttribute="height" secondItem="ZDT-p0-4CT" secondAttribute="height" multiplier="7:4" id="vrf-Bx-zf2"/>
                                     <constraint firstAttribute="bottom" secondItem="RI8-FE-Ghs" secondAttribute="bottom" id="yAS-FB-F5I"/>
                                 </constraints>
                             </scrollView>
@@ -301,7 +301,7 @@
                             <constraint firstItem="ZDT-p0-4CT" firstAttribute="top" secondItem="PMH-uV-l5E" secondAttribute="top" id="AGh-s3-2Yp"/>
                             <constraint firstItem="PMH-uV-l5E" firstAttribute="trailing" secondItem="ZDT-p0-4CT" secondAttribute="trailing" id="IvM-he-HAi"/>
                             <constraint firstItem="PMH-uV-l5E" firstAttribute="bottom" secondItem="ZDT-p0-4CT" secondAttribute="bottom" id="uul-dw-Plj"/>
-                            <constraint firstItem="ZDT-p0-4CT" firstAttribute="leading" secondItem="aIm-3D-Cwu" secondAttribute="leading" id="yP6-ev-gvp"/>
+                            <constraint firstItem="ZDT-p0-4CT" firstAttribute="leading" secondItem="PMH-uV-l5E" secondAttribute="leading" id="yP6-ev-gvp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PMH-uV-l5E"/>
                     </view>

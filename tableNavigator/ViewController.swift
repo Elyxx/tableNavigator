@@ -11,6 +11,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
    
+    weak var delegateCell: ResizingImages?
     //let segueToEditScreen = "ForEditting"
     let segueToNewCard = "ToEdit"
     let segueToCardInfo = "ToPage"
@@ -189,7 +190,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
-        
+        //cell.delegate = self
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
@@ -365,7 +366,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func resizeImages(_ sender: UIPinchGestureRecognizer) {
+        if sender.state == .changed {
+            let currentScale = delegateCell?.getScale()
+            //tableOfCards.cellForRow(at: <#T##IndexPath#>)
+            var newScale = currentScale!*sender.scale
+            if newScale > 1 {
+                newScale = 1
+            }
+            let transform = CGAffineTransform(scaleX: newScale, y: newScale)
+            delegateCell?.transformImageCell(transformation: transform)
+            sender.scale = 1
+            print(currentScale)
+        }
         
+        //delegate?.pinch(sender: sender)
     }
     
     func navigatorItemTitle() -> NSAttributedString {
