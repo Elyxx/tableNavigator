@@ -329,7 +329,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dwV-3K-L9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2188" y="-343"/>
+            <point key="canvasLocation" x="975" y="-138"/>
+        </scene>
+        <!--New Image View Controller-->
+        <scene sceneID="PCH-Fk-veM">
+            <objects>
+                <viewController id="d0W-0q-N8P" customClass="NewImageViewController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZuW-pO-v6b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e3z-Cv-J2h">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="e3z-Cv-J2h" firstAttribute="top" secondItem="7cn-ix-vaE" secondAttribute="top" id="97e-op-Ckg"/>
+                            <constraint firstItem="7cn-ix-vaE" firstAttribute="bottom" secondItem="e3z-Cv-J2h" secondAttribute="bottom" id="Ofb-3X-w9z"/>
+                            <constraint firstItem="7cn-ix-vaE" firstAttribute="trailing" secondItem="e3z-Cv-J2h" secondAttribute="trailing" id="vTy-YZ-Ay3"/>
+                            <constraint firstItem="e3z-Cv-J2h" firstAttribute="leading" secondItem="ZuW-pO-v6b" secondAttribute="leading" id="y0t-oT-iCF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7cn-ix-vaE"/>
+                    </view>
+                    <connections>
+                        <outlet property="originalImage" destination="e3z-Cv-J2h" id="Nhb-Wj-NtP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l4E-M4-Ibq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2086" y="-138"/>
         </scene>
         <!--IMAGES-->
         <scene sceneID="zsH-YZ-COB">
@@ -355,7 +384,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7g-Wi-HEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="641"/>
+            <point key="canvasLocation" x="-177" y="621"/>
         </scene>
         <!--front-->
         <scene sceneID="EFv-ld-ZOe">
@@ -419,7 +448,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8O-nY-Q7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1256" y="-95"/>
+            <point key="canvasLocation" x="-1177" y="-138"/>
         </scene>
     </scenes>
     <resources>
@@ -427,7 +456,7 @@
         <image name="empty.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kje-pU-4ye"/>
+        <segue reference="edf-9i-oic"/>
         <segue reference="vdp-Vt-0fN"/>
     </inferredMetricsTieBreakers>
 </document>

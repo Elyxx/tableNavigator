@@ -37,6 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
               
         tableOfCards.dataSource = self
         tableOfCards.delegate = self
+        
         searchCard.delegate = self
      
         coloredFilter.subviews[4].backgroundColor = UIColor.cYellow
@@ -46,9 +47,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         coloredFilter.subviews[5].backgroundColor = .white
         
-        navigationItem.title = "HOLDER"//String(describing: navigatorItemTitle())
+       // navigationItem.title = "HOLDER"//String(describing: navigatorItemTitle())
        // navigationItem.
       //      .titleView = UIImageView(image: UIImage.logo!)
+        
+        navigationItem.titleView = UIImageView(image: UIImage.logo!)
       //  navigationItem.titleView?.sizeToFit()
       //  navigationItem.titleView?.isOpaque = true
         navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
@@ -185,12 +188,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             performSegue(withIdentifier: segueToCardInfo, sender: self.myCards[indexPath.row])
         }
     }
-    
-    
+    /*
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       print("its possible")
+    }
+    */
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
-        //cell.delegate = self
+        delegateCell = cell
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
@@ -200,9 +206,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if searchActive == true {
             if filtered[indexPath.row].previewImageOfCard != nil{
                 cell.imageCell.image = imageManager.getImage(nameOfImage: filtered[indexPath.row].previewImageOfCard!)
+                cell.frontImage = cell.imageCell.image
             }
             else {
                 cell.imageCell.image = UIImage.defaultImage
+            }
+            if myCards[indexPath.row].backImageOfCard != nil {
+                cell.backImage = imageManager.getImage(nameOfImage: myCards[indexPath.row].backImageOfCard!)
+            }
+            else {
+                cell.backImage = UIImage.defaultImage
             }
             cell.nameCell.text = filtered[indexPath.row].nameOfCard
             cell.filterCell.image = setImage(number: filtered[indexPath.row].filterByColor)
@@ -210,13 +223,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.dataCell.text = dateFormatter.string(from: filtered[indexPath.row].dateOfCreation!)
         }
         else{
-            if myCards[indexPath.row].previewImageOfCard != nil{
+            if myCards[indexPath.row].previewImageOfCard != nil {
                 cell.imageCell.image = imageManager.getImage(nameOfImage: myCards[indexPath.row].previewImageOfCard!)
+                cell.frontImage = cell.imageCell.image
             }
             else {
                 cell.imageCell.image = UIImage.defaultImage
             }
-            
+            if myCards[indexPath.row].backImageOfCard != nil {
+                cell.backImage = imageManager.getImage(nameOfImage: myCards[indexPath.row].backImageOfCard!)
+            }
+            else {
+                cell.backImage = UIImage.defaultImage
+            }
             cell.nameCell.text = myCards[indexPath.row].nameOfCard
             cell.filterCell.image = setImage(number: myCards[indexPath.row].filterByColor)
             cell.descripCell.text = myCards[indexPath.row].descriptionOfCard
@@ -232,8 +251,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         else {filter = Int32( sender.selectedSegmentIndex - 1 )}
         myCards = manager.getFilteredCards(filter: filter)!
         tableOfCards.reloadData()
-       
     }
+   
     @objc func buttonAcsending(sender: UIButton!) {
         sortFinished = false
         removeMenu()
@@ -242,6 +261,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tableOfCards.reloadData()
     }
+    
     @objc func buttonDiscending(sender: UIButton!) {
         sortFinished = false
         removeMenu()
@@ -250,6 +270,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tableOfCards.reloadData()
     }
+    
     @objc func buttonEalier(sender: UIButton!) {
         sortFinished = false
         removeMenu()
@@ -258,6 +279,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tableOfCards.reloadData()
     }
+    
     @objc func buttonLater(sender: UIButton!) {
         sortFinished = false
         removeMenu()
@@ -266,6 +288,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tableOfCards.reloadData()
     }
+    
     @IBAction func sorting(_ sender: UIBarButtonItem) {
         
         if sortFinished == false{
@@ -278,17 +301,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             buttons[0].addTarget(self, action: #selector(buttonLater), for: .touchUpInside)
             view.addSubview(buttons[0])
-            UIView.animate(withDuration: 0.8, delay: 0, animations: {   self.buttons[0].center.y += 200 },  completion: nil )
+            UIView.animate(withDuration: 0.8, delay: 0, animations: {   self.buttons[0].center.y += 170 },  completion: nil )
             
             
             buttons[1].addTarget(self, action: #selector(buttonEalier), for: .touchUpInside)
             view.addSubview(buttons[1])
-            UIView.animate(withDuration: 0.6, delay: 0, animations: {   self.buttons[1].center.y += 150 },  completion: nil )
+            UIView.animate(withDuration: 0.6, delay: 0, animations: {   self.buttons[1].center.y += 130 },  completion: nil )
             
             
             buttons[2].addTarget(self, action: #selector(buttonDiscending), for: .touchUpInside)
             view.addSubview(buttons[2])
-            UIView.animate(withDuration: 0.4, delay: 0, animations: {   self.buttons[2].center.y += 100 },  completion: nil )
+            UIView.animate(withDuration: 0.4, delay: 0, animations: {   self.buttons[2].center.y += 90 },  completion: nil )
             
             
             buttons[3].addTarget(self, action: #selector(buttonAcsending), for: .touchUpInside)
@@ -302,11 +325,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       
     
     func createMenuButton(name: String) -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 10, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: 10, width: 100, height: 40))
         button.backgroundColor = .cGray
         button.titleLabel?.font =  UIFont(name: "Times New Roman", size: 18)
         button.setTitleColor(.black, for: .normal)
         button.setTitle(name, for: .normal)
+        button.layer.cornerRadius = button.frame.width/10.0
+        button.clipsToBounds = true
         return button
     }
     
@@ -333,8 +358,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return UIImage.other!
         }
     }
-    
-    
+   
     func loadImages(){
         if let imageToLoad = UIImage(named:"panda.jpg"){
             UIImageWriteToSavedPhotosAlbum(imageToLoad, nil, nil, nil)
@@ -366,20 +390,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func resizeImages(_ sender: UIPinchGestureRecognizer) {
-        if sender.state == .changed {
+        
+       // delegateCell?.pinch(senderScale: sender.scale)
+        tableOfCards?.visibleCells.forEach { cell in
+            if let cell = cell as? CardTableViewCell {
+                cell.pinch(senderScale: sender.scale)
+            }
+        }
+       //delegateCell?.ann()
+        print(sender.scale)
+        sender.scale = 1
+        /*if sender.state == .changed {
             let currentScale = delegateCell?.getScale()
-            //tableOfCards.cellForRow(at: <#T##IndexPath#>)
-            var newScale = currentScale!*sender.scale
+            var newScale = currentScale! * sender.scale
             if newScale > 1 {
                 newScale = 1
             }
             let transform = CGAffineTransform(scaleX: newScale, y: newScale)
             delegateCell?.transformImageCell(transformation: transform)
             sender.scale = 1
-            print(currentScale)
-        }
-        
-        //delegate?.pinch(sender: sender)
+            print(currentScale)*/
     }
     
     func navigatorItemTitle() -> NSAttributedString {

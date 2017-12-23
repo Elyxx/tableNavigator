@@ -35,7 +35,7 @@ extension UIColor {
 
 extension UIImage{
     static var defaultImage = UIImage(named: "default.png")
-    static var logo = UIImage(named: "hold.png")
+    static var logo = UIImage(named: "holder.png")
     static var barcode = UIImage(named: "barcode.png")
     
     static var food = UIImage(named: "food.png")
@@ -48,6 +48,12 @@ extension UIImage{
 protocol ResizingImages: class{
     func getScale() -> CGFloat
     func transformImageCell(transformation: CGAffineTransform)
+    func pinch(senderScale: CGFloat)
+    func ann()
+}
+
+protocol ChangingImages: class {
+    func getRowIndex() -> Double
 }
     /*
      

@@ -69,6 +69,8 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
     override func viewWillAppear(_ animated: Bool) {
         
         navigationItem.titleView = UIImageView(image: .logo)
+        navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
+        //navigationItem.leftBarButtonItem.backgroundColor = UIColor.mainBackGround
         navigationItem.titleView?.sizeToFit()
         navigationItem.titleView?.isOpaque = true
     }
@@ -250,5 +252,11 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
             manager.addNewCard(name: name.text, descrip: decriptionCard.text, filter: filterColor, previewIMG: previewPath, frontIMG: frontPath, backIMG: backPath, barcodeIMG: barcodePath)
         }
         performSegue(withIdentifier: segueToMain , sender: self)
+    }
+    
+    func cropImage(image: UIImage, newRect: CGRect) -> UIImage? {
+        let cgImage :CGImage! = image.cgImage
+        let croppedCGImage: CGImage! = cgImage.cropping(to: newRect)
+        return UIImage(cgImage: croppedCGImage)
     }
 }

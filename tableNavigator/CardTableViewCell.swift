@@ -10,16 +10,35 @@ import UIKit
 
 class CardTableViewCell: UITableViewCell, ResizingImages {
 
+    @objc func handleSwipes(sender: UISwipeGestureRecognizer) {
+        UIView.animate(withDuration: 0.5, delay: 0.4,
+                       options: [],
+                       animations: {
+                        if self.imageCell.image != self.backImage {
+                            self.imageCell.image = self.backImage
+                        }
+                        else {
+                            self.imageCell.image = self.frontImage
+                        }
+        },
+                       completion: nil
+        )
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         imageCell.layer.cornerRadius = imageCell.frame.width/13.0
         nameCell.layer.cornerRadius = nameCell.frame.width/14.0
         imageCell.isUserInteractionEnabled = true
-    
-       // let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinch(sender:)))
-       // imageCell.addGestureRecognizer(pinch)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(sender:)))
+        imageCell.addGestureRecognizer(rightSwipe)
+       
+     //  let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinch(senderScale:)))
+   //    imageCell.addGestureRecognizer(pinch)
     }
 
+    var applyPinch = false
     
     @IBOutlet weak var nameCell: UILabel!
     
@@ -31,36 +50,43 @@ class CardTableViewCell: UITableViewCell, ResizingImages {
     
     @IBOutlet weak var dataCell: UILabel!
     
-   
+    var backImage: UIImage?
+    
+    var frontImage: UIImage?
+    
+    func ann() {
+        applyPinch = true
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
-    //@objc
-    func pinch(sender: UIPinchGestureRecognizer) {
+    
+    func pinch(senderScale: CGFloat) {
         
-        //const.isActive = false
-        if sender.state == .changed {
-            let currentScale = self.imageCell.frame.size.width / self.imageCell.bounds.size.width
-            var newScale = currentScale*sender.scale
-         //   if newScale < 1 {
-         //      newScale = 0.1
-         //   }
-            if newScale > 1 {
-                newScale = 1
-            }
-            let transform = CGAffineTransform(scaleX: newScale, y: newScale)
-            self.imageCell.transform = transform
-            sender.scale = 1
+        var newSenderScale = senderScale
+        let currentScale = imageCell.frame.size.width / imageCell.bounds.size.width
+        var newScale = currentScale * newSenderScale
+        if newScale > 1 {
+             newScale = 1
         }
-        //const.isActive = true
+        //if newScale < 0.1 {
+        //    newScale = 1
+        //}
+        let transform = CGAffineTransform(scaleX: newScale, y: newScale)
+        imageCell.transform = transform
+        //newSenderScale = 1
+        print("current \(currentScale)")
+        print("sender \(senderScale)")
     }
+    
     func transformImageCell(transformation: CGAffineTransform) {
+        print("transformed")
         self.imageCell.transform = transformation
-        
     }
+    
     func getScale() -> CGFloat {
         return self.imageCell.frame.size.width / self.imageCell.bounds.size.width
     }
