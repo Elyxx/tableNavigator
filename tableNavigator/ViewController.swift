@@ -7,12 +7,10 @@
 //
 
 import UIKit
-//import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
    
     weak var delegateCell: ResizingImages?
-    //let segueToEditScreen = "ForEditting"
     let segueToNewCard = "ToEdit"
     let segueToCardInfo = "ToPage"
     
@@ -46,20 +44,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         coloredFilter.subviews[1].backgroundColor = UIColor.cPink
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         coloredFilter.subviews[5].backgroundColor = .white
-        
-       // navigationItem.title = "HOLDER"//String(describing: navigatorItemTitle())
-       // navigationItem.
-      //      .titleView = UIImageView(image: UIImage.logo!)
-        
+       
         navigationItem.titleView = UIImageView(image: UIImage.logo!)
-      //  navigationItem.titleView?.sizeToFit()
-      //  navigationItem.titleView?.isOpaque = true
-        navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
-        //navigationItem.title
-        
+     // navigationItem.title
+        navigationItem.titleView?.sizeToFit()
         view.backgroundColor = UIColor.mainBackGround
-        tableOfCards.backgroundColor = UIColor.mainBackGround//(patternImage: UIImage(named: "GrayLeather.jpg")!)
-        
+        tableOfCards.backgroundColor = UIColor.mainBackGround
         //loadImages()
     }
     
@@ -69,14 +59,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        searchCard.endEditing(true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        searchCard.endEditing(true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        searchCard.endEditing(true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -92,6 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(searchText)
         if (filtered.count == 0) {
             searchActive = false;
+            searchCard.endEditing(true)
         } else {
             searchActive = true;
         }
@@ -100,7 +94,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -143,10 +136,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         editAction.backgroundColor = .mainBackGround
         
         let shareAction = UIContextualAction(style: .normal, title: "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-   /*         let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)*/
-          let card = self.myCards[indexPath.row]
+         let card = self.myCards[indexPath.row]
             let activity = UIActivityViewController(activityItems: [card.nameOfCard as Any, card.descriptionOfCard as Any,
                  self.imageManager.getImage(nameOfImage: card.frontImageOfCard!) as Any], applicationActivities: nil)
              activity.popoverPresentationController?.sourceView = self.view
@@ -188,11 +178,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             performSegue(withIdentifier: segueToCardInfo, sender: self.myCards[indexPath.row])
         }
     }
-    /*
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       print("its possible")
-    }
-    */
+   
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
@@ -244,7 +230,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func numberOfSections(in tableOfCards: UITableView) -> Int {      return 1   }
+    func numberOfSections(in tableOfCards: UITableView) -> Int {   return 1   }
     
     @IBAction func filterCards(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 { filter = nil}
@@ -330,7 +316,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         button.titleLabel?.font =  UIFont(name: "Times New Roman", size: 18)
         button.setTitleColor(.black, for: .normal)
         button.setTitle(name, for: .normal)
-        button.layer.cornerRadius = button.frame.width/10.0
+        button.layer.cornerRadius = button.frame.width/8.0
         button.clipsToBounds = true
         return button
     }
@@ -390,44 +376,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func resizeImages(_ sender: UIPinchGestureRecognizer) {
-        
-       // delegateCell?.pinch(senderScale: sender.scale)
+        // delegateCell?.pinch(senderScale: sender.scale)
         tableOfCards?.visibleCells.forEach { cell in
             if let cell = cell as? CardTableViewCell {
                 cell.pinch(senderScale: sender.scale)
             }
         }
-       //delegateCell?.ann()
-        print(sender.scale)
         sender.scale = 1
-        /*if sender.state == .changed {
-            let currentScale = delegateCell?.getScale()
-            var newScale = currentScale! * sender.scale
-            if newScale > 1 {
-                newScale = 1
-            }
-            let transform = CGAffineTransform(scaleX: newScale, y: newScale)
-            delegateCell?.transformImageCell(transformation: transform)
-            sender.scale = 1
-            print(currentScale)*/
-    }
-    
-    func navigatorItemTitle() -> NSAttributedString {
-        let tmpString = "HOLDER"
-       
-        let myShadow = NSShadow()
-        myShadow.shadowBlurRadius = 3
-        myShadow.shadowOffset = CGSize(width: 3, height: 3)
-        myShadow.shadowColor = UIColor.gray
-        
-        let multipleAttributes: [NSAttributedStringKey : Any] = [
-             NSAttributedStringKey.foregroundColor: UIColor.cPink,
-             NSAttributedStringKey.backgroundColor: UIColor.mainBackGround,
-             NSAttributedStringKey.font: UIFont(name: "Chalkduster", size: 18.0)!,
-             NSAttributedStringKey.shadow: myShadow ]
-        
-        let title = NSAttributedString(string: tmpString, attributes: multipleAttributes)
-        return title
     }
 }
 

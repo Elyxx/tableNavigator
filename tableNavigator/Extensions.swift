@@ -51,10 +51,28 @@ protocol ResizingImages: class{
     func pinch(senderScale: CGFloat)
     func ann()
 }
+/*
+func navigatorItemTitle() -> NSAttributedString {
+    let tmpString = "HOLDER"
+    
+    let myShadow = NSShadow()
+    myShadow.shadowBlurRadius = 3
+    myShadow.shadowOffset = CGSize(width: 3, height: 3)
+    myShadow.shadowColor = UIColor.gray
+    
+    let multipleAttributes: [NSAttributedStringKey : Any] = [
+        NSAttributedStringKey.foregroundColor: UIColor.cPink,
+        NSAttributedStringKey.backgroundColor: UIColor.mainBackGround,
+        NSAttributedStringKey.font: UIFont(name: "Chalkduster", size: 18.0)!,
+        NSAttributedStringKey.shadow: myShadow ]
+    
+    let title = NSAttributedString(string: tmpString, attributes: multipleAttributes)
+    return title
+}*/
+/*         let alert = UIAlertController(title: "SORRY", message: "service is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
+ alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+ self.present(alert, animated: true, completion: nil)*/
 
-protocol ChangingImages: class {
-    func getRowIndex() -> Double
-}
     /*
      
      //UIImageWriteToSavedPhotosAlbum(UIImage(named:"chernyj_strizh.jpg")!, nil, nil, nil)

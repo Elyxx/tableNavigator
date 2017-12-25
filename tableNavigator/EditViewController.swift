@@ -48,7 +48,7 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
         
         buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
         frontImage.layer.cornerRadius = frontImage.frame.width/16.0
-        backImage.layer.cornerRadius = frontImage.frame.width/16.0
+        backImage.layer.cornerRadius = backImage.frame.width/16.0
         
         loadData()
         
@@ -67,10 +67,12 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
+        frontImage.layer.cornerRadius = frontImage.frame.width/16.0
+        backImage.layer.cornerRadius = backImage.frame.width/16.0
         
         navigationItem.titleView = UIImageView(image: .logo)
-        navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
-        //navigationItem.leftBarButtonItem.backgroundColor = UIColor.mainBackGround
+        //navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
         navigationItem.titleView?.sizeToFit()
         navigationItem.titleView?.isOpaque = true
     }
@@ -89,20 +91,16 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
     }
  
     func textViewDidEndEditing(_ textView: UITextView) {
-        //if textField != name {
-            UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
+         UIView.animate(withDuration: 0.25, animations: {
+            self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
-        //}
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        //if textField != name {
-            UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 170, width: self.view.frame.size.width, height: self.view.frame.size.height)
+         UIView.animate(withDuration: 0.25, animations: {
+             self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 170, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
-        //}
-    }
+     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField != name {
@@ -111,11 +109,9 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
             })
         }
         if barcodeNumber.text != nil{
-            print("barcode")
             if let tmpBarcode = RSUnifiedCodeGenerator.shared.generateCode(barcodeNumber.text!, machineReadableCodeObjectType: AVMetadataObject.ObjectType.ean13.rawValue) {
                 barcodePath = barcodeNumber.text! + ".jpeg"
                 barcodeImage.image = tmpBarcode
-                print("image")
             }
         }
     }
@@ -200,15 +196,15 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
             if (editingCard?.frontImageOfCard != nil) {
                 frontImage.image = imageManager.getImage(nameOfImage: (editingCard?.frontImageOfCard)!)
             }
-       //     else{
-       //         frontImage.image = UIImage.defaultImage
-       //     }
+            else{
+                frontImage.image = UIImage.defaultImage
+            }
             if (editingCard?.backImageOfCard != nil) {
                 backImage.image = imageManager.getImage(nameOfImage: (editingCard?.backImageOfCard)!)
             }
-       //     else{
-       //         backImage.image = UIImage.defaultImage
-       //     }
+            else{
+                backImage.image = UIImage.defaultImage
+            }
             if (editingCard?.barcode != nil) {
                 barcodeImage.image = imageManager.getImage(nameOfImage: (editingCard?.barcode)!)
             }

@@ -11,7 +11,7 @@ import UIKit
 class CardTableViewCell: UITableViewCell, ResizingImages {
 
     @objc func handleSwipes(sender: UISwipeGestureRecognizer) {
-        UIView.animate(withDuration: 0.5, delay: 0.4,
+        UIView.animate(withDuration: 0.8, delay: 0.4,
                        options: [],
                        animations: {
                         if self.imageCell.image != self.backImage {
@@ -27,15 +27,12 @@ class CardTableViewCell: UITableViewCell, ResizingImages {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageCell.layer.cornerRadius = imageCell.frame.width/13.0
+        imageCell.layer.cornerRadius = imageCell.frame.width/20.0
         nameCell.layer.cornerRadius = nameCell.frame.width/14.0
         imageCell.isUserInteractionEnabled = true
         
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(sender:)))
         imageCell.addGestureRecognizer(rightSwipe)
-       
-     //  let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinch(senderScale:)))
-   //    imageCell.addGestureRecognizer(pinch)
     }
 
     var applyPinch = false

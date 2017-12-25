@@ -165,8 +165,6 @@ class PageController: UIPageViewController, UIPageViewControllerDelegate, UIPage
         
         navigationItem.titleView = UIImageView(image: .logo)
         navigationItem.titleView?.sizeToFit()
-        navigationItem.titleView?.backgroundColor = UIColor.mainBackGround
-        //navigationItem.leftBarButtonItem
         navigationItem.titleView?.isOpaque = true
         
         if let firstViewController = orderedViewControllers.first {
