@@ -47,8 +47,8 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
         coloredFilter.subviews[0].backgroundColor = UIColor.cViolet
         
         buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
-        frontImage.layer.cornerRadius = frontImage.frame.width/16.0
-        backImage.layer.cornerRadius = backImage.frame.width/16.0
+        frontImage.layer.cornerRadius = frontImage.frame.width/20.0
+        backImage.layer.cornerRadius = backImage.frame.width/20.0
         
         loadData()
         
@@ -68,8 +68,8 @@ class EditViewController: UIViewController, UIScrollViewDelegate, UIImagePickerC
 
     override func viewWillAppear(_ animated: Bool) {
         buttonSave.layer.cornerRadius = buttonSave.frame.width/50.0
-        frontImage.layer.cornerRadius = frontImage.frame.width/16.0
-        backImage.layer.cornerRadius = backImage.frame.width/16.0
+        frontImage.layer.cornerRadius = frontImage.frame.width/20.0
+        backImage.layer.cornerRadius = backImage.frame.width/20.0
         
         navigationItem.titleView = UIImageView(image: .logo)
         //navigationItem.titleView?.backgroundColor = UIColor.mainBackGround

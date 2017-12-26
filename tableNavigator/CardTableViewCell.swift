@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardTableViewCell: UITableViewCell, ResizingImages {
+class CardTableViewCell: UITableViewCell {
 
     @objc func handleSwipes(sender: UISwipeGestureRecognizer) {
         UIView.animate(withDuration: 0.8, delay: 0.4,
@@ -51,41 +51,21 @@ class CardTableViewCell: UITableViewCell, ResizingImages {
     
     var frontImage: UIImage?
     
-    func ann() {
-        applyPinch = true
-    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
-    
     func pinch(senderScale: CGFloat) {
-        
-        var newSenderScale = senderScale
+        //var newSenderScale = senderScale
         let currentScale = imageCell.frame.size.width / imageCell.bounds.size.width
-        var newScale = currentScale * newSenderScale
+        var newScale = currentScale * senderScale
         if newScale > 1 {
              newScale = 1
         }
-        //if newScale < 0.1 {
-        //    newScale = 1
-        //}
         let transform = CGAffineTransform(scaleX: newScale, y: newScale)
         imageCell.transform = transform
-        //newSenderScale = 1
         print("current \(currentScale)")
         print("sender \(senderScale)")
     }
     
-    func transformImageCell(transformation: CGAffineTransform) {
-        print("transformed")
-        self.imageCell.transform = transformation
-    }
-    
-    func getScale() -> CGFloat {
-        return self.imageCell.frame.size.width / self.imageCell.bounds.size.width
-    }
-
 }

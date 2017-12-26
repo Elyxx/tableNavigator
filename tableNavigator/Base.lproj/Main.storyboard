@@ -146,13 +146,13 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="HOLDER" id="f6b-jH-cJ2">
-                        <barButtonItem key="leftBarButtonItem" title="sort" id="6Tf-8b-obu" userLabel="sort">
+                        <barButtonItem key="leftBarButtonItem" image="sort" id="6Tf-8b-obu" userLabel="sort">
                             <color key="tintColor" red="0.057900066020000002" green="0.0534777076" blue="0.06006107234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sorting:" destination="BYZ-38-t0r" id="kRw-gn-FP7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="k5V-tg-0al">
+                        <barButtonItem key="rightBarButtonItem" image="add" id="k5V-tg-0al">
                             <color key="tintColor" red="0.041085025380710682" green="0.041085025380710682" blue="0.041085025380710682" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="A7z-Xh-pLi" kind="show" identifier="ToEdit" id="kje-pU-4ye"/>
@@ -308,13 +308,13 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="EDIT" id="7Gh-qh-k9R">
-                        <barButtonItem key="leftBarButtonItem" title="&lt; Main" id="n7a-PG-apJ" userLabel="&lt; Main">
+                        <barButtonItem key="leftBarButtonItem" image="main" id="n7a-PG-apJ" userLabel="&lt; Main">
                             <color key="tintColor" red="0.025618654822335052" green="0.025618654822335052" blue="0.025618654822335052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="backToMain:" destination="A7z-Xh-pLi" id="LfO-8g-6HM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="aKe-bB-VUH"/>
+                        <barButtonItem key="rightBarButtonItem" image="none" id="aKe-bB-VUH"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
@@ -333,83 +333,18 @@
             </objects>
             <point key="canvasLocation" x="975" y="-138"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="j5c-ie-GkU">
-            <objects>
-                <viewController id="6b0-Ej-tQe" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0VM-qq-J2d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55b-kd-IeG">
-                                <rect key="frame" x="0.0" y="728" width="187.66666666666666" height="50"/>
-                                <color key="backgroundColor" red="0.82062190769999999" green="0.86965870860000005" blue="0.99985963109999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="I6E-jd-EMm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                <state key="normal" title="save">
-                                    <color key="titleColor" red="0.057900066020000002" green="0.0534777076" blue="0.06006107234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTx-Fv-n03">
-                                <rect key="frame" x="187.66666666666663" y="728" width="187.33333333333337" height="50"/>
-                                <color key="backgroundColor" red="0.82062190769999999" green="0.86965870860000005" blue="0.99985963109999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Lua-wW-wPu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                <state key="normal" title="crop">
-                                    <color key="titleColor" red="0.057900066020000002" green="0.0534777076" blue="0.06006107234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lkF-cS-MEm">
-                                <rect key="frame" x="0.0" y="44" width="375" height="684"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rP6-2P-wID">
-                                        <rect key="frame" x="87" y="237" width="240" height="128"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="rP6-2P-wID" firstAttribute="leading" secondItem="lkF-cS-MEm" secondAttribute="leading" id="2ug-cX-UWr"/>
-                                    <constraint firstItem="rP6-2P-wID" firstAttribute="top" secondItem="lkF-cS-MEm" secondAttribute="top" id="4E7-hL-Jep"/>
-                                    <constraint firstAttribute="trailing" secondItem="rP6-2P-wID" secondAttribute="trailing" id="OUc-bR-2Sh"/>
-                                    <constraint firstAttribute="bottom" secondItem="rP6-2P-wID" secondAttribute="bottom" id="UvD-cu-ZCz"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="PTx-Fv-n03" firstAttribute="leading" secondItem="55b-kd-IeG" secondAttribute="trailing" id="7E7-Nj-YId"/>
-                            <constraint firstItem="y3A-fK-15f" firstAttribute="trailing" secondItem="PTx-Fv-n03" secondAttribute="trailing" id="D0B-Wg-8kw"/>
-                            <constraint firstItem="55b-kd-IeG" firstAttribute="leading" secondItem="y3A-fK-15f" secondAttribute="leading" id="GOj-gp-P2v"/>
-                            <constraint firstItem="lkF-cS-MEm" firstAttribute="top" secondItem="y3A-fK-15f" secondAttribute="top" id="IP3-4u-TE7"/>
-                            <constraint firstItem="55b-kd-IeG" firstAttribute="width" secondItem="y3A-fK-15f" secondAttribute="width" multiplier="1:2" id="ejR-OO-qPj"/>
-                            <constraint firstItem="55b-kd-IeG" firstAttribute="top" secondItem="lkF-cS-MEm" secondAttribute="bottom" id="gXa-eg-9tw"/>
-                            <constraint firstItem="y3A-fK-15f" firstAttribute="bottom" secondItem="PTx-Fv-n03" secondAttribute="bottom" id="h9A-EY-X87"/>
-                            <constraint firstItem="y3A-fK-15f" firstAttribute="trailing" secondItem="lkF-cS-MEm" secondAttribute="trailing" id="igV-2S-KRV"/>
-                            <constraint firstItem="y3A-fK-15f" firstAttribute="bottom" secondItem="55b-kd-IeG" secondAttribute="bottom" id="tSp-Wg-9y7"/>
-                            <constraint firstItem="lkF-cS-MEm" firstAttribute="leading" secondItem="y3A-fK-15f" secondAttribute="leading" id="w1T-nb-st2"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="y3A-fK-15f"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8xk-ZP-uAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1818" y="-138"/>
-        </scene>
         <!--IMAGES-->
         <scene sceneID="zsH-YZ-COB">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Cub-AU-mTH" customClass="PageController" customModule="tableNavigator" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="IMAGES" id="5ME-H5-TOr">
-                        <barButtonItem key="leftBarButtonItem" title="&lt; Main" id="yRf-Cq-2dY">
+                        <barButtonItem key="leftBarButtonItem" image="main" id="yRf-Cq-2dY">
                             <color key="tintColor" red="0.029156907845625531" green="0.029445590101522812" blue="0.029445590101522812" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="zXd-7K-SHE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit &gt;" id="xn5-Bi-pRG">
+                        <barButtonItem key="rightBarButtonItem" image="edit" id="xn5-Bi-pRG">
                             <color key="tintColor" red="0.05360158816064501" green="0.054132296954314763" blue="0.054132296954314763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="goToEdit:" destination="Cub-AU-mTH" id="HaI-KQ-svo"/>
@@ -490,8 +425,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add" width="32" height="32"/>
         <image name="barcode" width="512" height="512"/>
+        <image name="edit" width="32" height="12"/>
         <image name="empty" width="512" height="512"/>
+        <image name="main" width="32" height="11"/>
+        <image name="none" width="32" height="32"/>
+        <image name="sort" width="32" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kje-pU-4ye"/>

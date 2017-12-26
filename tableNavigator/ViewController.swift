@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
    
-    weak var delegateCell: ResizingImages?
     let segueToNewCard = "ToEdit"
     let segueToCardInfo = "ToPage"
     
@@ -18,6 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var imageManager = FileManaging()
     var myCards = [DiscountCard]()
    
+    //var cellImageSize: Double?
     var data = [String] ()
     var buttons = [UIButton]()
     var searchActive : Bool = false
@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableOfCards.delegate = self
         
         searchCard.delegate = self
-     
+        //cellImageSize = UserDefaults.standard.double(forKey: "Key")
         coloredFilter.subviews[4].backgroundColor = UIColor.cYellow
         coloredFilter.subviews[3].backgroundColor = UIColor.cGray
         coloredFilter.subviews[2].backgroundColor = UIColor.cGreen
@@ -46,11 +46,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         coloredFilter.subviews[5].backgroundColor = .white
        
         navigationItem.titleView = UIImageView(image: UIImage.logo!)
-     // navigationItem.title
         navigationItem.titleView?.sizeToFit()
         view.backgroundColor = UIColor.mainBackGround
         tableOfCards.backgroundColor = UIColor.mainBackGround
-        //loadImages()
+  
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -182,12 +181,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableOfCards: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableOfCards.dequeueReusableCell(withIdentifier: "cellReuseId") as! CardTableViewCell
-        delegateCell = cell
+        /*if cellImageSize != nil {
+            cell.imageCell.frame.size.width = CGFloat(cellImageSize!)
+        }*/
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "en_US")
-       
         
         if searchActive == true {
             if filtered[indexPath.row].previewImageOfCard != nil{
@@ -376,13 +376,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func resizeImages(_ sender: UIPinchGestureRecognizer) {
-        // delegateCell?.pinch(senderScale: sender.scale)
         tableOfCards?.visibleCells.forEach { cell in
             if let cell = cell as? CardTableViewCell {
                 cell.pinch(senderScale: sender.scale)
             }
         }
         sender.scale = 1
+        /*if sender.state == .ended {
+            UserDefaults.standard.set(0.0, forKey: "Key")
+        }*/
     }
 }
 
